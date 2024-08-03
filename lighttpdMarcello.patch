@@ -1,0 +1,39 @@
+diff --git a/src/server.c b/src/server.c
+index 44385db1..6f1bd36e 100644
+--- a/src/server.c
++++ b/src/server.c
+@@ -2155,6 +2155,7 @@ static void server_main_loop (server * const srv) {
+ 	unix_time64_t last_active_ts = server_monotonic_secs();
+ 	log_epoch_secs = server_epoch_secs(srv, 0);
+ 
++	fdevent_poll(srv->ev, -1); //Wait for a connection
+ 	while (!srv_shutdown) {
+ 
+ 		if (handle_sig_hup) {
+@@ -2201,10 +2202,15 @@ static void server_main_loop (server * const srv) {
+ 		  (connection *)(uintptr_t)&log_con_jqueue;
+ 		connection * const joblist = log_con_jqueue;
+ 		log_con_jqueue = sentinel;
+-		server_run_con_queue(joblist, sentinel);
++		while(__AFL_LOOP(1000)){
++			//Force to receive a request -> actually, it's reading a line...
++			fdevent_poll(srv->ev, -1);
++			server_run_con_queue(joblist, sentinel);
++		}
++		srv_shutdown = 1;
+ 
+-		if (fdevent_poll(srv->ev, log_con_jqueue != sentinel ? 0 : 1000) > 0)
+-			last_active_ts = log_monotonic_secs;
++		/*if (fdevent_poll(srv->ev, log_con_jqueue != sentinel ? 0 : 1000) > 0)
++			last_active_ts = log_monotonic_secs;*/
+ 	}
+ }
+ 
+@@ -2294,7 +2300,6 @@ int server_main (int argc, char ** argv) {
+             server_status_running(srv);
+ 
+             server_main_loop(srv);
+-
+             if (graceful_shutdown || graceful_restart) {
+                 server_graceful_state(srv);
+             }

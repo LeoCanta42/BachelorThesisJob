@@ -1,0 +1,40 @@
+digraph g {
+
+	c0 [shape="circle" label="CON_STATE_REQUEST_START"];
+	c1 [shape="circle" label="CON_STATE_READ"];
+	c2 [shape="circle" label="CON_STATE_HANDLE_REQUEST"];
+	c3 [shape="circle" label="CON_STATE_READ_POST"];
+	c4 [shape="circle" label="CON_STATE_WRITE"];	
+	c5 [shape="circle" label="CON_STATE_ERROR"];
+	c6 [shape="circle" label="CON_STATE_RESPONSE_END"];
+	c7 [shape="circle" label="CON_STATE_CLOSE"];
+	h2 [shape="circle" label="HANDLER_WAIT_FOR_EVENT"];
+
+	c0 -> c1
+	c1 -> c1
+	c1 -> c2
+	c2 -> c4
+	
+	c1 -> c5
+	c1 -> c3 
+	
+	c3 -> h2	
+	h2 -> h2
+	h2 -> c4
+	
+	c4 -> c4;
+
+	c4 -> c5;
+	c4 -> c6;
+
+	c6 -> c7;
+	c6 -> c0;
+	c5 -> c7;
+	c5 -> c0;
+
+__start0 [label="" shape="none" width="0" height="0"];
+__start0 -> c0;
+
+}
+
+//dot -Tsvg Lighttpd_clean.dot > Lighttpd_clean.png
