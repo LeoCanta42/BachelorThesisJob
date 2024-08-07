@@ -4,7 +4,6 @@ digraph g {
 	c1 [shape="circle" label="CON_STATE_READ"];	
 	c2 [shape="circle" label="CON_STATE_ERROR"];
 	c3 [shape="circle" label="CON_STATE_RESPONSE_END"];
-	c4 [shape="circle" label="CON_STATE_CLOSE"];
 
 	c0 -> c1
 	c1 -> c1
@@ -12,15 +11,15 @@ digraph g {
 	c1 -> c2
 	c1 -> c3
 
-	c2 -> c0
-	c2 -> c4
+	c2 -> c0;
+	c2 -> c2;
 
-	c3 -> c0
-	c3 -> c4
+	c3 -> c0;
+	c3 -> c3;
 
 __start0 [label="" shape="none" width="0" height="0"];
 __start0 -> c0;
 
 }
 
-//dot -Tsvg Lighttpd_clean.dot > Lighttpd_clean.png
+//dot -Tsvg Lighttpd_clean_afterPatch.dot > Lighttpd_clean_afterPatch.png

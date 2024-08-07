@@ -4,3 +4,5 @@ lighttpd_tests
 Fuzzing_lighttpd*
 .vscode
 lighttpd_original
+lighttpd_cleanPatch
+LibAFLstar
