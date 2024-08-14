@@ -1,0 +1,30 @@
+diff --git a/src/connections.c b/src/connections.c
+index 51afa665..4c4c3d38 100644
+--- a/src/connections.c
++++ b/src/connections.c
+@@ -665,7 +665,9 @@ connection_state_machine_loop (request_st * const r, connection * const con)
+ 	do {
+ 		if (r->conf.log_state_handling)
+ 			connection_log_state(r, "");
+-
++        for (chunk *c = con->write_queue->first; c; c = c->next) { //log response data
++            log_error(r->conf.errh, __FILE__, __LINE__, "RESPONSE: %s", c->mem->ptr);
++        }
+ 		switch ((ostate = r->state)) {
+ 		case CON_STATE_REQUEST_START: /* transient */
+ 			/*(should not be reached by HTTP/2 streams)*/
+diff --git a/src/h1.c b/src/h1.c
+index eabcb414..eb3647bc 100644
+--- a/src/h1.c
++++ b/src/h1.c
+@@ -374,7 +374,9 @@ h1_recv_headers (request_st * const r, connection * const con)
+     uint8_t pipelined_request_start = 0;
+     uint8_t discard_blank = 0;
+     unsigned short hoff[8192]; /* max num header lines + 3; 16k on stack */
+-
++    for (c = cq->first; c; c = c->next) { //log raw request
++        log_error(r->conf.errh, __FILE__, __LINE__, "REQUEST: %s", c->mem->ptr);
++    }
+     if (con->request_count > 1) {
+         discard_blank = 1;
+         if (cq->bytes_in == r->x.h1.bytes_read_ckpt) {

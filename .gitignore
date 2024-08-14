@@ -6,3 +6,6 @@ Fuzzing_lighttpd*
 lighttpd_original
 lighttpd_cleanPatch
 LibAFLstar
+messages_log
+Output-fuzzers
+

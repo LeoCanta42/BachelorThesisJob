@@ -1,29 +1,49 @@
 diff --git a/src/connections.c b/src/connections.c
-index 51afa665..7d77c12d 100644
+index 51afa665..666ba300 100644
 --- a/src/connections.c
 +++ b/src/connections.c
-@@ -188,7 +188,8 @@ static void connection_handle_response_end_state(request_st * const r, connectio
+@@ -188,7 +188,12 @@ static void connection_handle_response_end_state(request_st * const r, connectio
  		r->http_status = 100; /* XXX: what if con->state == CON_STATE_ERROR? */
  		/*if (r->http_status)*/
  			plugins_call_handle_request_done(r);
 -		connection_handle_shutdown(con);
 +        // AVOIDING CLOSING CONNECTION, STAY ON THAT STATE
 +//		connection_handle_shutdown(con);
++        request_reset(r);
++		con->is_readable = 1;
++		r->x.h1.bytes_read_ckpt = r->read_queue.bytes_in;
++		r->x.h1.bytes_written_ckpt = r->write_queue.bytes_out;
  		return;
  	}
  
-@@ -220,7 +221,8 @@ static void connection_handle_response_end_state(request_st * const r, connectio
+@@ -220,7 +225,12 @@ static void connection_handle_response_end_state(request_st * const r, connectio
  #endif
  		connection_set_state(r, CON_STATE_REQUEST_START);
  	} else {
 -		connection_handle_shutdown(con);
 +        // AVOIDING CLOSING CONNECTION, STAY ON THAT STATE
 +//		connection_handle_shutdown(con);
++        request_reset(r);
++		con->is_readable = 1;
++		r->x.h1.bytes_read_ckpt = r->read_queue.bytes_in;
++		r->x.h1.bytes_written_ckpt = r->write_queue.bytes_out;
  	}
  }
  
+diff --git a/src/h1.c b/src/h1.c
+index eabcb414..e2a6ccaf 100644
+--- a/src/h1.c
++++ b/src/h1.c
+@@ -445,6 +445,7 @@ h1_recv_headers (request_st * const r, connection * const con)
+                       con->dst_addr_buf.ptr);
+             r->http_status = 400; /* Bad Request */
+             r->keep_alive = 0;
++            chunkqueue_free(cq); // FREE BAD REQUEST FROM QUEUE
+             return 1;
+         }
+     } while ((c = h1_recv_headers_more(con, cq, c, clen)));
 diff --git a/src/server.c b/src/server.c
-index 44385db1..a40d3682 100644
+index 44385db1..01f68138 100644
 --- a/src/server.c
 +++ b/src/server.c
 @@ -2155,6 +2155,7 @@ static void server_main_loop (server * const srv) {
@@ -38,7 +58,7 @@ index 44385db1..a40d3682 100644
  			server_load_check(srv);
  		}
  
-+		while (__AFL_LOOP(1000)) {
++		while (__AFL_LOOP(200)) {
 +		fdevent_poll(srv->ev, -1);
  	  #ifndef _MSC_VER
  		static

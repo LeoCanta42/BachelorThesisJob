@@ -1,0 +1,107 @@
+diff --git a/src/connections.c b/src/connections.c
+index 51afa665..c2c269b8 100644
+--- a/src/connections.c
++++ b/src/connections.c
+@@ -188,7 +188,13 @@ static void connection_handle_response_end_state(request_st * const r, connectio
+ 		r->http_status = 100; /* XXX: what if con->state == CON_STATE_ERROR? */
+ 		/*if (r->http_status)*/
+ 			plugins_call_handle_request_done(r);
+-		connection_handle_shutdown(con);
++        // AVOIDING CLOSING CONNECTION, RESET STATE TO REQUEST START
++//		connection_handle_shutdown(con);
++        request_reset(r);
++		con->is_readable = 1;
++		r->x.h1.bytes_read_ckpt = r->read_queue.bytes_in;
++		r->x.h1.bytes_written_ckpt = r->write_queue.bytes_out;
++		connection_set_state(r, CON_STATE_REQUEST_START);
+ 		return;
+ 	}
+ 
+@@ -211,8 +217,8 @@ static void connection_handle_response_end_state(request_st * const r, connectio
+ 		request_reset(r);
+ 		con->is_readable = 1; /* potentially trigger optimistic read */
+ 		/*(accounting used by mod_accesslog for HTTP/1.0 and HTTP/1.1)*/
+-		/*(overloaded to detect next bytes recv'd on keep-alive con)*/
+-		r->x.h1.bytes_read_ckpt = r->read_queue.bytes_in;
++		/*(overloaded to detect next bytes recv'd on keep-alive con)*/        
++        r->x.h1.bytes_read_ckpt = r->read_queue.bytes_in;
+ 		r->x.h1.bytes_written_ckpt = r->write_queue.bytes_out;
+ #if 0
+ 		r->start_hp.tv_sec = log_epoch_secs;
+@@ -220,7 +226,13 @@ static void connection_handle_response_end_state(request_st * const r, connectio
+ #endif
+ 		connection_set_state(r, CON_STATE_REQUEST_START);
+ 	} else {
+-		connection_handle_shutdown(con);
++        // AVOIDING CLOSING CONNECTION, RESET STATE TO REQUEST START
++//		connection_handle_shutdown(con);
++        request_reset(r);
++		con->is_readable = 1;
++		r->x.h1.bytes_read_ckpt = r->read_queue.bytes_in;
++		r->x.h1.bytes_written_ckpt = r->write_queue.bytes_out;
++		connection_set_state(r, CON_STATE_REQUEST_START);
+ 	}
+ }
+ 
+@@ -665,7 +677,7 @@ connection_state_machine_loop (request_st * const r, connection * const con)
+ 	do {
+ 		if (r->conf.log_state_handling)
+ 			connection_log_state(r, "");
+-
++            
+ 		switch ((ostate = r->state)) {
+ 		case CON_STATE_REQUEST_START: /* transient */
+ 			/*(should not be reached by HTTP/2 streams)*/
+diff --git a/src/h1.c b/src/h1.c
+index eabcb414..84c2555b 100644
+--- a/src/h1.c
++++ b/src/h1.c
+@@ -445,6 +445,7 @@ h1_recv_headers (request_st * const r, connection * const con)
+                       con->dst_addr_buf.ptr);
+             r->http_status = 400; /* Bad Request */
+             r->keep_alive = 0;
++            chunkqueue_reset(cq); // reset the chunkqueue to avoid reading same bad request
+             return 1;
+         }
+     } while ((c = h1_recv_headers_more(con, cq, c, clen)));
+diff --git a/src/server.c b/src/server.c
+index 44385db1..20a79cc7 100644
+--- a/src/server.c
++++ b/src/server.c
+@@ -2155,6 +2155,10 @@ static void server_main_loop (server * const srv) {
+ 	unix_time64_t last_active_ts = server_monotonic_secs();
+ 	log_epoch_secs = server_epoch_secs(srv, 0);
+ 
++	//wait for a connection
++    fdevent_poll(srv->ev, -1);
++	connection * const persistentcon = log_con_jqueue;
++	connection_state_machine(persistentcon);
+ 	while (!srv_shutdown) {
+ 
+ 		if (handle_sig_hup) {
+@@ -2193,7 +2197,10 @@ static void server_main_loop (server * const srv) {
+ 		} else {
+ 			server_load_check(srv);
+ 		}
+-
++		
++        while (__AFL_LOOP(1000)) {
++        // Force to read lines of request
++		fdevent_poll(srv->ev, -1);
+ 	  #ifndef _MSC_VER
+ 		static
+ 	  #endif
+@@ -2202,9 +2209,11 @@ static void server_main_loop (server * const srv) {
+ 		connection * const joblist = log_con_jqueue;
+ 		log_con_jqueue = sentinel;
+ 		server_run_con_queue(joblist, sentinel);
++        }
++		srv_shutdown = 1;
+ 
+-		if (fdevent_poll(srv->ev, log_con_jqueue != sentinel ? 0 : 1000) > 0)
+-			last_active_ts = log_monotonic_secs;
++//		if (fdevent_poll(srv->ev, log_con_jqueue != sentinel ? 0 : 1000) > 0)
++//			last_active_ts = log_monotonic_secs;
+ 	}
+ }
+ 

@@ -22,4 +22,4 @@ __start0 -> c0;
 
 }
 
-//dot -Tsvg Lighttpd_clean_afterPatch.dot > Lighttpd_clean_afterPatch.png
+//dot -Tsvg Lighttpd_clean_afterPatch_noreset.dot > Lighttpd_clean_afterPatch_noreset.png

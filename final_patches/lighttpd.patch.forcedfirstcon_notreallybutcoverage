@@ -1,0 +1,39 @@
+diff --git a/src/server.c b/src/server.c
+index 44385db1..74da4c6f 100644
+--- a/src/server.c
++++ b/src/server.c
+@@ -2155,6 +2155,10 @@ static void server_main_loop (server * const srv) {
+ 	unix_time64_t last_active_ts = server_monotonic_secs();
+ 	log_epoch_secs = server_epoch_secs(srv, 0);
+ 
++	//wait for a connection
++    fdevent_poll(srv->ev, -1);
++	connection * const persistentcon = log_con_jqueue;
++	connection_state_machine(persistentcon);
+ 	while (!srv_shutdown) {
+ 
+ 		if (handle_sig_hup) {
+@@ -2193,7 +2197,8 @@ static void server_main_loop (server * const srv) {
+ 		} else {
+ 			server_load_check(srv);
+ 		}
+-
++		while(__AFL_LOOP(INT64_MAX)) {
++			fdevent_poll(srv->ev, -1);
+ 	  #ifndef _MSC_VER
+ 		static
+ 	  #endif
+@@ -2202,9 +2207,11 @@ static void server_main_loop (server * const srv) {
+ 		connection * const joblist = log_con_jqueue;
+ 		log_con_jqueue = sentinel;
+ 		server_run_con_queue(joblist, sentinel);
++		}
++		srv_shutdown = 1;
+ 
+-		if (fdevent_poll(srv->ev, log_con_jqueue != sentinel ? 0 : 1000) > 0)
+-			last_active_ts = log_monotonic_secs;
++		// if (fdevent_poll(srv->ev, log_con_jqueue != sentinel ? 0 : 1000) > 0)
++		// 	last_active_ts = log_monotonic_secs;
+ 	}
+ }
+ 

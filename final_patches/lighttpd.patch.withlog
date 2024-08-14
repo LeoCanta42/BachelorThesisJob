@@ -1,0 +1,42 @@
+diff --git a/src/h1.c b/src/h1.c
+index eabcb414..ecf11273 100644
+--- a/src/h1.c
++++ b/src/h1.c
+@@ -375,6 +375,10 @@ h1_recv_headers (request_st * const r, connection * const con)
+     uint8_t discard_blank = 0;
+     unsigned short hoff[8192]; /* max num header lines + 3; 16k on stack */
+ 
++    for (c = cq->first; c; c = c->next) { //log raw request
++        log_error(r->conf.errh, __FILE__, __LINE__, "*** raw request: %s", c->mem->ptr);
++    }
++
+     if (con->request_count > 1) {
+         discard_blank = 1;
+         if (cq->bytes_in == r->x.h1.bytes_read_ckpt) {
+diff --git a/src/server.c b/src/server.c
+index 44385db1..19bbd592 100644
+--- a/src/server.c
++++ b/src/server.c
+@@ -2194,6 +2194,8 @@ static void server_main_loop (server * const srv) {
+ 			server_load_check(srv);
+ 		}
+ 
++		while(__AFL_LOOP(INT64_MAX)) { //afl loop into requests
++			fdevent_poll(srv->ev, -1);
+ 	  #ifndef _MSC_VER
+ 		static
+ 	  #endif
+@@ -2202,9 +2204,11 @@ static void server_main_loop (server * const srv) {
+ 		connection * const joblist = log_con_jqueue;
+ 		log_con_jqueue = sentinel;
+ 		server_run_con_queue(joblist, sentinel);
++		}
++		srv_shutdown = 1;
+ 
+-		if (fdevent_poll(srv->ev, log_con_jqueue != sentinel ? 0 : 1000) > 0)
+-			last_active_ts = log_monotonic_secs;
++		// if (fdevent_poll(srv->ev, log_con_jqueue != sentinel ? 0 : 1000) > 0)
++		// 	last_active_ts = log_monotonic_secs;
+ 	}
+ }
+ 

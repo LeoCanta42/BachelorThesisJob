@@ -1,0 +1,15 @@
+digraph g {
+
+	c0 [shape="circle" label="CON_STATE_REQUEST_START"];
+	c1 [shape="circle" label="CON_STATE_READ"];	
+
+	c0 -> c1
+	c1 -> c1
+	c1 -> c0
+
+__start0 [label="" shape="none" width="0" height="0"];
+__start0 -> c0;
+
+}
+
+//dot -Tsvg Lighttpd_clean_afterPatch_reset.dot > Lighttpd_clean_afterPatch_reset.png
