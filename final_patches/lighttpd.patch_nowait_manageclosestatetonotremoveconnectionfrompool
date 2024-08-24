@@ -1,7 +1,31 @@
 diff --git a/src/connections.c b/src/connections.c
-index 51afa665..4c4c3d38 100644
+index 51afa665..6ab316e3 100644
 --- a/src/connections.c
 +++ b/src/connections.c
+@@ -98,8 +98,8 @@ static void connection_close(connection *con) {
+ 	}
+ 	con->fd = -1;
+ 
+-	--srv->cur_fds;
+-	connection_del(srv, con);
++	// --srv->cur_fds;
++	// connection_del(srv, con);
+ }
+ 
+ static void connection_read_for_eos_plain(connection * const con) {
+@@ -140,9 +140,9 @@ static void connection_read_for_eos(connection * const con) {
+ static void connection_handle_close_state(connection *con) {
+ 	connection_read_for_eos(con);
+ 
+-	if (log_monotonic_secs - con->close_timeout_ts > HTTP_LINGER_TIMEOUT) {
+-		connection_close(con);
+-	}
++	// if (log_monotonic_secs - con->close_timeout_ts > HTTP_LINGER_TIMEOUT) {
++		connection_close(con); //call it anyway
++	// }
+ }
+ 
+ static void connection_handle_shutdown(connection *con) {
 @@ -665,7 +665,9 @@ connection_state_machine_loop (request_st * const r, connection * const con)
  	do {
  		if (r->conf.log_state_handling)
@@ -29,31 +53,20 @@ index eabcb414..eb3647bc 100644
          discard_blank = 1;
          if (cq->bytes_in == r->x.h1.bytes_read_ckpt) {
 diff --git a/src/server.c b/src/server.c
-index 44385db1..74da4c6f 100644
+index 44385db1..15791617 100644
 --- a/src/server.c
 +++ b/src/server.c
-@@ -2155,6 +2155,10 @@ static void server_main_loop (server * const srv) {
- 	unix_time64_t last_active_ts = server_monotonic_secs();
- 	log_epoch_secs = server_epoch_secs(srv, 0);
- 
-+	//wait for a connection
-+    fdevent_poll(srv->ev, -1);
-+	connection * const persistentcon = log_con_jqueue;
-+	connection_state_machine(persistentcon);
- 	while (!srv_shutdown) {
- 
- 		if (handle_sig_hup) {
-@@ -2193,7 +2197,8 @@ static void server_main_loop (server * const srv) {
- 		} else {
+@@ -2194,6 +2194,9 @@ static void server_main_loop (server * const srv) {
  			server_load_check(srv);
  		}
--
+ 
 +		while(__AFL_LOOP(INT64_MAX)) {
 +			fdevent_poll(srv->ev, -1);
++			log_error(srv->errh, __FILE__, __LINE__, "PID = %d", getpid());
  	  #ifndef _MSC_VER
  		static
  	  #endif
-@@ -2202,9 +2207,11 @@ static void server_main_loop (server * const srv) {
+@@ -2202,9 +2205,11 @@ static void server_main_loop (server * const srv) {
  		connection * const joblist = log_con_jqueue;
  		log_con_jqueue = sentinel;
  		server_run_con_queue(joblist, sentinel);

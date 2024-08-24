@@ -1,18 +1,25 @@
 diff --git a/src/connections.c b/src/connections.c
-index 51afa665..4c4c3d38 100644
+index 51afa665..32aa7e74 100644
 --- a/src/connections.c
 +++ b/src/connections.c
-@@ -665,7 +665,9 @@ connection_state_machine_loop (request_st * const r, connection * const con)
+@@ -665,7 +665,6 @@ connection_state_machine_loop (request_st * const r, connection * const con)
  	do {
  		if (r->conf.log_state_handling)
  			connection_log_state(r, "");
 -
-+        for (chunk *c = con->write_queue->first; c; c = c->next) { //log response data
-+            log_error(r->conf.errh, __FILE__, __LINE__, "RESPONSE: %s", c->mem->ptr);
-+        }
  		switch ((ostate = r->state)) {
  		case CON_STATE_REQUEST_START: /* transient */
  			/*(should not be reached by HTTP/2 streams)*/
+@@ -709,6 +708,9 @@ connection_state_machine_loop (request_st * const r, connection * const con)
+ 			/*__attribute_fallthrough__*/
+ 		/*case CON_STATE_RESPONSE_START:*//*occurred;transient*/
+ 			h1_send_headers(r);
++        for (chunk *c = con->write_queue->first; c; c = c->next) { //log response data
++            log_error(r->conf.errh, __FILE__, __LINE__, "RESPONSE: %s", c->mem->ptr);
++        }
+ 			connection_set_state(r, CON_STATE_WRITE);
+ 			__attribute_fallthrough__
+ 		case CON_STATE_WRITE:
 diff --git a/src/h1.c b/src/h1.c
 index eabcb414..eb3647bc 100644
 --- a/src/h1.c
@@ -28,3 +35,15 @@ index eabcb414..eb3647bc 100644
      if (con->request_count > 1) {
          discard_blank = 1;
          if (cq->bytes_in == r->x.h1.bytes_read_ckpt) {
+diff --git a/src/server.c b/src/server.c
+index 44385db1..01cd9314 100644
+--- a/src/server.c
++++ b/src/server.c
+@@ -2194,6 +2194,7 @@ static void server_main_loop (server * const srv) {
+ 			server_load_check(srv);
+ 		}
+ 
++		log_error(srv->errh, __FILE__, __LINE__, "PID = %d", getpid());
+ 	  #ifndef _MSC_VER
+ 		static
+ 	  #endif

@@ -1,0 +1,41 @@
+diff --git a/src/server.c b/src/server.c
+index 44385db1..db70d1eb 100644
+--- a/src/server.c
++++ b/src/server.c
+@@ -2146,6 +2146,8 @@ static void server_run_con_queue (connection * const restrict joblist, const con
+         jqnext = con->jqnext;
+         con->jqnext = NULL;
+         connection_state_machine(con);
++		if (con->request.state == CON_STATE_CLOSE) //has to be computed twice
++			connection_state_machine(con);
+     }
+ }
+ 
+@@ -2194,6 +2196,8 @@ static void server_main_loop (server * const srv) {
+ 			server_load_check(srv);
+ 		}
+ 
++		while(__AFL_LOOP(INT64_MAX)) { //afl loop into requests
++			fdevent_poll(srv->ev, -1);
+ 	  #ifndef _MSC_VER
+ 		static
+ 	  #endif
+@@ -2201,10 +2205,15 @@ static void server_main_loop (server * const srv) {
+ 		  (connection *)(uintptr_t)&log_con_jqueue;
+ 		connection * const joblist = log_con_jqueue;
+ 		log_con_jqueue = sentinel;
+-		server_run_con_queue(joblist, sentinel);
++		if(joblist != sentinel) 
++			server_run_con_queue(joblist, sentinel);
++		else
++			continue;
++		}
++		srv_shutdown = 1;
+ 
+-		if (fdevent_poll(srv->ev, log_con_jqueue != sentinel ? 0 : 1000) > 0)
+-			last_active_ts = log_monotonic_secs;
++		// if (fdevent_poll(srv->ev, log_con_jqueue != sentinel ? 0 : 1000) > 0)
++		// 	last_active_ts = log_monotonic_secs;
+ 	}
+ }
+ 

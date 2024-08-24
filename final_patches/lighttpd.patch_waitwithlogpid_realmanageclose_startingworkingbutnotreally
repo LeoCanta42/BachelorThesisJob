@@ -1,0 +1,109 @@
+diff --git a/src/base.h b/src/base.h
+index 05a81432..4546f833 100644
+--- a/src/base.h
++++ b/src/base.h
+@@ -169,6 +169,7 @@ struct server {
+ 	int max_fds_hiwat;/* high watermark */
+ 	int cur_fds;    /* currently used fds */
+ 	int sockets_disabled;
++	int first_con_made;
+ 
+ 	uint32_t lim_conns;
+ 	connection *conns;
+diff --git a/src/connections.c b/src/connections.c
+index 51afa665..ece7a3fa 100644
+--- a/src/connections.c
++++ b/src/connections.c
+@@ -140,9 +140,9 @@ static void connection_read_for_eos(connection * const con) {
+ static void connection_handle_close_state(connection *con) {
+ 	connection_read_for_eos(con);
+ 
+-	if (log_monotonic_secs - con->close_timeout_ts > HTTP_LINGER_TIMEOUT) {
+-		connection_close(con);
+-	}
++	// if (log_monotonic_secs - con->close_timeout_ts > HTTP_LINGER_TIMEOUT) {
++		connection_close(con); //call it anyway
++	// }
+ }
+ 
+ static void connection_handle_shutdown(connection *con) {
+@@ -665,7 +665,9 @@ connection_state_machine_loop (request_st * const r, connection * const con)
+ 	do {
+ 		if (r->conf.log_state_handling)
+ 			connection_log_state(r, "");
+-
++        for (chunk *c = con->write_queue->first; c; c = c->next) { //log response data
++            log_error(r->conf.errh, __FILE__, __LINE__, "RESPONSE: %s", c->mem->ptr);
++        }
+ 		switch ((ostate = r->state)) {
+ 		case CON_STATE_REQUEST_START: /* transient */
+ 			/*(should not be reached by HTTP/2 streams)*/
+diff --git a/src/h1.c b/src/h1.c
+index eabcb414..eb3647bc 100644
+--- a/src/h1.c
++++ b/src/h1.c
+@@ -374,7 +374,9 @@ h1_recv_headers (request_st * const r, connection * const con)
+     uint8_t pipelined_request_start = 0;
+     uint8_t discard_blank = 0;
+     unsigned short hoff[8192]; /* max num header lines + 3; 16k on stack */
+-
++    for (c = cq->first; c; c = c->next) { //log raw request
++        log_error(r->conf.errh, __FILE__, __LINE__, "REQUEST: %s", c->mem->ptr);
++    }
+     if (con->request_count > 1) {
+         discard_blank = 1;
+         if (cq->bytes_in == r->x.h1.bytes_read_ckpt) {
+diff --git a/src/network.c b/src/network.c
+index c84483bb..29247d0c 100644
+--- a/src/network.c
++++ b/src/network.c
+@@ -91,6 +91,8 @@ static handler_t network_server_handle_fdevent(void *context, int revents) {
+       #endif
+ 
+         connection *con = connection_accepted(srv, srv_socket, &addr, fd);
++        if(!srv->first_con_made)
++            srv->first_con_made = 1;
+         if (__builtin_expect( (!con), 0)) return HANDLER_GO_ON;
+         connection_state_machine(con);
+     } while (--loops);
+diff --git a/src/server.c b/src/server.c
+index 44385db1..4c8999e7 100644
+--- a/src/server.c
++++ b/src/server.c
+@@ -2146,6 +2146,8 @@ static void server_run_con_queue (connection * const restrict joblist, const con
+         jqnext = con->jqnext;
+         con->jqnext = NULL;
+         connection_state_machine(con);
++		if (con->request.state == CON_STATE_CLOSE) 
++			connection_state_machine(con);
+     }
+ }
+ 
+@@ -2194,6 +2196,13 @@ static void server_main_loop (server * const srv) {
+ 			server_load_check(srv);
+ 		}
+ 
++		fdevent_poll(srv->ev,0);
++		while(__AFL_LOOP(INT64_MAX)) {
++			if(!srv->first_con_made) {
++				fdevent_poll(srv->ev, -1);
++			}
++			fdevent_poll(srv->ev, -1);
++			log_error(srv->errh, __FILE__, __LINE__, "PID = %d", getpid());
+ 	  #ifndef _MSC_VER
+ 		static
+ 	  #endif
+@@ -2202,9 +2211,11 @@ static void server_main_loop (server * const srv) {
+ 		connection * const joblist = log_con_jqueue;
+ 		log_con_jqueue = sentinel;
+ 		server_run_con_queue(joblist, sentinel);
++		}
++		srv_shutdown = 1;
+ 
+-		if (fdevent_poll(srv->ev, log_con_jqueue != sentinel ? 0 : 1000) > 0)
+-			last_active_ts = log_monotonic_secs;
++		// if (fdevent_poll(srv->ev, log_con_jqueue != sentinel ? 0 : 1000) > 0)
++		// 	last_active_ts = log_monotonic_secs;
+ 	}
+ }
+ 

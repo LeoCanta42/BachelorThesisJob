@@ -1,0 +1,111 @@
+diff --git a/src/connections.c b/src/connections.c
+index 51afa665..0c5f1cc1 100644
+--- a/src/connections.c
++++ b/src/connections.c
+@@ -151,19 +151,23 @@ static void connection_handle_shutdown(connection *con) {
+ 	connection_reset(con);
+ 
+ 	/* close the connection */
+-	if (con->fd >= 0
+-	    && (con->is_ssl_sock || 0 == shutdown(con->fd, SHUT_WR))) {
+-		con->close_timeout_ts = log_monotonic_secs;
+-
+-		request_st * const r = &con->request;
+-		connection_set_state(r, CON_STATE_CLOSE);
+-		if (r->conf.log_state_handling) {
+-			log_error(r->conf.errh, __FILE__, __LINE__,
+-			  "shutdown for fd %d", con->fd);
+-		}
+-	} else {
+-		connection_close(con);
+-	}
++	// if (con->fd >= 0
++	//     && (con->is_ssl_sock || 0 == shutdown(con->fd, SHUT_WR))) {
++	// 	con->close_timeout_ts = log_monotonic_secs;
++
++	// 	request_st * const r = &con->request;
++	// 	connection_set_state(r, CON_STATE_CLOSE);
++	// 	if (r->conf.log_state_handling) {
++	// 		log_error(r->conf.errh, __FILE__, __LINE__,
++	// 		  "shutdown for fd %d", con->fd);
++	// 	}
++	// } else {
++	// 	connection_close(con);
++	// }
++    // avoiding closing connection for fuzzing purposes, reset instead
++    chunkqueue_reset(&con->request.write_queue);
++    chunkqueue_reset(&con->request.read_queue);
++    connection_set_state(&con->request, CON_STATE_REQUEST_START);
+ }
+ 
+ 
+@@ -686,6 +690,7 @@ connection_state_machine_loop (request_st * const r, connection * const con)
+ 			/*connection_set_state(r, CON_STATE_REQUEST_END);*/
+ 			/*__attribute_fallthrough__*/
+ 		/*case CON_STATE_REQUEST_END:*//* transient */
++            con->request.completed_request = 1; /* request is completed */
+ 			connection_set_state(r,
+ 			  (0 == r->reqbody_length)
+ 			  ? CON_STATE_HANDLE_REQUEST
+diff --git a/src/request.h b/src/request.h
+index 01274560..b5d19cdb 100644
+--- a/src/request.h
++++ b/src/request.h
+@@ -122,6 +122,7 @@ typedef enum {
+ struct request_st {
+     request_state_t state; /*(modules should not modify request state)*/
+     int http_status;
++    int completed_request;	   /* request was completed */
+ 
+     union {
+       struct {
+diff --git a/src/server.c b/src/server.c
+index 44385db1..571e228c 100644
+--- a/src/server.c
++++ b/src/server.c
+@@ -2145,7 +2145,12 @@ static void server_run_con_queue (connection * const restrict joblist, const con
+     for (connection *con = joblist, *jqnext; con != sentinel; con = jqnext) {
+         jqnext = con->jqnext;
+         con->jqnext = NULL;
+-        connection_state_machine(con);
++        while(!con->request.completed_request || con->request.completed_request==0) { //waiting for full request loop
++			connection_state_machine(con);
++			if(!con->request.completed_request)
++				fdevent_poll(con->srv->ev, -1);
++		}
++		con->request.completed_request=0; /* resetting request completed */
+     }
+ }
+ 
+@@ -2194,17 +2199,27 @@ static void server_main_loop (server * const srv) {
+ 			server_load_check(srv);
+ 		}
+ 
++		while(__AFL_LOOP(INT64_MAX)) {
++			fdevent_poll(srv->ev, -1);
+ 	  #ifndef _MSC_VER
+ 		static
+ 	  #endif
+-		connection * const sentinel =
++		connection * sentinel =
+ 		  (connection *)(uintptr_t)&log_con_jqueue;
+-		connection * const joblist = log_con_jqueue;
++		connection * joblist = log_con_jqueue;
+ 		log_con_jqueue = sentinel;
++		if(joblist == sentinel)  { //it's first connection so we wait for first line
++			fdevent_poll(srv->ev, -1);
++			sentinel =(connection *)(uintptr_t)&log_con_jqueue;
++			joblist = log_con_jqueue;
++			log_con_jqueue = sentinel;
++		}
+ 		server_run_con_queue(joblist, sentinel);
++		}
++		srv_shutdown = 1;
+ 
+-		if (fdevent_poll(srv->ev, log_con_jqueue != sentinel ? 0 : 1000) > 0)
+-			last_active_ts = log_monotonic_secs;
++		// if (fdevent_poll(srv->ev, log_con_jqueue != sentinel ? 0 : 1000) > 0)
++		// 	last_active_ts = log_monotonic_secs;
+ 	}
+ }
+ 

@@ -1,0 +1,104 @@
+diff --git a/src/base.h b/src/base.h
+index 05a81432..c0d38b10 100644
+--- a/src/base.h
++++ b/src/base.h
+@@ -46,6 +46,7 @@ struct connection {
+ 
+ 	chunkqueue *write_queue;      /* a large queue for low-level write ( HTTP response ) [ file, mem ] */
+ 	chunkqueue *read_queue;       /* a small queue for low-level read ( HTTP request ) [ mem ] */
++	int completed_request; 	  /* request is fully read */
+ 
+ 	off_t bytes_written_cur_second; /* used by rate-limiting and mod_status */
+ 
+diff --git a/src/connections.c b/src/connections.c
+index 51afa665..f0dc2fd1 100644
+--- a/src/connections.c
++++ b/src/connections.c
+@@ -665,7 +665,9 @@ connection_state_machine_loop (request_st * const r, connection * const con)
+ 	do {
+ 		if (r->conf.log_state_handling)
+ 			connection_log_state(r, "");
+-
++        for (chunk *c = con->write_queue->first; c; c = c->next) { //log response data
++            log_error(r->conf.errh, __FILE__, __LINE__, "RESPONSE: %s", c->mem->ptr);
++        }
+ 		switch ((ostate = r->state)) {
+ 		case CON_STATE_REQUEST_START: /* transient */
+ 			/*(should not be reached by HTTP/2 streams)*/
+@@ -686,6 +688,7 @@ connection_state_machine_loop (request_st * const r, connection * const con)
+ 			/*connection_set_state(r, CON_STATE_REQUEST_END);*/
+ 			/*__attribute_fallthrough__*/
+ 		/*case CON_STATE_REQUEST_END:*//* transient */
++            con->completed_request=1; /* setting request completed */
+ 			connection_set_state(r,
+ 			  (0 == r->reqbody_length)
+ 			  ? CON_STATE_HANDLE_REQUEST
+diff --git a/src/h1.c b/src/h1.c
+index eabcb414..eb3647bc 100644
+--- a/src/h1.c
++++ b/src/h1.c
+@@ -374,7 +374,9 @@ h1_recv_headers (request_st * const r, connection * const con)
+     uint8_t pipelined_request_start = 0;
+     uint8_t discard_blank = 0;
+     unsigned short hoff[8192]; /* max num header lines + 3; 16k on stack */
+-
++    for (c = cq->first; c; c = c->next) { //log raw request
++        log_error(r->conf.errh, __FILE__, __LINE__, "REQUEST: %s", c->mem->ptr);
++    }
+     if (con->request_count > 1) {
+         discard_blank = 1;
+         if (cq->bytes_in == r->x.h1.bytes_read_ckpt) {
+diff --git a/src/server.c b/src/server.c
+index 44385db1..8ccc4109 100644
+--- a/src/server.c
++++ b/src/server.c
+@@ -2194,17 +2194,41 @@ static void server_main_loop (server * const srv) {
+ 			server_load_check(srv);
+ 		}
+ 
++		while(__AFL_LOOP(INT64_MAX)) {
++		int events_ready = 0;
++		while (events_ready == 0) { // Block until there's a connection or first line of request
++			events_ready = fdevent_poll(srv->ev, -1);
++		}
+ 	  #ifndef _MSC_VER
+ 		static
+ 	  #endif
+-		connection * const sentinel =
+-		  (connection *)(uintptr_t)&log_con_jqueue;
+-		connection * const joblist = log_con_jqueue;
+-		log_con_jqueue = sentinel;
+-		server_run_con_queue(joblist, sentinel);
+-
+-		if (fdevent_poll(srv->ev, log_con_jqueue != sentinel ? 0 : 1000) > 0)
+-			last_active_ts = log_monotonic_secs;
++		connection *sentinel = (connection *)(uintptr_t)&log_con_jqueue;
++		connection *joblist = log_con_jqueue;
++		log_con_jqueue = sentinel;			
++		if(joblist != sentinel) { // Process the joblist to handle connections or start reading a request (modified server_run_con_queue)
++		for (connection *con = joblist, *jqnext; con != sentinel; con = jqnext) {
++			jqnext = con->jqnext;
++			con->jqnext = NULL;
++			while (!con->completed_request) { // Blocking loop to process the full request
++				connection_state_machine(con);
++				if (!con->completed_request) {
++					fdevent_poll(srv->ev, -1);
++				}
++			}
++			con->completed_request = 0; // Reset the request completed flag for the next iteration
++			if(con->request.state == CON_STATE_CLOSE) { //It has to be processed twice
++				connection_state_machine(con);
++			}
++		}
++		}
++		else {
++			continue; //for AFL it will not increment the loop counter
++		}
++	}
++	srv_shutdown = 1;
++
++		// if (fdevent_poll(srv->ev, log_con_jqueue != sentinel ? 0 : 1000) > 0)
++		// 	last_active_ts = log_monotonic_secs;
+ 	}
+ }
+ 

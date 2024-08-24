@@ -1,0 +1,87 @@
+diff --git a/src/base.h b/src/base.h
+index 05a81432..1461b16e 100644
+--- a/src/base.h
++++ b/src/base.h
+@@ -46,6 +46,7 @@ struct connection {
+ 
+ 	chunkqueue *write_queue;      /* a large queue for low-level write ( HTTP response ) [ file, mem ] */
+ 	chunkqueue *read_queue;       /* a small queue for low-level read ( HTTP request ) [ mem ] */
++	int completed_request; 	  /* request is fully read */
+ 
+ 	off_t bytes_written_cur_second; /* used by rate-limiting and mod_status */
+ 
+@@ -173,6 +174,7 @@ struct server {
+ 	uint32_t lim_conns;
+ 	connection *conns;
+ 	connection *conns_pool;
++	int first_connection_made;
+ 
+ 	log_error_st *errh;
+ 
+diff --git a/src/connections.c b/src/connections.c
+index 51afa665..d3891626 100644
+--- a/src/connections.c
++++ b/src/connections.c
+@@ -686,6 +686,7 @@ connection_state_machine_loop (request_st * const r, connection * const con)
+ 			/*connection_set_state(r, CON_STATE_REQUEST_END);*/
+ 			/*__attribute_fallthrough__*/
+ 		/*case CON_STATE_REQUEST_END:*//* transient */
++            con->completed_request=1; /* setting request completed */
+ 			connection_set_state(r,
+ 			  (0 == r->reqbody_length)
+ 			  ? CON_STATE_HANDLE_REQUEST
+diff --git a/src/network.c b/src/network.c
+index c84483bb..58f65b58 100644
+--- a/src/network.c
++++ b/src/network.c
+@@ -91,6 +91,8 @@ static handler_t network_server_handle_fdevent(void *context, int revents) {
+       #endif
+ 
+         connection *con = connection_accepted(srv, srv_socket, &addr, fd);
++        if(con!=NULL && !srv->first_connection_made)
++          srv->first_connection_made = 1;  
+         if (__builtin_expect( (!con), 0)) return HANDLER_GO_ON;
+         connection_state_machine(con);
+     } while (--loops);
+diff --git a/src/server.c b/src/server.c
+index 44385db1..5b17a8dd 100644
+--- a/src/server.c
++++ b/src/server.c
+@@ -2193,7 +2193,9 @@ static void server_main_loop (server * const srv) {
+ 		} else {
+ 			server_load_check(srv);
+ 		}
+-
++		if(srv->first_connection_made) {
++		while(__AFL_LOOP(INT64_MAX)) {
++		fdevent_poll(srv->ev, -1); //wait for first line (for sure it has to have at least one)
+ 	  #ifndef _MSC_VER
+ 		static
+ 	  #endif
+@@ -2201,10 +2203,22 @@ static void server_main_loop (server * const srv) {
+ 		  (connection *)(uintptr_t)&log_con_jqueue;
+ 		connection * const joblist = log_con_jqueue;
+ 		log_con_jqueue = sentinel;
+-		server_run_con_queue(joblist, sentinel);
+-
+-		if (fdevent_poll(srv->ev, log_con_jqueue != sentinel ? 0 : 1000) > 0)
+-			last_active_ts = log_monotonic_secs;
++		for (connection *con = joblist, *jqnext; con != sentinel; con = jqnext) { //waiting for full request loop
++			jqnext = con->jqnext;
++			con->jqnext = NULL;
++			while(!con->completed_request) {
++				connection_state_machine(con);
++				if(!con->completed_request)
++					fdevent_poll(srv->ev, -1);
++			}
++			con->completed_request=0; /* resetting request completed */
++		}
++		}
++		srv_shutdown = 1;
++		}
++		fdevent_poll(srv->ev,0);
++		// if (fdevent_poll(srv->ev, log_con_jqueue != sentinel ? 0 : 1000) > 0)
++		// 	last_active_ts = log_monotonic_secs;
+ 	}
+ }
+ 

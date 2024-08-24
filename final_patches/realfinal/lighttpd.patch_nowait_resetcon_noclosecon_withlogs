@@ -1,0 +1,92 @@
+diff --git a/src/connections.c b/src/connections.c
+index 51afa665..42ffec7a 100644
+--- a/src/connections.c
++++ b/src/connections.c
+@@ -151,19 +151,23 @@ static void connection_handle_shutdown(connection *con) {
+ 	connection_reset(con);
+ 
+ 	/* close the connection */
+-	if (con->fd >= 0
+-	    && (con->is_ssl_sock || 0 == shutdown(con->fd, SHUT_WR))) {
+-		con->close_timeout_ts = log_monotonic_secs;
+-
+-		request_st * const r = &con->request;
+-		connection_set_state(r, CON_STATE_CLOSE);
+-		if (r->conf.log_state_handling) {
+-			log_error(r->conf.errh, __FILE__, __LINE__,
+-			  "shutdown for fd %d", con->fd);
+-		}
+-	} else {
+-		connection_close(con);
+-	}
++	// if (con->fd >= 0
++	//     && (con->is_ssl_sock || 0 == shutdown(con->fd, SHUT_WR))) {
++	// 	con->close_timeout_ts = log_monotonic_secs;
++
++	// 	request_st * const r = &con->request;
++	// 	connection_set_state(r, CON_STATE_CLOSE);
++	// 	if (r->conf.log_state_handling) {
++	// 		log_error(r->conf.errh, __FILE__, __LINE__,
++	// 		  "shutdown for fd %d", con->fd);
++	// 	}
++	// } else {
++	// 	connection_close(con);
++	// }
++    // avoiding closing connection for fuzzing purposes, reset instead
++    chunkqueue_reset(&con->request.write_queue);
++    chunkqueue_reset(&con->request.read_queue);
++    connection_set_state(&con->request, CON_STATE_REQUEST_START);
+ }
+ 
+ 
+@@ -709,6 +713,9 @@ connection_state_machine_loop (request_st * const r, connection * const con)
+ 			/*__attribute_fallthrough__*/
+ 		/*case CON_STATE_RESPONSE_START:*//*occurred;transient*/
+ 			h1_send_headers(r);
++            for (chunk *c = con->write_queue->first; c!=NULL ; c = c->next) { //log response data
++            log_error(r->conf.errh, __FILE__, __LINE__, "RESPONSE: %s", c->mem->ptr);
++            }
+ 			connection_set_state(r, CON_STATE_WRITE);
+ 			__attribute_fallthrough__
+ 		case CON_STATE_WRITE:
+diff --git a/src/h1.c b/src/h1.c
+index eabcb414..dd936665 100644
+--- a/src/h1.c
++++ b/src/h1.c
+@@ -375,6 +375,9 @@ h1_recv_headers (request_st * const r, connection * const con)
+     uint8_t discard_blank = 0;
+     unsigned short hoff[8192]; /* max num header lines + 3; 16k on stack */
+ 
++    for (c = cq->first; c; c = c->next) { //log raw request
++        log_error(r->conf.errh, __FILE__, __LINE__, "REQUEST: %s", c->mem->ptr);
++    }
+     if (con->request_count > 1) {
+         discard_blank = 1;
+         if (cq->bytes_in == r->x.h1.bytes_read_ckpt) {
+diff --git a/src/server.c b/src/server.c
+index 44385db1..810ee3ae 100644
+--- a/src/server.c
++++ b/src/server.c
+@@ -2194,6 +2194,8 @@ static void server_main_loop (server * const srv) {
+ 			server_load_check(srv);
+ 		}
+ 
++		while(__AFL_LOOP(INT64_MAX)) {
++			fdevent_poll(srv->ev, -1);
+ 	  #ifndef _MSC_VER
+ 		static
+ 	  #endif
+@@ -2202,9 +2204,11 @@ static void server_main_loop (server * const srv) {
+ 		connection * const joblist = log_con_jqueue;
+ 		log_con_jqueue = sentinel;
+ 		server_run_con_queue(joblist, sentinel);
++		}
++		srv_shutdown = 1;
+ 
+-		if (fdevent_poll(srv->ev, log_con_jqueue != sentinel ? 0 : 1000) > 0)
+-			last_active_ts = log_monotonic_secs;
++		// if (fdevent_poll(srv->ev, log_con_jqueue != sentinel ? 0 : 1000) > 0)
++		// 	last_active_ts = log_monotonic_secs;
+ 	}
+ }
+ 
