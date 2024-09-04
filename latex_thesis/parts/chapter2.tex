@@ -1,2 +1,98 @@
 \chapter{State of Art}
-All the background information goes here. 
+
+\section{Introduction to Fuzzing}
+Fuzzing, also known as fuzz testing, is a software testing technique used to discover coding errors and security vulnerabilities by inputting large volumes of random data, known as fuzz, into the system to cause unexpected behaviors. The primary objective of fuzzing is to find vulnerabilities such as buffer overflows, memory leaks, and other security weaknesses that could be exploited by attackers.
+
+Fuzzing is effective due to its ability to automate the generation of test cases and to focus on areas of code that may not be exercised by traditional testing methods. It is particularly useful for applications with complex input grammars, where manually generating test cases would be infeasible.
+
+\subsection{Types of Fuzzing Techniques}
+There are several fuzzing techniques, each tailored to specific applications and objectives:
+
+\begin{itemize}
+    \item \textbf{Black-box Fuzzing}: Generates inputs without any knowledge of the application's internal structure. It is easy to deploy but often less efficient due to the lack of internal feedback.
+    
+    \item \textbf{White-box Fuzzing}: Uses detailed information about the application's source code, such as control flow and data flow, to generate test cases that maximize code coverage. This approach often involves complex static and dynamic analysis techniques.
+    
+    \item \textbf{Grey-box Fuzzing}: Combines elements of both black-box and white-box fuzzing, using partial knowledge about the application's internals (e.g., code coverage feedback) to guide input generation. It balances simplicity with effectiveness and is exemplified by tools like AFL (American Fuzzy Lop).
+    
+    \item \textbf{Mutation-based Fuzzing}: Creates new inputs by randomly mutating existing ones, without requiring knowledge of the input format. It is versatile but may struggle with applications that require highly structured inputs.
+    
+    \item \textbf{Generation-based Fuzzing}: Generates inputs from scratch based on a formal specification of the input format, such as a grammar or protocol description. It is particularly effective for applications that require complex or structured inputs.
+\end{itemize}
+
+\section{Stateful Fuzzing: Concepts and Challenges}
+\textit{Stateful fuzzing} extends traditional fuzzing techniques by incorporating state-awareness. Traditional fuzzing often treats each input as an independent test case, but stateful fuzzing considers the application's internal state and how this state may affect the processing of subsequent inputs. This is particularly important for applications that maintain complex state information, such as network servers, databases, and interactive applications.
+
+\subsection{Understanding Stateful Applications}
+Stateful applications maintain a state across multiple interactions or sessions. For instance, a network server may keep track of the connection status, authentication states, session identifiers, or application-specific state information. These states influence how inputs are processed and can affect the application's behavior over time. Proper handling of state transitions is critical for both security and reliability, as state-dependent bugs can lead to vulnerabilities such as unauthorized access, denial of service (DoS), or data corruption.
+
+Stateful fuzzers aim to model and explore these state transitions by generating sequences of inputs that mimic real-world usage scenarios, while tracking the state changes to ensure comprehensive testing of all possible state transitions.
+
+\subsection{Key Techniques in Stateful Fuzzing}
+Stateful fuzzing involves several advanced techniques that distinguish it from traditional fuzzing approaches:
+
+\begin{itemize}
+    \item \textbf{State Modeling}: Construction of a model representing the application's state machine, either by analyzing source code, observing real interactions, or employing machine learning techniques. This model helps guide test case generation.
+    
+    \item \textbf{State Tracking}: Monitoring the application's state throughout multiple inputs, which may involve tracking network traffic, system calls, or internal state variables.
+    
+    \item \textbf{Feedback Mechanisms}: Utilizing feedback mechanisms to prioritize test cases that explore new states or code paths, thereby improving the efficiency of the fuzzing process.
+    
+    \item \textbf{Sequence Generation}: Creating sequences of inputs that accurately reflect real-world interactions with the application, essential for discovering vulnerabilities that depend on specific input sequences or state changes.
+    
+    \item \textbf{Learning-Based Approaches}: Some fuzzers employ machine learning or heuristic approaches to dynamically learn the application's state machine structure, allowing the fuzzer to adapt and improve over time.
+\end{itemize}
+
+\subsection{Challenges in Stateful Fuzzing}
+Stateful fuzzing poses several challenges that need to be addressed for effective testing:
+
+\begin{itemize}
+    \item \textbf{State Explosion}: As the number of possible states in an application grows, the complexity of the fuzzing process increases exponentially. This \textit{state explosion} problem necessitates strategies such as state abstraction, pruning, or prioritization to manage the complexity.
+    
+    \item \textbf{Protocol Complexity}: Understanding complex protocols or state machines is often required to generate meaningful input sequences, which demands significant domain-specific knowledge or advanced learning algorithms.
+    
+    \item \textbf{Performance Overhead}: The need to track state and generate sequences of inputs can lead to substantial computational overhead, impacting the performance of the fuzzing process.
+    
+    \item \textbf{Handling Non-Deterministic Behavior}: Many stateful applications exhibit non-deterministic behavior due to factors such as concurrency, external inputs, or timing variations, complicating the reproduction of bugs and consistency of fuzzing results.
+\end{itemize}
+
+\section{Lighttpd: A Case Study for Stateful Fuzzing}
+\textit{Lighttpd} is an open-source web server optimized for high performance with a low memory footprint. Designed to handle a large number of parallel connections, Lighttpd is well-suited for environments with limited resources or high concurrency requirements. Its modular architecture and support for advanced web protocols make it popular for embedded devices, cloud platforms, and high-traffic websites.
+
+\subsection{Architectural Overview of Lighttpd}
+Lighttpd follows an event-driven architecture, which enables it to handle numerous requests concurrently. It uses an asynchronous I/O model that reduces the overhead associated with network connections, allowing it to scale efficiently under load. Some of the key features of Lighttpd include:
+
+\begin{itemize}
+    \item \textbf{Modular Design}: Offers a range of modules that provide various functionalities, such as URL rewriting, HTTP compression, SSL/TLS, and WebSockets. This modular approach enables customization based on specific needs.
+    
+    \item \textbf{Protocol Support}: Supports multiple protocols, including HTTP/1.1, HTTPS, FastCGI, SCGI, and HTTP/2, making it versatile for different web applications and services.
+    
+    \item \textbf{Security Features}: Built-in security features include support for TLS/SSL encryption, defense against denial-of-service attacks, and various authentication mechanisms.
+\end{itemize}
+
+\subsection{Relevance of Lighttpd for Stateful Fuzzing}
+Lighttpd's state management complexity, particularly in protocol handling, makes it an ideal candidate for stateful fuzzing:
+
+\begin{itemize}
+    \item \textbf{State Management Complexity}: Handles multiple client connections concurrently, each with potentially different states based on protocol version, authentication, request type, and other factors.
+    
+    \item \textbf{Protocol Vulnerabilities}: Due to its support for multiple web protocols, Lighttpd is vulnerable to a range of potential attacks that could arise from improper state handling, such as request smuggling, race conditions, and state confusion attacks.
+    
+    \item \textbf{Modular Configuration}: Its modular architecture and numerous configurations present unique states or behaviors, which can be thoroughly tested using stateful fuzzing.
+\end{itemize}
+
+\section{Overview of Benchmarking Tools: AFLNet, ChatAFL, and Fallaway}
+
+For this thesis, three stateful fuzzers—AFLNet, ChatAFL, and Fallaway—will be benchmarked over Lighttpd to evaluate their effectiveness in uncovering state-dependent vulnerabilities.
+
+\subsection{AFLNet}
+\textit{AFLNet} is an extension of the American Fuzzy Lop (AFL) designed specifically for fuzzing stateful network protocols. It integrates state-awareness into AFL's grey-box fuzzing framework, allowing it to target specific protocol states and maximize state coverage during fuzzing.
+
+\subsection{ChatAFL}
+\textit{ChatAFL} is a stateful fuzzer that leverages machine learning techniques to improve the fuzzing of stateful applications. It is particularly effective for applications involving natural language processing or interactive protocols, using reinforcement learning to adapt and optimize its input generation strategies.
+
+\subsection{Fallaway}
+\textit{Fallaway} is a stateful fuzzer that combines static analysis with dynamic state tracking to explore the state space of the target application. It constructs a preliminary model of the application's state machine through static analysis and refines this model during dynamic fuzzing sessions. Fallaway's hybrid approach is particularly suited for applications with large or poorly documented state machines.
+
+\section{Summary}
+Stateful fuzzing represents a significant advancement in software testing and security, particularly for applications with complex state management requirements like Lighttpd. By considering the internal state of the application, stateful fuzzers such as AFLNet, ChatAFL, and Fallaway can more effectively identify vulnerabilities that would be missed by traditional fuzzing techniques. The following chapters will provide a detailed benchmarking of these tools over Lighttpd to evaluate their effectiveness and identify areas for further improvement.
