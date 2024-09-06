@@ -1,0 +1,15 @@
+digraph g {
+	rankdir=LR;
+
+
+	s0 [shape="circle" label="x > 0"];
+	s1 [shape="circle" label="y = 1;"];	
+	s2 [shape="circle" label="y = 2;"];
+	
+	s0 -> s1
+	s0 -> s2
+
+
+}
+
+//dot -Tsvg sample_edge_graph.dot > sample_edge_graph.png

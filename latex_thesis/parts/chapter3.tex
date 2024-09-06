@@ -218,15 +218,15 @@ We ran the fuzzer for 24 hours and a week, using the following script to execute
 
 \begin{lstlisting}
 #!/bin/bash
-bin="${1:-mcmm-cy}"
+bin="${1:-mcsm-cy}"
 loops="${2:-1000}"
 
 timeout 24h cargo run --release --bin libaflstar-http-$bin -- --in-dir /corpus --out-dir /output_lighttpd --target-port 8080 --loops $loops -t 300 /lighttpd/lighttpd -D -f /lighttpd.conf
 \end{lstlisting}
 In particular we have:
 \begin{itemize}
-    \item \textbf{bin}: the state scheduler that can operate in several modes like it may select target states in a round-robin fashion (CY), rely solely on the outgoing edges of the target state machine (OE), or use pure novelty search, where a random state is chosen if none of the target states show progress (NS). Additionally, it can employ novelty search with a fallback on outgoing edges (NO).
+    \item \textbf{bin}: the state scheduler strategy.
     \item \textbf{loops}: taken by the \_\_AFL\_LOOP, it is the number of iterations that the fuzzer will do.
     \item \textbf{timeout 24h}: the fuzzer will run for 24 hours (or a week).
 \end{itemize}
-The results of the fuzzing process will be discussed in the next chapter.
+The results of the fuzzing process will be discussed in the chapter \ref{chap:Results}.

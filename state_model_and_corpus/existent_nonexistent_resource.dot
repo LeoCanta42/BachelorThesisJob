@@ -1,0 +1,15 @@
+digraph g {
+	rankdir=LR;
+
+	s0 [shape="circle" label=""];
+	s1 [shape="circle" label="s1"];	
+	s2 [shape="circle" label="s2"];
+	
+	s0 -> s1 [label="Resource Exists"];
+	s0 -> s2 [label="Resource Does Not Exist"];
+
+	__start0 [label="Request" shape="none" width="0" height="0"];
+	__start0 -> s0;
+}
+
+//dot -Tsvg existent_nonexistent_resource.dot > existent_nonexistent_resource.png
