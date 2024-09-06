@@ -18,8 +18,8 @@
 \providecommand\HyField@AuxAddToCoFields[2]{}
 \providecommand\babel@aux[2]{}
 \@nameuse{bbl@beforestart}
+\providecommand \oddpage@label [2]{}
 \babel@aux{english}{}
-\bibstyle{unsrt}
 \@writefile{toc}{\contentsline {chapter}{\numberline {1}Introduction}{3}{chapter.1}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
@@ -30,25 +30,49 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.1.1}Types of Fuzzing Techniques}{5}{subsection.2.1.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {2.2}Stateful Fuzzing: Concepts and Challenges}{6}{section.2.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}Understanding Stateful Applications}{6}{subsection.2.2.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces A simple state model illustrating state transitions in a stateful application\relax }}{7}{figure.caption.3}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:simplestatemodel}{{2.1}{7}{A simple state model illustrating state transitions in a stateful application\relax }{figure.caption.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Key Techniques in Stateful Fuzzing}{7}{subsection.2.2.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2.3}Challenges in Stateful Fuzzing}{7}{subsection.2.2.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {2.3}Lighttpd: A Case Study for Stateful Fuzzing}{8}{section.2.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3.1}Overview of Lighttpd Architecture}{8}{subsection.2.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.2}Relevance of Lighttpd for Stateful Fuzzing}{9}{subsection.2.3.2}\protected@file@percent }
+\citation{AFLNet}
+\citation{chatafl}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.2}Relevance of Lighttpd for Fuzzing}{9}{subsection.2.3.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {2.4}Fuzzers Overview: AFLNet, ChatAFL, and Fallaway}{9}{section.2.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.4.1}AFLNet}{9}{subsection.2.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.2}ChatAFL}{9}{subsection.2.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.2}ChatAFL}{10}{subsection.2.4.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.4.3}Fallaway}{10}{subsection.2.4.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {chapter}{\numberline {3}Fallaway Setup}{11}{chapter.3}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {chapter}{\numberline {4}Comparison with AFLNet and ChatAFL}{12}{chapter.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}Lighttpd Code Modifications for Persistent Mode}{11}{section.3.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3.1}{\ignorespaces Comparison of Original and Modified Code for `src/connections.c`\relax }}{12}{table.caption.4}\protected@file@percent }
+\newlabel{tab:connections_patch}{{3.1}{12}{Comparison of Original and Modified Code for `src/connections.c`\relax }{table.caption.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.2}{\ignorespaces Comparison of Original and Modified Code for `src/server.c`\relax }}{13}{table.caption.5}\protected@file@percent }
+\newlabel{tab:server_patch}{{3.2}{13}{Comparison of Original and Modified Code for `src/server.c`\relax }{table.caption.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Mutator and Corpus}{13}{section.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Example of existent resource request\relax }}{14}{figure.caption.6}\protected@file@percent }
+\newlabel{tab:existent_resource}{{3.1}{14}{Example of existent resource request\relax }{figure.caption.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Example of non-existent resource request\relax }}{14}{figure.caption.7}\protected@file@percent }
+\newlabel{tab:nonexistent_resource}{{3.2}{14}{Example of non-existent resource request\relax }{figure.caption.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Setting Up the Fuzzing Environment}{15}{section.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.4}Fuzzing Execution and Results}{16}{section.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Comparison with AFLNet and ChatAFL}{18}{chapter.4}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {chapter}{\numberline {5}Results}{13}{chapter.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Results}{19}{chapter.5}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {chapter}{Conclusion}{14}{chapter*.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {6}Conclusion}{20}{chapter.6}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {chapter}{\numberline {7}Future Works}{21}{chapter.7}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\bibstyle{unsrt}
 \bibdata{bibliography}
-\@writefile{toc}{\contentsline {chapter}{Bibliography}{15}{chapter*.3}\protected@file@percent }
-\gdef \@abspage@last{16}
+\bibcite{AFLNet}{1}
+\bibcite{chatafl}{2}
+\gdef \@abspage@last{23}

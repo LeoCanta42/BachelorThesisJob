@@ -24,9 +24,17 @@ Fuzzing methodologies vary, and there exist a lot for different applications and
 \textit{Stateful fuzzing} adds state awareness to traditional fuzzing methods. Traditional fuzzing approaches treat every input individually as a test case, but stateful fuzzing considers an application's internal state and how that state might affect subsequent inputs handling. This becomes particularly critical for applications that handle complex state information, such as network servers, databases, and interactive applications.
 
 \subsection{Understanding Stateful Applications}
-Stateful applications maintain some sort of state across multiple interactions or sessions. Examples include network servers maintaining connection states, authentication states, session identifiers, or other state information specific to an application. These states could contribute significantly to the processing of inputs and, therefore, influence the behavior of the application over time.
-Good practice in state transition management is important for security as well as reliability: bugs dependent on state can lead to vulnerabilities such as unauthorized access, DoS, or corruption of data.
-\\Stateful fuzzers attempt to model and explore such state transitions through the generation of input sequences that mimic valid usage scenarios while monitoring state changes concurrently to ensure adequate coverage of all possible state transitions.
+Stateful applications maintain state across multiple interactions or sessions. Examples include network servers that manage connection states, authentication states, session identifiers, or other state information specific to an application. These states significantly influence the processing of inputs and the behavior of the application over time.
+\\Good practices in state transition management are crucial for both security and reliability: bugs related to state transitions can lead to vulnerabilities such as unauthorized access, denial of service (DoS), or data corruption. 
+\\Stateful fuzzers attempt to model and explore these state transitions by generating input sequences that mimic valid usage scenarios while concurrently monitoring state changes to ensure comprehensive coverage of all possible transitions. To better understand this concept, consider a simple state model shown in Figure \ref{fig:simplestatemodel}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Images/simplestatemodel.png}
+    \caption{A simple state model illustrating state transitions in a stateful application}
+    \label{fig:simplestatemodel}
+\end{figure}
+
 
 \subsection{Key Techniques in Stateful Fuzzing}
 Stateful fuzzing involves several advanced techniques that distinguish it from traditional fuzzing approaches:
@@ -71,26 +79,24 @@ Lighttpd operates on an event-driven architecture, which enables it to serve man
     \item \textbf{Security Attributes}: Advanced integrated security features include TLS/SSL encryption, prevention of denial-of-service attacks, and multiple authentication options.
 \end{itemize}
 
-\subsection{Relevance of Lighttpd for Stateful Fuzzing}
-The complexity of state management in Lighttpd, especially in protocol processing, makes it an ideal candidate for stateful fuzzing:
+\subsection{Relevance of Lighttpd for Fuzzing}
 
-\begin{itemize}
-    \item \textbf{State Management Complexity}: Responsible for managing numerous concurrent client connections, each with its own state depending on protocol versioning, authentication, and request type.
-    
-    \item \textbf{Protocol Vulnerabilities}: The support for multiple web protocols exposes Lighttpd to a range of potential attacks due to improper state management, such as request smuggling, race conditions, and state confusion attacks.
-    
-    \item \textbf{Modular Configuration}: Its modular architecture and extensive array of configuration options facilitate the emergence of distinct states or behaviors, which can be effectively evaluated through stateful fuzzing techniques.
-\end{itemize}
+Lighttpd is an important target for stateful fuzzing due to its complex state management and the potential vulnerabilities that can emerge from improper state handling. As a web server commonly used behind various internet applications, Lighttpd needs to manage multiple simultaneous connections and support multiple network protocols. These characteristics make it a suitable candidate for evaluating stateful fuzzing techniques. By applying stateful fuzzing to Lighttpd, researchers can assess the capability of these tools to discover vulnerabilities that traditional fuzzing methods might miss.
 
 \section{Fuzzers Overview: AFLNet, ChatAFL, and Fallaway}
 
-For this thesis, three stateful fuzzers—AFLNet, ChatAFL, and Fallaway—will be benchmarked over Lighttpd to evaluate their effectiveness in uncovering state-dependent vulnerabilities.
+For this thesis, three stateful fuzzers—AFLNet, ChatAFL, and Fallaway—will be benchmarked over Lighttpd.
 
 \subsection{AFLNet}
-\textit{AFLNet} is an extension of the American Fuzzy Lop (AFL) designed specifically for fuzzing stateful network protocols. It integrates state-awareness into AFL's grey-box fuzzing framework, allowing it to target specific protocol states and maximize state coverage during fuzzing.
+\textit{AFLNet} \cite{AFLNet} is a greybox fuzzer for protocol implementations. Unlike existing protocol fuzzers, it takes a mutational approach and uses statefeedback besides code-coverage feedback in order to guide the fuzzing process. AFLNet is seeded with a corpus of recorded message exchanges between the server and an actual client. No protocol specification or message grammars are required. It acts like a client, replaying variants of the original sequence of messages ever sent to the server, retaining only the variants which managed to increase the coverage of either code or state space. The response codes supplied by the server are utilised by AFLNet for server states that a message sequence manages to exercise. From this feedback, AFLNet identifies progressive regions in the state space and systematically steers towards such regions. 
+
+
 
 \subsection{ChatAFL}
-\textit{ChatAFL} is a stateful fuzzer that leverages machine learning techniques to improve the fuzzing of stateful applications. It is particularly effective for applications involving natural language processing or interactive protocols, using reinforcement learning to adapt and optimize its input generation strategies.
+\textit{ChatAFL} \cite{chatafl} is a large language model-guided protocol fuzzer. It is based on AFLNet but integrates three concrete components. First, the fuzzer uses the LLM to extract a machine-readable grammar for a protocol that is used for structure-aware mutation. Second, the fuzzer uses the LLM to increase the diversity of messages in the recorded message sequences that are used as initial seeds. The fuzzer uses the LLM in an attempt to escape a coverage plateau, where LLM is prompted to generate messages to reach new states.
+The ChatAFL artifact is configured within ProfuzzBench-a well-accepted benchmark for stateful fuzzing of network protocols. This way, this allows smooth integration with an already established format.
+
+
 
 \subsection{Fallaway}
-\textit{Fallaway} is a stateful fuzzer that combines static analysis with dynamic state tracking to explore the state space of the target application. It constructs a preliminary model of the application's state machine through static analysis and refines this model during dynamic fuzzing sessions. Fallaway's hybrid approach is particularly suited for applications with large or poorly documented state machines.
+\textit{Fallaway} Fallaway is a stateful, code coverage-based fuzzer and combines techniques from AFL* and AFLnet. It is implemented by extending the library LibAFL, which is a library to build modular fuzzers written in Rust. Its performance gain can partly be explained by the fact that the target process is reused for more than one test case. The state-awareness in test cases and feedback seems to have no effect on performance regarding code coverage. Nevertheless, there are a number of limitations in the approach followed by Fallaway which, after their resolution, might further increase the benefit that will be gained from having state-aware test cases and feedback.

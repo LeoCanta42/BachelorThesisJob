@@ -1,3 +1,15 @@
-\begin{thebibliography}{}
+\begin{thebibliography}{1}
+
+\bibitem{AFLNet}
+Van{-}Thuan Pham, Marcel B{\"o}hme, and Abhik Roychoudhury.
+\newblock Aflnet: A greybox fuzzer for network protocols.
+\newblock In {\em Proceedings of the 13rd IEEE International Conference on
+  Software Testing, Verification and Validation : Testing Tools Track}, 2020.
+
+\bibitem{chatafl}
+Ruijie Meng, Martin Mirchev, Marcel B\"{o}hme, and Abhik Roychoudhury.
+\newblock Large language model guided protocol fuzzing.
+\newblock In {\em Proceedings of the 31st Annual Network and Distributed System
+  Security Symposium (NDSS)}, 2024.
 
 \end{thebibliography}

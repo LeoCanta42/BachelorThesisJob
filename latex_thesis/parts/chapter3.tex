@@ -1,3 +1,232 @@
 \chapter{Fallaway Setup}
-All the info about the setup for fallaway.
-mutator, settings, corpus, etc.
+
+Fallaway distinguishes itself from other fuzzers like AFLNet or ChatAFL by using a \textbf{persistent mode}. This mode allows the fuzzer to maintain the server's state across multiple requests, which is especially useful in scenarios where the server does not reset its state between requests, such as when managing user sessions or maintaining authentication states in a web application.
+\\The persistent mode is implemented by modifying the Lighttpd server to maintain its state between requests. The server operates in a separate process, and the fuzzer interacts with it via a socket. The fuzzer sends requests to the server and receives responses, using the results to guide the generation of subsequent requests. This process continues in a loop until the fuzzing session is complete.
+\\To enable this, we must modify the Lighttpd code to ensure that the server continuously receives, processes, and responds to requests without shutting down. The changes are made to the function \texttt{server\_main\_loop} in the \texttt{src/server.c} file, and to the connection handling functions in \texttt{src/connections.c} of the Lighttpd source code. The specific code changes are shown in the next section, providing a comparison between the original and modified code.
+
+\section{Lighttpd Code Modifications for Persistent Mode}
+
+Table \ref{tab:connections_patch} presents a comparison of the original and modified code for the \texttt{connections.c} file. The modifications to this file are crucial for maintaining an open connection state, ensuring that the fuzzer can interact continuously with the server. We also had to clean all buffers and old data for that connection.
+\\Table \ref{tab:server_patch} shows a comparison of the original and modified code for the \texttt{server.c} file. The changes made here are essential for enabling persistent server operation, allowing the fuzzer to manage and maintain server state across multiple requests, looping into the \_\_AFL\_LOOP.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{0.9\textwidth}|}
+\hline
+\textbf{Original Code} \\
+\hline
+\begin{lstlisting}[language=c, basicstyle=\footnotesize, breaklines=true]
+static void connection_handle_shutdown(connection *con) {
+    ...
+    connection_reset(con);
+    
+    /* close the connection */
+    if (con->fd >= 0 
+        && (con->is_ssl_sock 
+        || 0 == shutdown(con->fd, SHUT_WR))) {
+        con->close_timeout_ts = log_monotonic_secs;
+
+        request_st * const r = &con->request;
+        connection_set_state(r, CON_STATE_CLOSE);
+        if (r->conf.log_state_handling) {
+            log_error(r->conf.errh, __FILE__, __LINE__,
+                "shutdown for fd %d", con->fd);
+        }
+    } else {
+        connection_close(con);
+    }
+}
+\end{lstlisting} \\
+\hline
+\textbf{Modified Code} \\
+\hline
+\begin{lstlisting}[language=c, basicstyle=\footnotesize, breaklines=true]
+static void connection_handle_shutdown(connection *con) {
+    ...
+    connection_reset(con);
+
+    /* keep the connection open and reset it */
+    request_reset_ex(&con->request);
+    chunkqueue_reset(con->read_queue);
+    con->request_count = 0;
+    con->is_ssl_sock = 0;
+    con->revents_err = 0;
+    connection_set_state(&con->request,CON_STATE_REQUEST_START);
+}
+\end{lstlisting} \\
+\hline
+\end{tabular}
+\caption{Comparison of Original and Modified Code for `src/connections.c`}
+\label{tab:connections_patch}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{0.9\textwidth}|}
+\hline
+\textbf{Original Code} \\
+\hline
+\begin{lstlisting}[language=c, basicstyle=\footnotesize, breaklines=true]
+static void server_main_loop (server * const srv) {
+    ...
+    server_load_check(srv);
+
+    #ifndef _MSC_VER
+    static
+    #endif
+    connection * const joblist = log_con_jqueue;
+    log_con_jqueue = sentinel;
+    server_run_con_queue(joblist, sentinel);
+
+    if (fdevent_poll(srv->ev, log_con_jqueue != sentinel ? 0 : 1000) > 0)
+        last_active_ts = log_monotonic_secs;
+}
+\end{lstlisting} \\
+\hline
+\textbf{Modified Code} \\
+\hline
+\begin{lstlisting}[language=c, basicstyle=\footnotesize, breaklines=true]
+static void server_main_loop (server * const srv) {
+    ...
+    server_load_check(srv);
+
+    while (__AFL_LOOP(INT64_MAX)) {
+        fdevent_poll(srv->ev, -1);
+        
+        #ifndef _MSC_VER
+        static
+        #endif
+        connection * const joblist = log_con_jqueue;
+        log_con_jqueue = sentinel;
+        server_run_con_queue(joblist, sentinel);
+    }
+
+    srv_shutdown = 1;
+}
+\end{lstlisting} \\
+\hline
+\end{tabular}
+\caption{Comparison of Original and Modified Code for `src/server.c`}
+\label{tab:server_patch}
+\end{table}
+
+\section{Mutator and Corpus}
+
+Another crucial aspect of the fuzzing process involves the corpus and the mutator. In this experiment, we define the state of the server based on the existence \ref{tab:existent_resource} or non-existence \ref{tab:nonexistent_resource} of resources. Specifically, we consider two types of requests: one that attempts to access a resource that exists and another that attempts to access a resource that does not exist.
+\\\\The \textbf{corpus} consists of a set of initial test cases that represent these two scenarios. By including requests for both existing and non-existing resources, we ensure that the fuzzer can effectively explore different states of the server.
+\begin{figure}[H]
+    \centering
+    \begin{adjustbox}{valign=t}
+    \begin{lstlisting}
+        PUT /hello.txt HTTP/1.1
+        Host: 127.0.0.1:8080
+        Content-type: text/plain
+        Content-length: 13
+    
+        Hello, World!
+
+    
+    \end{lstlisting}
+    \end{adjustbox}
+    \caption{Example of existent resource request}
+    \label{tab:existent_resource}
+\end{figure}
+    
+\begin{figure}[H]
+    \centering
+    \begin{adjustbox}{valign=t}
+    \begin{lstlisting}
+        DELETE /hello.txt HTTP/1.1
+        Host: 127.0.0.1:8080
+        User-Agent: curl/8.0.1
+        Accept: */*
+    
+    
+    \end{lstlisting}
+    \end{adjustbox}
+    \caption{Example of non-existent resource request}
+    \label{tab:nonexistent_resource}
+\end{figure}
+\phantom{}\\
+The \textbf{mutator}, which is responsible for generating variations of the requests, is relatively straightforward. Its primary function is to modify the existing requests by appending a sequence of characters ('\textit{\textbackslash r\textbackslash n\textbackslash r\textbackslash n}') to the end of each request. This modification is essential as it guarantees that the requests are well-formed and adheres to the HTTP protocol standards. By ensuring the requests are properly formatted, we enable the server to parse and process them correctly, which is vital for accurate fuzz testing.
+
+\section{Setting Up the Fuzzing Environment}
+
+To run the fuzzer, we need to build a Docker container that includes all the necessary dependencies and the modified Lighttpd server. The Dockerfile below shows the steps to set up this environment.
+
+\begin{lstlisting}
+FROM libaflstar 
+
+WORKDIR /
+
+# Copy the patch file
+COPY ./lighttpd.patch /lighttpd.patch
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install lighttpd dependencies
+RUN apt-get install -y \
+    autoconf \
+    automake \
+    libtool \
+    m4 \
+    pkg-config \
+    libpcre2-dev \
+    zlib1g-dev \
+    zlib1g \
+    openssl \
+    libssl-dev \
+    scons
+
+# Create the root directory for the server
+RUN chmod 777 /tmp
+
+# Install
+
+# Set up environment variables for ASAN
+ENV ASAN_OPTIONS='abort_on_error=1:symbolize=0:detect_leaks=0:detect_stack_use_after_return=1:detect_container_overflow=0:poison_array_cookie=0:malloc_fill_byte=0:max_malloc_fill_size=16777216'
+
+# Download lighttpd
+ENV CC=afl-cc
+ENV CXX=afl-cc
+RUN git clone https://git.lighttpd.net/lighttpd/lighttpd1.4.git lighttpd
+WORKDIR /lighttpd 
+RUN git checkout 9f38b63cae3e2
+RUN git apply /lighttpd.patch
+RUN ./autogen.sh  
+RUN scons CC=/AFLplusplus/afl-cc CXX=/AFLplusplus/afl-cc -j 4 build_static=1 build_dynamic=0
+RUN mv /lighttpd/sconsbuild/static/build/lighttpd /lighttpd/lighttpd
+
+# Copy the corpus
+COPY ./corpus /corpus
+
+# Copy the config file
+COPY ./lighttpd.conf /lighttpd.conf
+
+# Copy the run script
+COPY ./run.sh /LibAFLstar/run.sh
+# Make it executable
+RUN chmod +x /LibAFLstar/run.sh
+
+WORKDIR /LibAFLstar
+\end{lstlisting}
+The Docker container is configured with all the dependencies to run the fuzzer and build the modified Lighttpd server, providing a controlled environment to conduct the fuzzing experiment.
+
+\section{Fuzzing Execution and Results}
+
+We ran the fuzzer for 24 hours and a week, using the following script to execute it:
+
+\begin{lstlisting}
+#!/bin/bash
+bin="${1:-mcmm-cy}"
+loops="${2:-1000}"
+
+timeout 24h cargo run --release --bin libaflstar-http-$bin -- --in-dir /corpus --out-dir /output_lighttpd --target-port 8080 --loops $loops -t 300 /lighttpd/lighttpd -D -f /lighttpd.conf
+\end{lstlisting}
+In particular we have:
+\begin{itemize}
+    \item \textbf{bin}: the state scheduler that can operate in several modes like it may select target states in a round-robin fashion (CY), rely solely on the outgoing edges of the target state machine (OE), or use pure novelty search, where a random state is chosen if none of the target states show progress (NS). Additionally, it can employ novelty search with a fallback on outgoing edges (NO).
+    \item \textbf{loops}: taken by the \_\_AFL\_LOOP, it is the number of iterations that the fuzzer will do.
+    \item \textbf{timeout 24h}: the fuzzer will run for 24 hours (or a week).
+\end{itemize}
+The results of the fuzzing process will be discussed in the next chapter.

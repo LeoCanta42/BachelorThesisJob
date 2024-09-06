@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.9.4)  5 SEP 2024 13:56
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.9.4)  6 SEP 2024 15:54
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -304,32 +304,95 @@ Package: fancyhdr 2021/01/28 v4.0.1 Extensive control of page headers and footer
 \f@nch@O@erf=\skip62
 \f@nch@O@olf=\skip63
 \f@nch@O@orf=\skip64
+) (/usr/share/texlive/texmf-dist/tex/latex/tools/verbatim.sty
+Package: verbatim 2020-07-07 v1.5u LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks29
+\verbatim@line=\toks30
+\verbatim@in@stream=\read3
+) (/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count295
+\float@exts=\toks31
+\float@box=\box55
+\@float@everytoks=\toks32
+\@floatcapt=\box56
+) (/usr/share/texlive/texmf-dist/tex/latex/adjustbox/adjustbox.sty
+Package: adjustbox 2020/08/19 v1.3 Adjusting TeX boxes (trim, clip, ...)
+ (/usr/share/texlive/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+Package: xkeyval 2020/11/20 v2.8 package option processing (HA)
+ (/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkeyval.tex (/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkvutils.tex
+\XKV@toks=\toks33
+\XKV@tempa@toks=\toks34
+)
+\XKV@depth=\count296
+File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
+)) (/usr/share/texlive/texmf-dist/tex/latex/adjustbox/adjcalc.sty
+Package: adjcalc 2012/05/16 v1.1 Provides advanced setlength with multiple back-ends (calc, etex, pgfmath)
+) (/usr/share/texlive/texmf-dist/tex/latex/adjustbox/trimclip.sty
+Package: trimclip 2020/08/19 v1.2 Trim and clip general TeX material
+ (/usr/share/texlive/texmf-dist/tex/latex/collectbox/collectbox.sty
+Package: collectbox 2012/05/17 v0.4b Collect macro arguments as boxes
+\collectedbox=\box57
+)
+\tc@llx=\dimen175
+\tc@lly=\dimen176
+\tc@urx=\dimen177
+\tc@ury=\dimen178
+Package trimclip Info: Using driver 'tc-pdftex.def'.
+ (/usr/share/texlive/texmf-dist/tex/latex/adjustbox/tc-pdftex.def
+File: tc-pdftex.def 2019/01/04 v2.2 Clipping driver for pdftex
+))
+\adjbox@Width=\dimen179
+\adjbox@Height=\dimen180
+\adjbox@Depth=\dimen181
+\adjbox@Totalheight=\dimen182
+\adjbox@pwidth=\dimen183
+\adjbox@pheight=\dimen184
+\adjbox@pdepth=\dimen185
+\adjbox@ptotalheight=\dimen186
+ (/usr/share/texlive/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
+Package: ifoddpage 2016/04/23 v1.1 Conditionals for odd/even page detection
+\c@checkoddpage=\count297
+) (/usr/share/texlive/texmf-dist/tex/latex/varwidth/varwidth.sty
+Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
+\@vwid@box=\box58
+\sift@deathcycles=\count298
+\@vwid@loff=\dimen187
+\@vwid@roff=\dimen188
+)) (/usr/share/texlive/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
+Package: fancyvrb 2021/12/21 4.1b verbatim text (tvz,hv)
+\FV@CodeLineNo=\count299
+\FV@InFile=\read4
+\FV@TabBox=\box59
+\c@FancyVerbLine=\count300
+\FV@StepNumber=\count301
+\FV@OutFile=\write3
 ) (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2022-01-12 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count295
-\l__pdf_internal_box=\box55
+\l__color_backend_stack_int=\count302
+\l__pdf_internal_box=\box60
 ) (./document.aux)
 \openout1 = `document.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-Package hyperref Info: Link coloring OFF on input line 34.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+Package hyperref Info: Link coloring OFF on input line 48.
  (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
  (/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty
@@ -337,30 +400,30 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ) (/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count296
+\c@section@level=\count303
 )
-LaTeX Info: Redefining \ref on input line 34.
-LaTeX Info: Redefining \pageref on input line 34.
-LaTeX Info: Redefining \nameref on input line 34.
+LaTeX Info: Redefining \ref on input line 48.
+LaTeX Info: Redefining \pageref on input line 48.
+LaTeX Info: Redefining \nameref on input line 48.
  (./document.out) (./document.out)
-\@outlinefile=\write3
-\openout3 = `document.out'.
+\@outlinefile=\write4
+\openout4 = `document.out'.
 
  (/usr/share/texlive/texmf-dist/tex/latex/ucs/ucsencs.def
 File: ucsencs.def 2011/01/21 Fixes to fontencodings LGR, T3
 ) (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count297
-\scratchdimen=\dimen175
-\scratchbox=\box56
-\nofMPsegments=\count298
-\nofMParguments=\count299
-\everyMPshowfont=\toks29
-\MPscratchCnt=\count300
-\MPscratchDim=\dimen176
-\MPnumerator=\count301
-\makeMPintoPDFobject=\count302
-\everyMPtoPDFconversion=\toks30
+\scratchcounter=\count304
+\scratchdimen=\dimen189
+\scratchbox=\box61
+\nofMPsegments=\count305
+\nofMParguments=\count306
+\everyMPshowfont=\toks35
+\MPscratchCnt=\count307
+\MPscratchDim=\dimen190
+\MPnumerator=\count308
+\makeMPintoPDFobject=\count309
+\everyMPtoPDFconversion=\toks36
 ) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
@@ -368,11 +431,12 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
 Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: float package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
-\c@lstlisting=\count303
+\c@lstlisting=\count310
  (./parts/front.tex
-<Images/university_logo.png, id=83, 106.3975pt x 112.42pt>
+<Images/university_logo.png, id=100, 106.3975pt x 112.42pt>
 File: Images/university_logo.png Graphic file (type png)
 <use Images/university_logo.png>
 Package pdftex.def Info: Images/university_logo.png  used on input line 3.
@@ -383,77 +447,121 @@ Package pdftex.def Info: Images/university_logo.png  used on input line 3.
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./Images/university_logo.png>]) (./parts/abstract.tex (/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-32.def
 File: uni-32.def 2013/05/13 UCS: Unicode data U+2000..U+20FF
 ))
-Underfull \hbox (badness 2903) in paragraph at lines 6--44
+Underfull \hbox (badness 2903) in paragraph at lines 6--57
 \OT1/cmr/m/n/12 This the-sis com-pare three state-ful fuzzers|Fallaway, AFLNet, and
  []
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.45 \tableofcontents
+l.58 \tableofcontents
                       [1
 
 ] (./document.toc)
-\tf@toc=\write4
-\openout4 = `document.toc'.
+\tf@toc=\write5
+\openout5 = `document.toc'.
 
  (./parts/chapter1.tex [2
 
 ]
 Chapter 1.
-[3
+) (./parts/chapter2.tex [3
 
-]) (./parts/chapter2.tex [4]
+] [4]
 Chapter 2.
 [5
 
-] [6] [7] [8]
-Underfull \hbox (badness 1297) in paragraph at lines 87--88
+]
+<Images/simplestatemodel.png, id=159, 288.07625pt x 149.55875pt>
+File: Images/simplestatemodel.png Graphic file (type png)
+<use Images/simplestatemodel.png>
+Package pdftex.def Info: Images/simplestatemodel.png  used on input line 33.
+(pdftex.def)             Requested size: 195.0pt x 101.2399pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[6] [7 <./Images/simplestatemodel.png>] [8]
+Underfull \hbox (badness 1297) in paragraph at lines 88--89
 \OT1/cmr/m/n/12 For this the-sis, three state-ful fuzzers|AFLNet, ChatAFL, and Fall-
  []
 
-) (./parts/chapter3.tex [9] [10]
+[9]) (./parts/chapter3.tex [10]
 Chapter 3.
-) (./parts/chapter4.tex [11
+LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 5.
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
+) [11
 
-]
+] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2020/03/24 1.8d listings language file
+) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
+)
+LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 19.
+ (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 19.
+LaTeX Font Info:    Trying to load font information for OML+cmr on input line 24.
+ (/usr/share/texlive/texmf-dist/tex/latex/base/omlcmr.fd
+File: omlcmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 24.
+ [12]
+Underfull \hbox (badness 10000) in paragraph at lines 115--133
+
+ []
+
+[13]
+LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 151.
+ [14] [15]
+LaTeX Font Info:    Trying to load font information for TS1+pcr on input line 221.
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1pcr.fd
+File: ts1pcr.fd 2001/06/04 font definitions for TS1/pcr.
+) [16]) (./parts/chapter4.tex [17]
 Chapter 4.
 
 Underfull \hbox (badness 2932) in paragraph at lines 1--1
 |[]\OT1/cmr/bx/n/20.74 Comparison with AFLNet and
  []
 
-) (./parts/chapter5.tex [12
+) (./parts/chapter5.tex [18
 
 ]
 Chapter 5.
-) (./parts/conclusion.tex [13
+) (./parts/conclusion.tex [19
 
-]) [14
+]
+Chapter 6.
+) (./parts/futureworks.tex [20
 
-] (./document.bbl
+]
+Chapter 7.
+) [21
 
-LaTeX Warning: Empty `thebibliography' environment on input line 3.
-
-) [15
+] (./document.bbl) [22
 
 ] (./document.aux)
 Package rerunfilecheck Info: File `document.out' has not changed.
-(rerunfilecheck)             Checksum: A8A2C9FB0C2060BFA7B718FDA6F90C84;3580.
+(rerunfilecheck)             Checksum: 534363D28F729B4577C420B3A6BF3061;4435.
  ) 
 Here is how much of TeX's memory you used:
- 13518 strings out of 480247
- 216277 string characters out of 5896152
- 522990 words of memory out of 5000000
- 31229 multiletter control sequences out of 15000+600000
- 476426 words of font info for 52 fonts, out of 8000000 for 9000
+ 16148 strings out of 480247
+ 257656 string characters out of 5896152
+ 995952 words of memory out of 5000000
+ 33619 multiletter control sequences out of 15000+600000
+ 479723 words of font info for 63 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 60i,11n,63p,874b,417s stack positions out of 5000i,500n,10000p,200000b,80000s
- </home/leo/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on document.pdf (16 pages, 106502 bytes).
+ 60i,13n,77p,947b,1860s stack positions out of 5000i,500n,10000p,200000b,80000s
+ </home/leo/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcti1000.600pk> </home/leo/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk>{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc} </home/leo/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
+Output written on document.pdf (23 pages, 216712 bytes).
 PDF statistics:
- 220 PDF objects out of 1000 (max. 8388607)
- 187 compressed objects within 2 object streams
- 38 named destinations out of 1000 (max. 500000)
- 166 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 507 PDF objects out of 1000 (max. 8388607)
+ 448 compressed objects within 5 object streams
+ 203 named destinations out of 1000 (max. 500000)
+ 203 words of extra memory for PDF output out of 10000 (max. 10000000)
 

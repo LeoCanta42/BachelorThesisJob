@@ -1,0 +1,18 @@
+digraph g {
+	rankdir=LR;
+
+
+	s0 [shape="circle" label="s0"];
+	s1 [shape="circle" label="s1"];	
+	s2 [shape="circle" label="s2"];
+	
+	s0 -> s1 [label="input1"];
+	s0 -> s2 [label="input2"];
+	
+	
+__start0 [label="" shape="none" width="0" height="0"];
+__start0 -> s0;
+
+}
+
+//dot -Tsvg sample.dot > sample.png
