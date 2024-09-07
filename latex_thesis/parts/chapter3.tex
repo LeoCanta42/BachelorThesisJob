@@ -211,7 +211,18 @@ RUN chmod +x /LibAFLstar/run.sh
 WORKDIR /LibAFLstar
 \end{lstlisting}
 The Docker container is configured with all the dependencies to run the fuzzer and build the modified Lighttpd server, providing a controlled environment to conduct the fuzzing experiment.
+Another important file to consider is the configuration file of the Lighttpd server, which is shown below.
+\begin{lstlisting}
+    server.document-root = "/tmp"
+    server.bind = "0.0.0.0"
+    server.port = 8080
+    mimetype.assign = (".txt" => "text/plain", ".html" => "text/html" )
 
+    server.max-worker = 1 
+    server.max-connections = 1000
+\end{lstlisting}
+This configuration file specifies the server's document root, bind address, port, and maximum number of workers and connections. By defining these parameters, we ensure that the server operates correctly and can handle the incoming requests from the fuzzer.
+\\In particular, we force to have just one worker to avoid problems with fuzzing, because Fallaway is not yet ready to work with multiprocess programs.
 \section{Fuzzing Execution and Results}
 
 We ran the fuzzer for 24 hours and a week, using the following script to execute it:
@@ -227,6 +238,6 @@ In particular we have:
 \begin{itemize}
     \item \textbf{bin}: the state scheduler strategy.
     \item \textbf{loops}: taken by the \_\_AFL\_LOOP, it is the number of iterations that the fuzzer will do.
-    \item \textbf{timeout 24h}: the fuzzer will run for 24 hours (or a week).
+    \item \textbf{timeout 24h}: the fuzzer will run for 24 hours.
 \end{itemize}
 The results of the fuzzing process will be discussed in the chapter \ref{chap:Results}.

@@ -1,8 +1,43 @@
 \chapter{Comparison with AFLNet and ChatAFL}
-How they works, how they are different, how they are similar, how they are better, how they are worse, etc.
-Script, dockerfile, etc.
-Replayer.
 
-%spiegare setup e eventuali options
-%AFLNet ChatAFL Fallaway comparison of components
-% check https://github.com/ChatAFLndss/ChatAFL/blob/master/benchmark/subjects/HTTP/Lighttpd1/run.sh
+Setup of ChatAFL and AFLNet is similar to the one of Profuzzbench \cite{profuzzbench}, that is a benchmarking tool designed for stateful fuzzing of network protocols. It provides a suite of open-source network servers implementing popular protocols and includes tools to automate fuzzing experiments. Unlike other benchmarks focused on stateless programs, ProFuzzBench specifically addresses stateful protocol fuzzing, which requires considering the protocol states and combinations of multiple messages. The benchmark aims to support research in fuzzing techniques for protocol security testing and is open-source, inviting contributions for extending its range of targets.
+\\The real difference from Fallaway is in the execution script that we can see here:
+\begin{lstlisting}
+    #!/bin/bash
+
+    PFBENCH="$PWD/benchmark"
+    cd $PFBENCH
+
+    PATH=$PATH:$PFBENCH/scripts/execution:$PFBENCH/scripts/analysis
+    NUM_CONTAINERS=$1
+    TIMEOUT=$(( ${2:-1440} * 60))
+    SKIPCOUNT="${SKIPCOUNT:-1}"
+    TEST_TIMEOUT="${TEST_TIMEOUT:-5000}"
+
+    export TARGET_LIST=$3
+    export FUZZER_LIST=$4
+
+    if [[ "x$NUM_CONTAINERS" == "x" ]] || [[ "x$TIMEOUT" == "x" ]] || [[ "x$TARGET_LIST" == "x" ]] || [[ "x$FUZZER_LIST" == "x" ]]
+    then
+        echo "Usage: $0 NUM_CONTAINERS TIMEOUT TARGET FUZZER"
+        exit 1
+    fi
+
+    PFBENCH=$PFBENCH PATH=$PATH NUM_CONTAINERS=$NUM_CONTAINERS TIMEOUT=$TIMEOUT SKIPCOUNT=$SKIPCOUNT TEST_TIMEOUT=$TEST_TIMEOUT scripts/execution/profuzzbench_exec_all.sh ${TARGET_LIST} ${FUZZER_LIST}
+\end{lstlisting}
+An example of execution line is like this:
+\begin{lstlisting}
+./run.sh  <container_number> <fuzzed_time> <subjects> <fuzzers>
+\end{lstlisting}
+We can see that the script takes four arguments:
+\begin{itemize}
+    \item \textit{CONTAINER\_NUMBER}: the number of containers to use for the execution of the fuzzer
+    \item \textit{FUZZED\_TIME}: the time in minutes after which the execution of the fuzzer will be stopped
+    \item \textit{SUBJECTS}: a list of targets to fuzz
+    \item \textit{FUZZERS}: a list of fuzzers to use
+\end{itemize}
+We ran the script with the following command (1440 is 24h in minutes):
+\begin{lstlisting}
+./run.sh 1 1440 lighttpd aflnet,chatafl
+\end{lstlisting}
+The results of the fuzzing process will be discussed in the next chapter.

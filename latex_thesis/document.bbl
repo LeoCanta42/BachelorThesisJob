@@ -17,4 +17,10 @@ TODO.
 \newblock Todo.
 \newblock In {\em TODO}, 2024.
 
+\bibitem{profuzzbench}
+Roberto Natella and Van-Thuan Pham.
+\newblock Profuzzbench: A benchmark for stateful protocol fuzzing.
+\newblock In {\em Proceedings of the 30th ACM SIGSOFT International Symposium
+  on Software Testing and Analysis}, 2021.
+
 \end{thebibliography}
