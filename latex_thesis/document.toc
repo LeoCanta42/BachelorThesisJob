@@ -12,7 +12,7 @@
 \contentsline {section}{\numberline {2.3}Lighttpd: A Case Study for Stateful Fuzzing}{10}{section.2.3}%
 \contentsline {subsection}{\numberline {2.3.1}Overview of Lighttpd Architecture}{11}{subsection.2.3.1}%
 \contentsline {subsection}{\numberline {2.3.2}Relevance of Lighttpd for Fuzzing}{11}{subsection.2.3.2}%
-\contentsline {section}{\numberline {2.4}Fuzzers Overview: AFLNet, ChatAFL, and Fallaway}{14}{section.2.4}%
+\contentsline {section}{\numberline {2.4}Fuzzers Overview: AFLNet, ChatAFL and Fallaway}{14}{section.2.4}%
 \contentsline {subsection}{\numberline {2.4.1}AFLNet}{14}{subsection.2.4.1}%
 \contentsline {subsection}{\numberline {2.4.2}ChatAFL}{15}{subsection.2.4.2}%
 \contentsline {subsection}{\numberline {2.4.3}Fallaway}{17}{subsection.2.4.3}%

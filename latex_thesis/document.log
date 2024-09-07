@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.9.4)  7 SEP 2024 12:38
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.9.4)  7 SEP 2024 15:53
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -451,8 +451,8 @@ l.58 \newpage
               [1] (./parts/abstract.tex (/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-32.def
 File: uni-32.def 2013/05/13 UCS: Unicode data U+2000..U+20FF
 ))
-Underfull \hbox (badness 2903) in paragraph at lines 5--63
-\OT1/cmr/m/n/12 This the-sis com-pare three state-ful fuzzers|Fallaway, AFLNet, and
+Underfull \hbox (badness 3965) in paragraph at lines 5--63
+\OT1/cmr/m/n/12 This the-sis com-pare three state-ful fuzzers|Fallaway, AFLNet and
  []
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
@@ -564,18 +564,18 @@ Chapter 7.
 
 ] (./document.aux)
 Package rerunfilecheck Info: File `document.out' has not changed.
-(rerunfilecheck)             Checksum: 5D5979EFB2AA69D88A3BEB21E287B959;4808.
+(rerunfilecheck)             Checksum: 341D535160B0C3F01953723D0238CEFB;4803.
  ) 
 Here is how much of TeX's memory you used:
  16203 strings out of 480247
  258830 string characters out of 5896152
- 997422 words of memory out of 5000000
+ 996421 words of memory out of 5000000
  33644 multiletter control sequences out of 15000+600000
  479723 words of font info for 63 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  60i,13n,77p,802b,1860s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/leo/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcti1000.600pk> </home/leo/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk>{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc} </home/leo/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
-Output written on document.pdf (31 pages, 433102 bytes).
+Output written on document.pdf (31 pages, 433052 bytes).
 PDF statistics:
  588 PDF objects out of 1000 (max. 8388607)
  514 compressed objects within 6 object streams
