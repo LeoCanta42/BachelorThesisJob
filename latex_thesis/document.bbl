@@ -13,9 +13,10 @@ Ruijie Meng, Martin Mirchev, Marcel B\"{o}hme, and Abhik Roychoudhury.
   Security Symposium (NDSS)}, 2024.
 
 \bibitem{Fallaway}
-TODO.
-\newblock Todo.
-\newblock In {\em TODO}, 2024.
+Timme Bethe.
+\newblock Fallaway: High throughput stateful fuzzing by making afl*
+  state-aware.
+\newblock 2024.
 
 \bibitem{profuzzbench}
 Roberto Natella and Van-Thuan Pham.

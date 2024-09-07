@@ -899,6 +899,16 @@ INPUT parts/chapter5.tex
 INPUT ./parts/chapter5.tex
 INPUT ./parts/chapter5.tex
 INPUT parts/chapter5.tex
+INPUT ./Images/coverage_over_time_lighttpd-1day.pdf
+INPUT ./Images/coverage_over_time_lighttpd-1day.pdf
+INPUT Images/coverage_over_time_lighttpd-1day.pdf
+INPUT ./Images/coverage_over_time_lighttpd-1day.pdf
+INPUT ./Images/coverage_over_time_lighttpd-1day.pdf
+INPUT ./Images/coverage_over_time_lighttpd-10h.pdf
+INPUT ./Images/coverage_over_time_lighttpd-10h.pdf
+INPUT Images/coverage_over_time_lighttpd-10h.pdf
+INPUT ./Images/coverage_over_time_lighttpd-10h.pdf
+INPUT ./Images/coverage_over_time_lighttpd-10h.pdf
 INPUT ./parts/conclusion.tex
 INPUT ./parts/conclusion.tex
 INPUT ./parts/conclusion.tex
