@@ -26,7 +26,7 @@ There are also different ways to generate inputs for fuzzing:
 \end{itemize}
 
 \subsection{Coverage-Guided Fuzzing}
-\textbf{Coverage-guided fuzzing} is a subtype of grey-box fuzzing that leverages code coverage information to drive the generation of test inputs. It aims to explore as many code paths as possible by continuously generating inputs that maximize the coverage.
+\textbf{Coverage-guided fuzzing} (CGF) is a subtype of grey-box fuzzing that leverages code coverage information to drive the generation of test inputs. It aims to explore as many code paths as possible by continuously generating inputs that maximize the coverage.
 \\For example, the American Fuzzy Lop (AFL) fuzzer is a popular coverage-guided fuzzer that uses a feedback loop to guide the generation of new test cases. AFL instruments the binary to track the code coverage during execution and uses this information to guide the mutation of test cases. The fuzzer maintains a queue of test cases and iteratively selects, mutates, and executes them to maximize the code coverage.
 \\In this context is also important to describe the concept of \textbf{edge coverage}, that is a metric that measures the number of unique edges traversed by the program during execution. An edge is a transition between two basic blocks in the control flow graph of the program (a basic block is a sequence of instructions not containing any jumps or branches).
 For example, consider the following code snippet:
@@ -37,7 +37,7 @@ if (x > 0) {
     y = 2;
 }
 \end{lstlisting}
-In this case, there are two edges \ref{fig:sample_edge_graph}: one from the condition to the true branch and one from the condition to the false branch. The basic blocks are the condition, the true branch, and the false branch.
+In this case, there are two edges (Figure \ref{fig:sample_edge_graph}): one from the condition to the true branch and one from the condition to the false branch. The basic blocks are the condition, the true branch, and the false branch.
 \\This edges are used in the \textbf{coverage map}, that is a binary compiled with edge coverage information, where each edge is mapped to a bit in the coverage map.
 \begin{figure}[H]
     \centering
@@ -55,10 +55,12 @@ When an edge is executed, the corresponding bit in the coverage map is set to a 
 The mix of corpus, coverage map, queue and scheduler is the core of the coverage-guided fuzzing strategy.
 \\These are some examples of coverage-guided strategies:
 \begin{itemize}
-    \item \textbf{Multiple Corpus Single Map (MCSM)}: This strategy uses a single coverage map to track the coverage of the program and multiple queues to store the inputs. Each queue contains inputs that have allowed the fuzzer to reach a specific state of the program. The fuzzer uses a scheduler to select which input to mutate next based on the coverage achieved by the input.
+    \item \textbf{Multiple Corpus Single Map (MCSM)}: This strategy uses a single coverage map to track the coverage of the program and multiple queues to store the inputs (is more efficient in terms of memory usage and faster in terms of execution time, but it is less effective in terms of coverage).
     
-    \item \textbf{Multiple Corpus Multiple Map (MCMM)}: This strategy uses multiple coverage maps to track the coverage of the program and multiple queues to store the inputs. Each queue contains inputs that have allowed the fuzzer to reach a specific state of the program. The fuzzer uses a scheduler to select which input to mutate next based on the coverage achieved by the input.
+    \item \textbf{Multiple Corpus Multiple Map (MCMM)}: This strategy uses multiple coverage maps to track the coverage of the program and multiple queues to store the inputs (is more effective in terms of coverage, but it is less efficient in terms of memory usage and slower in terms of execution time).
 \end{itemize}
+Each queue contains inputs that have allowed the fuzzer to reach a specific state of the program. The fuzzer uses a scheduler to select which input to mutate next based on the coverage achieved by the input.
+
 
 \section{Stateful Fuzzing: Concepts and Challenges}
 \textit{Stateless fuzzing} is a traditional fuzzing technique that generates random inputs to test the behavior of an application. However, this approach is not always effective for applications that maintain internal states across multiple interactions.
@@ -125,7 +127,7 @@ Lighttpd operates on an event-driven architecture, which enables it to serve man
 
 Lighttpd is an important SUT for fuzzing due to its common use behind various internet applications.
 These characteristics make it a suitable candidate for evaluating fuzzing techniques.
-By default, Lighttpd is not stateful, but it maintains transient states during the processing of requests \ref{fig:lighttpdstatemodel}.
+By default, Lighttpd is not stateful, but it maintains transient states during the processing of requests (Figure \ref{fig:lighttpdstatemodel}).
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{Images/lighttpd_original.png}
@@ -155,7 +157,7 @@ The state model seems to be complex, but the state are effectively transitory.
 In the \textit{CON\_STATE\_CONNECT} we have no control of input, because it only changes when the connection is established.
 \\The only stationary state could be the \textit{CON\_STATE\_READ}, because it is a loop that reads the request (i.e. if we send line by line the request, we will loop into it).
 \\The other states are transitory because, at the end, we will go back to \textit{CON\_STATE\_REQUEST\_START} or \textit{CON\_STATE\_CONNECT}.
-\\For this thesis, we have chosen to model the state of the server based on the existence or non-existence of a resources \ref{fig:existent_nonexistent_resource_statemodel}. A resource can be a file, a directory, or any other entity that can be accessed via HTTP. By considering two types of requests—those that attempt to access an existing resource and those that attempt to access a non-existing resource—we can effectively explore different states of the server.
+\\For this thesis, we have chosen to model the state of the server based on the existence or non-existence of a resources (Figure \ref{fig:existent_nonexistent_resource_statemodel}). A resource can be a file, a directory, or any other entity that can be accessed via HTTP. By considering two types of requests—those that attempt to access an existing resource and those that attempt to access a non-existing resource—we can effectively explore different states of the server.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{Images/existent_nonexistent_resource.png}
@@ -165,20 +167,47 @@ In the \textit{CON\_STATE\_CONNECT} we have no control of input, because it only
 
 \section{Fuzzers Overview: AFLNet, ChatAFL, and Fallaway}
 
-For this thesis, three stateful fuzzers—AFLNet, ChatAFL, and Fallaway—will be benchmarked over Lighttpd.
+For this thesis, three stateful fuzzers—AFLNet, ChatAFL and Fallaway—will be benchmarked over Lighttpd.
  
 % fare una pagina a testa
 \subsection{AFLNet}
-\textit{AFLNet} \cite{AFLNet} is a greybox fuzzer for protocol implementations. Unlike existing protocol fuzzers, it takes a mutational approach and uses statefeedback besides code-coverage feedback in order to guide the fuzzing process. AFLNet is seeded with a corpus of recorded message exchanges between the server and an actual client. No protocol specification or message grammars are required. It acts like a client, replaying variants of the original sequence of messages ever sent to the server, retaining only the variants which managed to increase the coverage of either code or state space. The response codes supplied by the server are utilised by AFLNet for server states that a message sequence manages to exercise. From this feedback, AFLNet identifies progressive regions in the state space and systematically steers towards such regions. 
-
-
+\textit{AFLNet} \cite{AFLNet} is a stateful CGF tool. It integrates automated state model inference with coverage-guided fuzzing, creating a synergistic relationship between the two processes. As fuzzing generates new message sequences to reach unexplored states, it progressively builds a more complete state model. Concurrently, this dynamically evolving state model helps guide fuzzing efforts towards more significant areas of the code, leveraging both state and code coverage information of the retained message sequences.
+\\AFLNet is implemented as an extension of the popular grey-box fuzzer AFL, with the additional capability of facilitating \textbf{network communication} over sockets, which is not supported by the original AFL. To achieve this, AFLNet establishes two communication channels: one for sending messages to the SUT and another for receiving responses. The response-receiving channel acts as a state feedback channel, complementing the code coverage feedback channel utilized by other CGF tools. The communication is implemented using standard C Socket APIs, and synchronization between AFLNet and the server is ensured by introducing delays between requests.
+\\AFLNet uses a \textbf{prefix-based fuzzing} strategy, where the fuzzer maintains a prefix of the message sequence that has been successfully processed by the server. This prefix is used to guide the generation of new message sequences, ensuring that the fuzzer explores new states and code paths while maintaining the validity of the input.
+\\The input to AFLNet consists of pcap files capturing network traffic, such as interactions between a client and server. A network sniffer, like tcpdump, is used to capture realistic exchanges and a packet analyzer, such as Wireshark, can automatically extract the relevant message sequences. AFLNet uses a \textbf{Request Sequence Parser} to generate an initial corpus of message sequences by parsing these pcap files. It isolates individual client requests, discards the responses, and identifies the beginning and end of each message, utilizing protocol-specific markers.
+\\The \textbf{State Machine Learner} component then augments the protocol state machine with newly observed states and transitions by analyzing server responses. AFLNet extracts status codes from server responses to identify and document new states and transitions. The \textbf{Target State Selector} leverages this information to determine which state the fuzzer should focus on next. This is done by applying several heuristics based on the statistical data gathered from the state machine, aiming to identify "blind spots" or rarely exercised states and maximize the discovery of new state transitions.
+\\Once a target state is selected, the \textbf{Sequence Selector} chooses a corresponding message sequence from the corpus that can reach the desired state. AFLNet maintains a state corpus and a hashmap to facilitate efficient selection of sequences. The selected sequence is then subjected to mutation using the \textbf{Sequence Mutator}, which builds upon AFL's \textbf{`fuzz\_one`} method (\textit{input selection, mutation, execution, feedback collecltion, minimization and prioritization, looping}). AFLNet uses protocol-aware mutation operators to modify the candidate subsequence, enhancing the chances of generating new sequences that can lead to the discovery of new states or code branches.
+\\AFLNet employs several mutation strategies, such as replacing, inserting, duplicating, or deleting messages, in addition to standard byte-level operations like bit flipping. Generated sequences deemed "interesting" — those that uncover new states, transitions, or code branches — are added to the corpus for further fuzzing. This evolutionary approach, driven by the continuous enhancement of the message sequence corpus, underpins the effectiveness of AFLNet in achieving comprehensive state and code coverage.
 
 \subsection{ChatAFL}
-\textit{ChatAFL} \cite{chatafl} is a large language model-guided protocol fuzzer. It is based on AFLNet but integrates three concrete components. First, the fuzzer uses the LLM to extract a machine-readable grammar for a protocol that is used for structure-aware mutation. Second, the fuzzer uses the LLM to increase the diversity of messages in the recorded message sequences that are used as initial seeds. The fuzzer uses the LLM in an attempt to escape a coverage plateau, where LLM is prompted to generate messages to reach new states.
-The ChatAFL artifact is configured within ProfuzzBench-a well-accepted benchmark for stateful fuzzing of network protocols. This way, this allows smooth integration with an already established format.
+Traditional \textit{mutation-based protocol fuzzing} relies heavily on recorded message sequences to generate test cases, which can limit its effectiveness in thoroughly exploring the input and state space of complex network protocols. Existing approaches often require detailed, machine-readable protocol specifications, which are labor-intensive to produce and maintain. Furthermore, these approaches may struggle with limited seed diversity and may reach a coverage plateau (no more progress in discovering code paths or states), where further exploration yields diminishing returns.
+\\To address these limitations, recent advancements have explored the potential of Large Language Models (LLMs) to assist in the fuzzing process.
+\\LLMs are a class of neural network models that have demonstrated remarkable capabilities in natural language understanding and generation. They can be fine-tuned for specific tasks and have been successfully applied to a wide range of applications, including language translation, text generation, and code completion.
+\\LLMs, such as ChatGPT, are pre-trained on extensive corpora, including publicly available protocol specifications, and have demonstrated impressive capabilities in understanding and generating text. This presents an opportunity to leverage LLMs to improve fuzzing strategies by interpreting natural language descriptions of protocols and generating structured, diverse message sequences.
+\\\textbf{LLM-guided protocol fuzzing} uses the capabilities of LLMs to overcome the limitations of traditional mutation-based fuzzers. This method is implemented in \textit{ChatAFL} \cite{chatafl} , a fuzzing tool built upon the AFLNet framework. \textit{ChatAFL} incorporates LLMs to assist in three key areas:
 
+\begin{enumerate}
+    \item \textbf{Grammar Extraction:} By querying the LLM, the fuzzer can obtain a machine-readable grammar for the protocol under test. This grammar is used to guide mutations in a way that maintains the structural validity of the messages, thus enhancing the fuzzer's ability to explore new state transitions.
+
+    \item \textbf{Seed Enrichment:} The LLM is used to diversify the initial seed corpus by generating new message types that are contextually relevant to the protocol. This helps to overcome the limitations posed by a narrow set of initial test cases and increases the likelihood of discovering new protocol behaviors.
+
+    \item \textbf{Breaking Coverage Plateaus:} When the fuzzer is unable to achieve further state or code coverage, it is considered to be in a coverage plateau. The LLM can be prompted to generate new message sequences aimed at escaping the plateau by triggering unexplored state transitions.
+\end{enumerate}
+The integration of LLMs into protocol fuzzing offers several benefits:
+\begin{enumerate}
+    \item It reduces the dependence on pre-existing machine-readable protocol specifications by leveraging natural language processing capabilities.
+    \item It enhances the diversity and effectiveness of the fuzzing process by generating a wider variety of input sequences.
+    \item It aligns with the inherent goals of fuzzing — automation and adaptability — by using LLMs that can be easily guided via prompts to perform specific tasks without extensive reprogramming or manual intervention.
+\end{enumerate}
+Overall, this LLM-guided approach, as demonstrated in ChatAFL, represents a novel direction in protocol fuzzing, combining traditional techniques with state-of-the-art language models to improve both the breadth and depth of fuzzing campaigns.
 
 
 \subsection{Fallaway}
-\textit{Fallaway} \cite{Fallaway} is a stateful, code coverage-based fuzzer and combines techniques from AFL* and AFLnet. It is implemented by extending the library LibAFL, which is a library to build modular fuzzers written in Rust. Its performance gain can partly be explained by the fact that the SUT process is reused for more than one test case. The state-awareness in test cases and feedback seems to have no effect on performance regarding code coverage. Nevertheless, there are a number of limitations in the approach followed by Fallaway which, after their resolution, might further increase the benefit that will be gained from having state-aware test cases and feedback.
-
+\textit{Fallaway} \cite{Fallaway} is a stateful fuzzer designed to address several key challenges faced by traditional fuzzers when handling stateful targets. Unlike stateless fuzzers such as AFL, which send single test cases and expect the target to terminate, Fallaway manages multiple states by incorporating a \textbf{dual-loop} structure: an outer loop that selects the target state and an inner loop that sends multiple test cases for the chosen state. This approach helps maintain deliberate focus on specific states, prevents interference between states and ensures that progress in one state does not hinder progress in another.
+\\To achieve these objectives, Fallaway decouples the concepts of state scheduling and test case (seed) scheduling. For each state, a unique prefix is maintained along with a separate corpus of test cases, allowing focused exploration of the target's behavior within that state. Observations and feedback are also stored separately for each state, avoiding the problem of feedback contamination across different states. This strategy enables the fuzzer to maintain a clear distinction between the information gathered in each state, ensuring that the testing process remains unbiased and effective.
+\\Fallaway is built on the LibAFL framework, which is a modular library for developing fuzzers. To make LibAFL suitable for stateful targets, Fallaway extends its functionality in two key ways:
+\begin{enumerate}
+    \item It uses AFL's \textbf{persistent mode}, designed to keep a target application running continuously between different test cases, rather than starting a new process for each test case. This approach is particularly useful for maintaining and manipulating the application's state across test cases, allowing the target to handle inputs continuously without resetting after each test case, which is crucial for efficient fuzzing of stateful systems.
+    \item It introduces an outer loop to handle state transitions and reset the target accordingly, ensuring compatibility with LibAFL's existing mechanisms for executing test cases.
+\end{enumerate}  
+By integrating these methods, Fallaway leverages the speed and efficiency of persistent mode fuzzing while maintaining precise control over state transitions. This approach allows it balance execution speed and focus state exploration.

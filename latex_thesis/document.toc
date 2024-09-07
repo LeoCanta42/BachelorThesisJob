@@ -14,14 +14,14 @@
 \contentsline {subsection}{\numberline {2.3.2}Relevance of Lighttpd for Fuzzing}{11}{subsection.2.3.2}%
 \contentsline {section}{\numberline {2.4}Fuzzers Overview: AFLNet, ChatAFL, and Fallaway}{14}{section.2.4}%
 \contentsline {subsection}{\numberline {2.4.1}AFLNet}{14}{subsection.2.4.1}%
-\contentsline {subsection}{\numberline {2.4.2}ChatAFL}{14}{subsection.2.4.2}%
-\contentsline {subsection}{\numberline {2.4.3}Fallaway}{15}{subsection.2.4.3}%
-\contentsline {chapter}{\numberline {3}Fallaway Setup}{16}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Lighttpd Code Modifications for Persistent Mode}{16}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Mutator and Corpus}{18}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Setting Up the Fuzzing Environment}{20}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Fuzzing Execution and Results}{21}{section.3.4}%
-\contentsline {chapter}{\numberline {4}Comparison with AFLNet and ChatAFL}{22}{chapter.4}%
-\contentsline {chapter}{\numberline {5}Results}{23}{chapter.5}%
-\contentsline {chapter}{\numberline {6}Conclusion}{24}{chapter.6}%
-\contentsline {chapter}{\numberline {7}Future Works}{25}{chapter.7}%
+\contentsline {subsection}{\numberline {2.4.2}ChatAFL}{15}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.4.3}Fallaway}{17}{subsection.2.4.3}%
+\contentsline {chapter}{\numberline {3}Fallaway Setup}{19}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Lighttpd Code Modifications for Persistent Mode}{19}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Mutator and Corpus}{21}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Setting Up the Fuzzing Environment}{23}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Fuzzing Execution and Results}{24}{section.3.4}%
+\contentsline {chapter}{\numberline {4}Comparison with AFLNet and ChatAFL}{25}{chapter.4}%
+\contentsline {chapter}{\numberline {5}Results}{26}{chapter.5}%
+\contentsline {chapter}{\numberline {6}Conclusion}{27}{chapter.6}%
+\contentsline {chapter}{\numberline {7}Future Works}{28}{chapter.7}%

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.9.4)  6 SEP 2024 19:52
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.9.4)  7 SEP 2024 12:38
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -451,7 +451,7 @@ l.58 \newpage
               [1] (./parts/abstract.tex (/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-32.def
 File: uni-32.def 2013/05/13 UCS: Unicode data U+2000..U+20FF
 ))
-Underfull \hbox (badness 2903) in paragraph at lines 6--63
+Underfull \hbox (badness 2903) in paragraph at lines 5--63
 \OT1/cmr/m/n/12 This the-sis com-pare three state-ful fuzzers|Fallaway, AFLNet, and
  []
 
@@ -489,13 +489,13 @@ Package pdftex.def Info: Images/sample_edge_graph.png  used on input line 44.
 <Images/simplestatemodel.png, id=199, 288.07625pt x 149.55875pt>
 File: Images/simplestatemodel.png Graphic file (type png)
 <use Images/simplestatemodel.png>
-Package pdftex.def Info: Images/simplestatemodel.png  used on input line 75.
+Package pdftex.def Info: Images/simplestatemodel.png  used on input line 77.
 (pdftex.def)             Requested size: 195.0pt x 101.2399pt.
  [9 <./Images/simplestatemodel.png>] [10]
 <Images/lighttpd_original.png, id=210, 1002.74625pt x 2713.13625pt>
 File: Images/lighttpd_original.png Graphic file (type png)
 <use Images/lighttpd_original.png>
-Package pdftex.def Info: Images/lighttpd_original.png  used on input line 131.
+Package pdftex.def Info: Images/lighttpd_original.png  used on input line 133.
 (pdftex.def)             Requested size: 234.00238pt x 633.11601pt.
  [11]
 Overfull \vbox (64.716pt too high) has occurred while \output is active []
@@ -504,16 +504,11 @@ Overfull \vbox (64.716pt too high) has occurred while \output is active []
 <Images/existent_nonexistent_resource.png, id=223, 553.06625pt x 149.55875pt>
 File: Images/existent_nonexistent_resource.png Graphic file (type png)
 <use Images/existent_nonexistent_resource.png>
-Package pdftex.def Info: Images/existent_nonexistent_resource.png  used on input line 161.
+Package pdftex.def Info: Images/existent_nonexistent_resource.png  used on input line 163.
 (pdftex.def)             Requested size: 312.00119pt x 84.37076pt.
- [13]
-Underfull \hbox (badness 1297) in paragraph at lines 168--169
-\OT1/cmr/m/n/12 For this the-sis, three state-ful fuzzers|AFLNet, ChatAFL, and Fall-
- []
-
-[14 <./Images/existent_nonexistent_resource.png>]) (./parts/chapter3.tex [15]
+ [13] [14 <./Images/existent_nonexistent_resource.png>] [15] [16]) (./parts/chapter3.tex [17] [18]
 Chapter 3.
-[16
+[19
 
 ] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2020/03/24 1.8d listings language file
@@ -532,58 +527,58 @@ File: omlcmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
 (Font)              Font shape `OML/cmm/m/it' tried instead on input line 24.
- [17]
+ [20]
 Underfull \hbox (badness 10000) in paragraph at lines 115--133
 
  []
 
-[18]
+[21]
 LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 151.
- [19] [20]
+ [22] [23]
 LaTeX Font Info:    Trying to load font information for TS1+pcr on input line 221.
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1pcr.fd
 File: ts1pcr.fd 2001/06/04 font definitions for TS1/pcr.
-)) (./parts/chapter4.tex [21]
+)) (./parts/chapter4.tex [24]
 Chapter 4.
 
 Underfull \hbox (badness 2932) in paragraph at lines 1--1
 |[]\OT1/cmr/bx/n/20.74 Comparison with AFLNet and
  []
 
-) (./parts/chapter5.tex [22
+) (./parts/chapter5.tex [25
 
 ]
 Chapter 5.
-) (./parts/conclusion.tex [23
+) (./parts/conclusion.tex [26
 
 ]
 Chapter 6.
-) (./parts/futureworks.tex [24
+) (./parts/futureworks.tex [27
 
 ]
 Chapter 7.
-) [25
+) [28
 
-] (./document.bbl) [26
+] (./document.bbl) [29
 
 ] (./document.aux)
 Package rerunfilecheck Info: File `document.out' has not changed.
 (rerunfilecheck)             Checksum: 5D5979EFB2AA69D88A3BEB21E287B959;4808.
  ) 
 Here is how much of TeX's memory you used:
- 16192 strings out of 480247
- 258761 string characters out of 5896152
- 996422 words of memory out of 5000000
+ 16203 strings out of 480247
+ 258830 string characters out of 5896152
+ 997422 words of memory out of 5000000
  33644 multiletter control sequences out of 15000+600000
  479723 words of font info for 63 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 60i,13n,77p,947b,1860s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,13n,77p,802b,1860s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/leo/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcti1000.600pk> </home/leo/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk>{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc} </home/leo/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
-Output written on document.pdf (28 pages, 425284 bytes).
+Output written on document.pdf (31 pages, 433102 bytes).
 PDF statistics:
- 564 PDF objects out of 1000 (max. 8388607)
- 494 compressed objects within 5 object streams
- 219 named destinations out of 1000 (max. 500000)
+ 588 PDF objects out of 1000 (max. 8388607)
+ 514 compressed objects within 6 object streams
+ 230 named destinations out of 1000 (max. 500000)
  234 words of extra memory for PDF output out of 10000 (max. 10000000)
 
