@@ -8,4 +8,5 @@ lighttpd_cleanPatch
 LibAFLstar
 messages_log
 Output-fuzzers
-
+final_output_24h
+lighttpd1day-finalresults
