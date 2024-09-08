@@ -24,11 +24,11 @@
 \contentsline {subsection}{\numberline {3.1.4}Fuzzing Execution and Results}{25}{subsection.3.1.4}%
 \contentsline {section}{\numberline {3.2}Comparison with AFLNet and ChatAFL}{26}{section.3.2}%
 \contentsline {subsection}{\numberline {3.2.1}Setting up the fuzzing environment}{26}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}Mutator and Corpus Management}{29}{subsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.2.3}Operational Differences: Code Handling and Analysis}{31}{subsection.3.2.3}%
-\contentsline {subsection}{\numberline {3.2.4}Fuzzing Execution and Results}{32}{subsection.3.2.4}%
-\contentsline {chapter}{\numberline {4}Results}{34}{chapter.4}%
-\contentsline {chapter}{\numberline {5}Conclusion}{37}{chapter.5}%
-\contentsline {chapter}{\numberline {6}Future Works}{38}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Fuzzing with Reinforcement Learning}{38}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Fuzzing with multi-process SUTs}{39}{section.6.2}%
+\contentsline {subsection}{\numberline {3.2.2}Mutator and Corpus Management}{27}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Operational Differences: Code Handling and Analysis}{29}{subsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.2.4}Fuzzing Execution and Results}{29}{subsection.3.2.4}%
+\contentsline {chapter}{\numberline {4}Results}{31}{chapter.4}%
+\contentsline {chapter}{\numberline {5}Conclusion}{34}{chapter.5}%
+\contentsline {chapter}{\numberline {6}Future Works}{35}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Fuzzing with Reinforcement Learning}{35}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Fuzzing with multi-process SUTs}{36}{section.6.2}%
