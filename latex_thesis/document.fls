@@ -920,6 +920,17 @@ INPUT ./document.bbl
 INPUT document.bbl
 INPUT ./document.bbl
 INPUT document.bbl
+INPUT ./parts/greetings.tex
+INPUT ./parts/greetings.tex
+INPUT ./parts/greetings.tex
+INPUT parts/greetings.tex
+INPUT ./parts/greetings.tex
+INPUT ./parts/greetings.tex
+INPUT parts/greetings.tex
+INPUT /usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-0.def
+INPUT /usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-0.def
+INPUT /usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-0.def
+INPUT /usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-0.def
 INPUT document.aux
 INPUT ./document.out
 INPUT ./document.out
