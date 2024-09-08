@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.9.4)  7 SEP 2024 21:33
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.9.4)  8 SEP 2024 18:06
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -436,7 +436,7 @@ Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
 \c@lstlisting=\count310
  (./parts/front.tex
-<Images/university_logo.png, id=108, 106.3975pt x 112.42pt>
+<Images/university_logo.png, id=136, 106.3975pt x 112.42pt>
 File: Images/university_logo.png Graphic file (type png)
 <use Images/university_logo.png>
 Package pdftex.def Info: Images/university_logo.png  used on input line 3.
@@ -461,135 +461,150 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has b
 l.64 \tableofcontents
                       [1
 
-] (./document.toc)
+] (./document.toc [2
+
+])
 \tf@toc=\write5
 \openout5 = `document.toc'.
 
- (./parts/chapter1.tex [2
-
-]
+ (./parts/chapter1.tex [3]
 Chapter 1.
-) (./parts/chapter2.tex [3
+) (./parts/chapter2.tex [4
 
-] [4]
+] [5]
 Chapter 2.
-[5
+[6
 
 ]
 LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 33.
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
-<Images/sample_edge_graph.png, id=174, 256.96pt x 240.9pt>
+<Images/sample_edge_graph.png, id=213, 256.96pt x 240.9pt>
 File: Images/sample_edge_graph.png Graphic file (type png)
 <use Images/sample_edge_graph.png>
 Package pdftex.def Info: Images/sample_edge_graph.png  used on input line 44.
 (pdftex.def)             Requested size: 195.0pt x 182.81387pt.
- [6] [7 <./Images/sample_edge_graph.png>] [8]
-<Images/simplestatemodel.png, id=199, 288.07625pt x 149.55875pt>
+ [7] [8 <./Images/sample_edge_graph.png>] [9]
+<Images/simplestatemodel.png, id=238, 288.07625pt x 149.55875pt>
 File: Images/simplestatemodel.png Graphic file (type png)
 <use Images/simplestatemodel.png>
 Package pdftex.def Info: Images/simplestatemodel.png  used on input line 84.
 (pdftex.def)             Requested size: 195.0pt x 101.2399pt.
- [9 <./Images/simplestatemodel.png>] [10]
-<Images/lighttpd_original.png, id=210, 1002.74625pt x 2713.13625pt>
+ [10 <./Images/simplestatemodel.png>] [11]
+<Images/lighttpd_original.png, id=250, 1002.74625pt x 2713.13625pt>
 File: Images/lighttpd_original.png Graphic file (type png)
 <use Images/lighttpd_original.png>
 Package pdftex.def Info: Images/lighttpd_original.png  used on input line 140.
 (pdftex.def)             Requested size: 234.00238pt x 633.11601pt.
- [11]
+ [12]
 Overfull \vbox (64.716pt too high) has occurred while \output is active []
 
- [12 <./Images/lighttpd_original.png>]
-<Images/existent_nonexistent_resource.png, id=223, 553.06625pt x 149.55875pt>
+ [13 <./Images/lighttpd_original.png>]
+<Images/existent_nonexistent_resource.png, id=262, 553.06625pt x 149.55875pt>
 File: Images/existent_nonexistent_resource.png Graphic file (type png)
 <use Images/existent_nonexistent_resource.png>
 Package pdftex.def Info: Images/existent_nonexistent_resource.png  used on input line 170.
 (pdftex.def)             Requested size: 312.00119pt x 84.37076pt.
- [13] [14 <./Images/existent_nonexistent_resource.png>] [15] [16]) (./parts/chapter3.tex [17] [18]
+ [14] [15 <./Images/existent_nonexistent_resource.png>] [16] [17]) (./parts/chapter3.tex [18] [19]
 Chapter 3.
-[19
+
+Underfull \hbox (badness 3229) in paragraph at lines 8--8
+|[]\OT1/cmr/bx/n/14.4 Lighttpd Code Mod-i-fi-ca-tions for Per-sis-tent
+ []
+
+[20
 
 ] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2020/03/24 1.8d listings language file
 ) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
 )
-LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 19.
+LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 20.
  (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 19.
-LaTeX Font Info:    Trying to load font information for OML+cmr on input line 24.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 20.
+LaTeX Font Info:    Trying to load font information for OML+cmr on input line 25.
  (/usr/share/texlive/texmf-dist/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 24.
- [20]
-Underfull \hbox (badness 10000) in paragraph at lines 115--133
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 25.
+ [21]
+Underfull \hbox (badness 10000) in paragraph at lines 116--134
 
  []
 
-[21]
+[22]
 LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 151.
- [22] [23]
-LaTeX Font Info:    Trying to load font information for TS1+pcr on input line 232.
- (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1pcr.fd
-File: ts1pcr.fd 2001/06/04 font definitions for TS1/pcr.
-) [24]) (./parts/chapter4.tex [25]
-Chapter 4.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 152.
+ [23] [24]
+Underfull \hbox (badness 10000) in paragraph at lines 225--227
 
-Underfull \hbox (badness 2932) in paragraph at lines 1--1
-|[]\OT1/cmr/bx/n/20.74 Comparison with AFLNet and
  []
 
-[26
+LaTeX Font Info:    Trying to load font information for TS1+pcr on input line 233.
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1pcr.fd
+File: ts1pcr.fd 2001/06/04 font definitions for TS1/pcr.
+) [25]
+Underfull \hbox (badness 10000) in paragraph at lines 252--257
 
-]) (./parts/chapter5.tex [27]
-Chapter 5.
-<Images/coverage_over_time_lighttpd-1day.pdf, id=502, 867.24pt x 433.62pt>
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 252--257
+
+ []
+
+[26] [27] [28] [29] [30] [31]
+Underfull \hbox (badness 10000) in paragraph at lines 507--509
+
+ []
+
+[32]) (./parts/chapter4.tex [33]
+Chapter 4.
+<Images/coverage_over_time_lighttpd-1day.pdf, id=728, 867.24pt x 650.43pt>
 File: Images/coverage_over_time_lighttpd-1day.pdf Graphic file (type pdf)
 <use Images/coverage_over_time_lighttpd-1day.pdf>
-Package pdftex.def Info: Images/coverage_over_time_lighttpd-1day.pdf  used on input line 37.
-(pdftex.def)             Requested size: 390.0pt x 195.00148pt.
-[28
+Package pdftex.def Info: Images/coverage_over_time_lighttpd-1day.pdf  used on input line 42.
+(pdftex.def)             Requested size: 390.0pt x 292.50221pt.
+[34
 
 ]
-<Images/coverage_over_time_lighttpd-10h.pdf, id=524, 867.24pt x 433.62pt>
+<Images/coverage_over_time_lighttpd-10h.pdf, id=750, 867.24pt x 650.43pt>
 File: Images/coverage_over_time_lighttpd-10h.pdf Graphic file (type pdf)
 <use Images/coverage_over_time_lighttpd-10h.pdf>
-Package pdftex.def Info: Images/coverage_over_time_lighttpd-10h.pdf  used on input line 47.
-(pdftex.def)             Requested size: 390.0pt x 195.00148pt.
-) (./parts/conclusion.tex [29 <./Images/coverage_over_time_lighttpd-1day.pdf> <./Images/coverage_over_time_lighttpd-10h.pdf>] [30]
-Chapter 6.
-) (./parts/futureworks.tex [31
+Package pdftex.def Info: Images/coverage_over_time_lighttpd-10h.pdf  used on input line 52.
+(pdftex.def)             Requested size: 390.0pt x 292.50221pt.
+ [35 <./Images/coverage_over_time_lighttpd-1day.pdf>]) (./parts/conclusion.tex [36 <./Images/coverage_over_time_lighttpd-10h.pdf>]
+Chapter 5.
+) (./parts/futureworks.tex [37
 
 ]
-Chapter 7.
-) [32
+Chapter 6.
+) [38
 
-] (./document.bbl) [33
+] [39] (./document.bbl) [40
 
 ] (./document.aux)
 Package rerunfilecheck Info: File `document.out' has not changed.
-(rerunfilecheck)             Checksum: 341D535160B0C3F01953723D0238CEFB;4803.
+(rerunfilecheck)             Checksum: 0B0212365E8C1E1B3C8536A53DA904A5;6421.
  ) 
 Here is how much of TeX's memory you used:
- 16382 strings out of 480247
- 261793 string characters out of 5896152
- 996603 words of memory out of 5000000
- 33765 multiletter control sequences out of 15000+600000
+ 16779 strings out of 480247
+ 266912 string characters out of 5896152
+ 997725 words of memory out of 5000000
+ 33987 multiletter control sequences out of 15000+600000
  479723 words of font info for 63 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  60i,13n,77p,802b,1860s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/leo/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcti1000.600pk> </home/leo/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk>{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc} </home/leo/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
-Output written on document.pdf (35 pages, 470370 bytes).
+Output written on document.pdf (42 pages, 495985 bytes).
 PDF statistics:
- 739 PDF objects out of 1000 (max. 8388607)
- 601 compressed objects within 7 object streams
- 286 named destinations out of 1000 (max. 500000)
- 244 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1037 PDF objects out of 1200 (max. 8388607)
+ 872 compressed objects within 9 object streams
+ 464 named destinations out of 1000 (max. 500000)
+ 300 words of extra memory for PDF output out of 10000 (max. 10000000)
 

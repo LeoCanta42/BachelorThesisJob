@@ -176,7 +176,6 @@ In the \textit{CON\_STATE\_CONNECT} we have no control of input, because it only
 
 For this thesis, three stateful fuzzers—AFLNet, ChatAFL and Fallaway—will be benchmarked over Lighttpd.
  
-% fare una pagina a testa
 \subsection{AFLNet}
 \textit{AFLNet} \cite{AFLNet} is a stateful CGF tool. It integrates automated state model inference with coverage-guided fuzzing, creating a synergistic relationship between the two processes. As fuzzing generates new message sequences to reach unexplored states, it progressively builds a more complete state model. Concurrently, this dynamically evolving state model helps guide fuzzing efforts towards more significant areas of the code, leveraging both state and code coverage information of the retained message sequences.
 \\AFLNet is implemented as an extension of the popular grey-box fuzzer AFL, with the additional capability of facilitating \textbf{network communication} over sockets, which is not supported by the original AFL. To achieve this, AFLNet establishes two communication channels: one for sending messages to the SUT and another for receiving responses. The response-receiving channel acts as a state feedback channel, complementing the code coverage feedback channel utilized by other CGF tools. The communication is implemented using standard C Socket APIs and synchronization between AFLNet and the server is ensured by introducing delays between requests.

@@ -24,4 +24,17 @@ Roberto Natella and Van-Thuan Pham.
 \newblock In {\em Proceedings of the 30th ACM SIGSOFT International Symposium
   on Software Testing and Analysis}, 2021.
 
+\bibitem{icissp23}
+Marcello Maugeri, Cristian Daniele, Giampaolo Bella, and Erik Poll.
+\newblock Evaluating the fork-awareness of coverage-guided fuzzers.
+\newblock In {\em Proceedings of the 9th International Conference on
+  Information Systems Security and Privacy - ICISSP}, 2023.
+
+\bibitem{forkfuzz}
+Marcello Maugeri, Cristian Daniele, and Giampaolo Bella.
+\newblock Forkfuzz: Leveraging the fork-awareness in coverage-guided fuzzing.
+\newblock In {\em Computer Security. ESORICS 2023 International Workshops:
+  CPS4CIP, ADIoT, SecAssure, WASP, TAURIN, PriST-AI, and SECAI, The Hague, The
+  Netherlands, September 25--29, 2023, Revised Selected Papers, Part II}, 2023.
+
 \end{thebibliography}

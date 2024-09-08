@@ -1,43 +1,60 @@
-\chapter{Comparison with AFLNet and ChatAFL}
-
-Setup of ChatAFL and AFLNet is similar to the one of Profuzzbench \cite{profuzzbench}, that is a benchmarking tool designed for stateful fuzzing of network protocols. It provides a suite of open-source network servers implementing popular protocols and includes tools to automate fuzzing experiments. Unlike other benchmarks focused on stateless programs, ProFuzzBench specifically addresses stateful protocol fuzzing, which requires considering the protocol states and combinations of multiple messages. The benchmark aims to support research in fuzzing techniques for protocol security testing and is open-source, inviting contributions for extending its range of targets.
-\\The real difference from Fallaway is in the execution script that we can see here:
-\begin{lstlisting}
-    #!/bin/bash
-
-    PFBENCH="$PWD/benchmark"
-    cd $PFBENCH
-
-    PATH=$PATH:$PFBENCH/scripts/execution:$PFBENCH/scripts/analysis
-    NUM_CONTAINERS=$1
-    TIMEOUT=$(( ${2:-1440} * 60))
-    SKIPCOUNT="${SKIPCOUNT:-1}"
-    TEST_TIMEOUT="${TEST_TIMEOUT:-5000}"
-
-    export TARGET_LIST=$3
-    export FUZZER_LIST=$4
-
-    if [[ "x$NUM_CONTAINERS" == "x" ]] || [[ "x$TIMEOUT" == "x" ]] || [[ "x$TARGET_LIST" == "x" ]] || [[ "x$FUZZER_LIST" == "x" ]]
-    then
-        echo "Usage: $0 NUM_CONTAINERS TIMEOUT TARGET FUZZER"
-        exit 1
-    fi
-
-    PFBENCH=$PFBENCH PATH=$PATH NUM_CONTAINERS=$NUM_CONTAINERS TIMEOUT=$TIMEOUT SKIPCOUNT=$SKIPCOUNT TEST_TIMEOUT=$TEST_TIMEOUT scripts/execution/profuzzbench_exec_all.sh ${TARGET_LIST} ${FUZZER_LIST}
-\end{lstlisting}
-An example of execution line is like this:
-\begin{lstlisting}
-./run.sh  <container_number> <fuzzed_time> <subjects> <fuzzers>
-\end{lstlisting}
-We can see that the script takes four arguments:
+\chapter{Results}
+\label{chap:Results}
+%importanza loop (cambio stato), confronto a cambio di loop
+%discutere i loops e i vari risultati
+%noi non prendiamo codici di errorere, ma solo coverage
+%punti di forza e debolezza di fallaway
+%aflnet e chatafl quasi lineare
+%fallaway ha un andamento a scalini, piu' casuale
 \begin{itemize}
-    \item \textit{CONTAINER\_NUMBER}: the number of containers to use for the execution of the fuzzer
-    \item \textit{FUZZED\_TIME}: the time in minutes after which the execution of the fuzzer will be stopped
-    \item \textit{SUBJECTS}: a list of targets to fuzz
-    \item \textit{FUZZERS}: a list of fuzzers to use
+    \item Fallaway:
+    \begin{lstlisting}
+
+    complete_coverage: 6% (883/15168)
+    total_executions: 79987763
+    \end{lstlisting}
+    
+    \item AFLNet:
+    \begin{lstlisting}
+    
+    complete_coverage: 5% (830/15168)
+    total_executions: 209776
+    \end{lstlisting}
+    
+    \item ChatAFL:
+    \begin{lstlisting}
+    
+    complete_coverage: 6% (850/15168)
+    total_executions: 241242
+    \end{lstlisting}
 \end{itemize}
-We ran the script with the following command (1440 is 24h in minutes):
-\begin{lstlisting}
-./run.sh 1 1440 lighttpd aflnet,chatafl
-\end{lstlisting}
-The results of the fuzzing process will be discussed in the next chapter.
+After 24h of fuzzing, we can look at the results and analyze them.
+\\\textbf{Fallaway} has the highest coverage of 6\% with 883 edge cases covered.
+\\It has the highest number of total executions with 79,987,763, which is 381 times more than \textbf{AFLNet} and 332 times more than \textbf{ChatAFL}.
+\\\textbf{AFLNet} has the lowest coverage of 5\% with 830 edge cases covered.
+\\It has the lowest number of total executions with 209,776.
+\\\textbf{ChatAFL} has a coverage of 6\% with 850 edge cases covered.
+\\It has a total of 241,242 executions.
+\\The coverage of the three fuzzers over 24h is shown in Figure \ref{fig:coverage_1day}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/coverage_over_time_lighttpd-1day.pdf}
+    \caption{Coverage of the three fuzzers in 24h}
+    \label{fig:coverage_1day}
+\end{figure}
+\phantom{}\\
+In another experiment, we ran the fuzzers for 10 hours, modifying the configuration of Fallaway to be in a loop of 250.
+\\The coverage of the three fuzzers over 10h is shown in Figure \ref{fig:coverage_10hours}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/coverage_over_time_lighttpd-10h.pdf}
+    \caption{Coverage of the three fuzzers in 10 hours}
+    \label{fig:coverage_10hours}
+\end{figure}
+\phantom{}\\
+In this configuration, Fallaway has reached a complete\_coverage of 6\% (942/15168).
+\\This is 59 more edge cases than the previous configuration, which is a 6.7\% increase.
+\\This could be due to the fact that the fuzzer is running in a loop of 250, which allows it to run more test cases in a shorter amount of time.
+\\This is not always a good thing, it depends on the SUT, corpus, configurations and more because in general: higher loop values can lead to more coverage, but also to more redundant test cases and to stuck on states that makes low progress; lower loop values can lead to less coverage, but also to less redundant test cases and to faster progress.

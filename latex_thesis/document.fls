@@ -892,13 +892,6 @@ INPUT parts/chapter4.tex
 INPUT ./parts/chapter4.tex
 INPUT ./parts/chapter4.tex
 INPUT parts/chapter4.tex
-INPUT ./parts/chapter5.tex
-INPUT ./parts/chapter5.tex
-INPUT ./parts/chapter5.tex
-INPUT parts/chapter5.tex
-INPUT ./parts/chapter5.tex
-INPUT ./parts/chapter5.tex
-INPUT parts/chapter5.tex
 INPUT ./Images/coverage_over_time_lighttpd-1day.pdf
 INPUT ./Images/coverage_over_time_lighttpd-1day.pdf
 INPUT Images/coverage_over_time_lighttpd-1day.pdf

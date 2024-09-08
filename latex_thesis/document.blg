@@ -4,45 +4,45 @@ The top-level auxiliary file: document.aux
 The style file: unsrt.bst
 Database file #1: bibliography.bib
 Warning--empty booktitle in Fallaway
-You've used 4 entries,
+You've used 6 entries,
             1791 wiz_defined-function locations,
-            465 strings with 4281 characters,
-and the built_in function-call counts, 749 in all, are:
-= -- 46
-> -- 37
+            474 strings with 4854 characters,
+and the built_in function-call counts, 1146 in all, are:
+= -- 70
+> -- 62
 < -- 0
-+ -- 14
-- -- 10
-* -- 31
-:= -- 122
-add.period$ -- 12
-call.type$ -- 4
-change.case$ -- 4
++ -- 23
+- -- 17
+* -- 51
+:= -- 185
+add.period$ -- 18
+call.type$ -- 6
+change.case$ -- 6
 chr.to.int$ -- 0
-cite$ -- 5
-duplicate$ -- 47
-empty$ -- 99
-format.name$ -- 10
-if$ -- 172
+cite$ -- 7
+duplicate$ -- 71
+empty$ -- 149
+format.name$ -- 17
+if$ -- 264
 int.to.chr$ -- 0
-int.to.str$ -- 4
-missing$ -- 4
-newline$ -- 23
-num.names$ -- 4
-pop$ -- 29
+int.to.str$ -- 6
+missing$ -- 6
+newline$ -- 33
+num.names$ -- 6
+pop$ -- 43
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 13
+skip$ -- 19
 stack$ -- 0
 substring$ -- 0
-swap$ -- 7
+swap$ -- 11
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 1
-while$ -- 4
-width$ -- 5
-write$ -- 41
+while$ -- 6
+width$ -- 7
+write$ -- 61
 (There was 1 warning)
