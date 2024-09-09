@@ -1,3 +1,10 @@
 \chapter{Conclusion} 
 
-Conclusions 
+Each fuzzer has distinct strengths and weaknesses:
+\begin{itemize}
+    \item \textbf{Fallaway}: Suitable for extensive input space exploration, especially in environments where resource constraints are less critical.
+    \item \textbf{AFLNet}: Optimal for fuzzing network protocols that require state management and meaningful test cases.
+    \item \textbf{ChatAFL}: Provides a balanced approach with efficient execution and competitive coverage, making it suitable for a wide range of applications.
+\end{itemize}
+
+The choice of fuzzer depends on the specific goals of testing, the nature of the SUT and the available computational resources.

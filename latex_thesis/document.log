@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.9.4)  8 SEP 2024 19:11
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.9.4)  9 SEP 2024 11:00
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -436,7 +436,7 @@ Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
 \c@lstlisting=\count310
  (./parts/front.tex
-<Images/university_logo.png, id=143, 106.3975pt x 112.42pt>
+<Images/university_logo.png, id=163, 106.3975pt x 112.42pt>
 File: Images/university_logo.png Graphic file (type png)
 <use Images/university_logo.png>
 Package pdftex.def Info: Images/university_logo.png  used on input line 3.
@@ -480,19 +480,19 @@ LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 33
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
-<Images/sample_edge_graph.png, id=222, 256.96pt x 240.9pt>
+<Images/sample_edge_graph.png, id=247, 256.96pt x 240.9pt>
 File: Images/sample_edge_graph.png Graphic file (type png)
 <use Images/sample_edge_graph.png>
 Package pdftex.def Info: Images/sample_edge_graph.png  used on input line 44.
 (pdftex.def)             Requested size: 195.0pt x 182.81387pt.
  [7] [8 <./Images/sample_edge_graph.png>] [9]
-<Images/simplestatemodel.png, id=247, 288.07625pt x 149.55875pt>
+<Images/simplestatemodel.png, id=272, 288.07625pt x 149.55875pt>
 File: Images/simplestatemodel.png Graphic file (type png)
 <use Images/simplestatemodel.png>
 Package pdftex.def Info: Images/simplestatemodel.png  used on input line 84.
 (pdftex.def)             Requested size: 195.0pt x 101.2399pt.
  [10 <./Images/simplestatemodel.png>] [11]
-<Images/lighttpd_original.png, id=259, 1002.74625pt x 2713.13625pt>
+<Images/lighttpd_original.png, id=284, 1002.74625pt x 2713.13625pt>
 File: Images/lighttpd_original.png Graphic file (type png)
 <use Images/lighttpd_original.png>
 Package pdftex.def Info: Images/lighttpd_original.png  used on input line 140.
@@ -501,7 +501,7 @@ Package pdftex.def Info: Images/lighttpd_original.png  used on input line 140.
 Overfull \vbox (64.716pt too high) has occurred while \output is active []
 
  [13 <./Images/lighttpd_original.png>]
-<Images/existent_nonexistent_resource.png, id=271, 553.06625pt x 149.55875pt>
+<Images/existent_nonexistent_resource.png, id=296, 553.06625pt x 149.55875pt>
 File: Images/existent_nonexistent_resource.png Graphic file (type png)
 <use Images/existent_nonexistent_resource.png>
 Package pdftex.def Info: Images/existent_nonexistent_resource.png  used on input line 170.
@@ -570,50 +570,56 @@ Underfull \hbox (badness 10000) in paragraph at lines 386--388
 
 ) (./parts/chapter4.tex [30]
 Chapter 4.
-<Images/coverage_over_time_lighttpd-1day.pdf, id=608, 867.24pt x 650.43pt>
-File: Images/coverage_over_time_lighttpd-1day.pdf Graphic file (type pdf)
-<use Images/coverage_over_time_lighttpd-1day.pdf>
-Package pdftex.def Info: Images/coverage_over_time_lighttpd-1day.pdf  used on input line 42.
-(pdftex.def)             Requested size: 390.0pt x 292.50221pt.
 [31
 
 ]
-<Images/coverage_over_time_lighttpd-10h.pdf, id=631, 867.24pt x 650.43pt>
+Underfull \hbox (badness 10000) in paragraph at lines 59--60
+
+ []
+
+[32]
+<Images/coverage_over_time_lighttpd-1day.pdf, id=642, 867.24pt x 650.43pt>
+File: Images/coverage_over_time_lighttpd-1day.pdf Graphic file (type pdf)
+<use Images/coverage_over_time_lighttpd-1day.pdf>
+Package pdftex.def Info: Images/coverage_over_time_lighttpd-1day.pdf  used on input line 88.
+(pdftex.def)             Requested size: 390.0pt x 292.50221pt.
+ [33]
+<Images/coverage_over_time_lighttpd-10h.pdf, id=649, 867.24pt x 650.43pt>
 File: Images/coverage_over_time_lighttpd-10h.pdf Graphic file (type pdf)
 <use Images/coverage_over_time_lighttpd-10h.pdf>
-Package pdftex.def Info: Images/coverage_over_time_lighttpd-10h.pdf  used on input line 52.
+Package pdftex.def Info: Images/coverage_over_time_lighttpd-10h.pdf  used on input line 100.
 (pdftex.def)             Requested size: 390.0pt x 292.50221pt.
- [32 <./Images/coverage_over_time_lighttpd-1day.pdf>]) (./parts/conclusion.tex [33 <./Images/coverage_over_time_lighttpd-10h.pdf>]
+ [34 <./Images/coverage_over_time_lighttpd-1day.pdf>]) (./parts/conclusion.tex [35 <./Images/coverage_over_time_lighttpd-10h.pdf>]
 Chapter 5.
-) (./parts/futureworks.tex [34
+) (./parts/futureworks.tex [36
 
 ]
 Chapter 6.
-) [35
+) [37
 
-] [36] (./document.bbl) (./parts/greetings.tex [37
+] [38] (./document.bbl) (./parts/greetings.tex [39
 
 ] (/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-0.def
 File: uni-0.def 2013/05/13 UCS: Unicode data U+0000..U+00FF
-)) [38
+)) [40
 
-] [39] (./document.aux)
+] [41] (./document.aux)
 Package rerunfilecheck Info: File `document.out' has not changed.
-(rerunfilecheck)             Checksum: 30656B949FDF9C63BA00268FF9E98D48;6608.
+(rerunfilecheck)             Checksum: 31593F189D57F4D1DDB9C4486A156D31;7332.
  ) 
 Here is how much of TeX's memory you used:
- 16961 strings out of 480247
- 268107 string characters out of 5896152
- 997725 words of memory out of 5000000
- 34278 multiletter control sequences out of 15000+600000
+ 16955 strings out of 480247
+ 267965 string characters out of 5896152
+ 997731 words of memory out of 5000000
+ 34280 multiletter control sequences out of 15000+600000
  479723 words of font info for 63 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  60i,13n,77p,802b,1860s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/leo/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcti1000.600pk> </home/leo/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk>{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc} </home/leo/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
-Output written on document.pdf (41 pages, 493905 bytes).
+Output written on document.pdf (43 pages, 499487 bytes).
 PDF statistics:
- 903 PDF objects out of 1000 (max. 8388607)
- 740 compressed objects within 8 object streams
- 349 named destinations out of 1000 (max. 500000)
- 316 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 920 PDF objects out of 1000 (max. 8388607)
+ 755 compressed objects within 8 object streams
+ 341 named destinations out of 1000 (max. 500000)
+ 356 words of extra memory for PDF output out of 10000 (max. 10000000)
 
