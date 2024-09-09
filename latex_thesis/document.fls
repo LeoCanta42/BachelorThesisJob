@@ -892,11 +892,11 @@ INPUT parts/chapter4.tex
 INPUT ./parts/chapter4.tex
 INPUT ./parts/chapter4.tex
 INPUT parts/chapter4.tex
-INPUT ./Images/coverage_over_time_lighttpd-1day.pdf
-INPUT ./Images/coverage_over_time_lighttpd-1day.pdf
-INPUT Images/coverage_over_time_lighttpd-1day.pdf
-INPUT ./Images/coverage_over_time_lighttpd-1day.pdf
-INPUT ./Images/coverage_over_time_lighttpd-1day.pdf
+INPUT ./Images/coverage_over_time_lighttpd-1day-1000l.pdf
+INPUT ./Images/coverage_over_time_lighttpd-1day-1000l.pdf
+INPUT Images/coverage_over_time_lighttpd-1day-1000l.pdf
+INPUT ./Images/coverage_over_time_lighttpd-1day-1000l.pdf
+INPUT ./Images/coverage_over_time_lighttpd-1day-1000l.pdf
 INPUT ./Images/coverage_over_time_lighttpd-10h.pdf
 INPUT ./Images/coverage_over_time_lighttpd-10h.pdf
 INPUT Images/coverage_over_time_lighttpd-10h.pdf

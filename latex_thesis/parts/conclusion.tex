@@ -1,10 +1,10 @@
 \chapter{Conclusion} 
-
-Each fuzzer has distinct strengths and weaknesses:
-\begin{itemize}
-    \item \textbf{Fallaway}: Suitable for extensive input space exploration, especially in environments where resource constraints are less critical.
-    \item \textbf{AFLNet}: Optimal for fuzzing network protocols that require state management and meaningful test cases.
-    \item \textbf{ChatAFL}: Provides a balanced approach with efficient execution and competitive coverage, making it suitable for a wide range of applications.
-\end{itemize}
-
-The choice of fuzzer depends on the specific goals of testing, the nature of the SUT and the available computational resources.
+This thesis explored the effectiveness of three stateful fuzzing tools—Fallaway, AFLNet, and ChatAFL—when applied to the Lighttpd web server. The study aimed to evaluate each tool's focusing on aspects like coverage, efficiency, and adaptability.
+\\\\We discussed the importance of stateful fuzzing, particularly for applications where internal states and state transitions significantly impact behavior, such as web servers and network-based applications. Stateful fuzzing techniques were shown to be crucial in effectively testing these SUTs, as they consider the influence of previous interactions on the application's current state.
+\\\\The research also involved comparing the setup processes for each fuzzer. Each tool required a different configuration and environment setup to achieve optimal performance. For instance, Fallaway's modifications to Lighttpd required a persistent mode for maintaining server states across multiple requests, while AFLNet and ChatAFL leveraged network protocol benchmarks to facilitate efficient fuzzing.
+\\\\Additionally, various graphs were presented to illustrate the comparative results of the fuzzers. These showed differences in execution counts, code coverage achieved over time, and other performance metrics, providing a clearer understanding of how each tool behaves in different scenarios.
+\\\\Through experimentation, it was found that each fuzzer employs a distinct approach to address the challenges of testing applications with complex internal states. 
+\\\\\textbf{Fallaway} was observed to extensively explore possible program behaviors, achieving broad coverage by conducting numerous test executions. Its method is advantageous in scenarios where a comprehensive examination of all potential states is crucial, despite its higher demand on computational resources.
+\\\\On the other hand, \textbf{AFLNet} leveraged its specialization in network protocols to achieve meaningful results with fewer test cases. It effectively targeted specific parts of the code, making it suitable for applications that require testing of network-related functionalities. However, its narrower focus might limit its applicability to broader testing needs.
+\\\\\textbf{ChatAFL} introduced an innovative strategy by incorporating advanced techniques to optimize input generation. This tool struck a balance between maximizing coverage and minimizing execution overhead, offering a versatile solution adaptable to various types of software.
+\\\\The findings underscore the need to select the appropriate fuzzing tool based on specific requirements, such as the nature of the software, the testing objectives and available resources. The evaluation provided valuable insights into the relative strengths and limitations of each fuzzer, guiding the selection of the most effective approach for different scenarios.
