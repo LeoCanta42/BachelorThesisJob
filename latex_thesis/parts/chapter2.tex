@@ -2,12 +2,12 @@
 
 \section{Introduction to Fuzzing}
 
-\textit{Fuzzing}, or \textit{fuzz testing}, is a software testing technique that includes feeding a huge amount of random data into the system, called \textit{SUT (System Under Test)}, to find unprecedented responses and reveal major programming errors, along with key security vulnerabilities. The primary objective of fuzzing is to identify vulnerabilities such as \textit{buffer overflows}, \textit{memory leaks} and other security weaknesses that can be exploited by attackers (TODO \cite{}).
-\\The success of fuzzing is based on its capabilities for automatic test case generation and for focusing its attention on portions of programs that otherwise would not have been tested by other more traditional testing technique (TODO \cite{}).
+\textit{Fuzzing}, or \textit{fuzz testing}, is a software testing technique that includes feeding a huge amount of random data into the system, called \textit{SUT (System Under Test)}, to find unprecedented responses and reveal major programming errors, along with key security vulnerabilities. The primary objective of fuzzing is to identify vulnerabilities such as \textit{buffer overflows}, \textit{memory leaks} and other security weaknesses that can be exploited by attackers (\cite{fuzzingprogresschallenges}).
+\\The success of fuzzing is based on its capabilities for automatic test case generation and for focusing its attention on portions of programs that otherwise would not have been tested by other more traditional testing technique.
 \\Indeed, it is particularly effective for applications with complex input grammars, where manual test case creation would be impracticable.
 
 \subsection{Types of Fuzzing Techniques}
-Fuzzing methodologies vary and there exist a lot for different applications and purposes (\cite{statefulfuzzing}):
+Fuzzing methodologies vary and there exist a lot for different applications and purposes (\textit{Fuzzers for Stateful Systems} \cite{statefulfuzzingcristian}):
 
 \begin{itemize}
     \item \textbf{Black-box Fuzzing}: This is a technique of generating inputs without prior knowledge of the internal structure of an application. It is easy to deploy but often less efficient as there is no internal feedback.
@@ -38,7 +38,7 @@ if (x > 0) {
 }
 \end{lstlisting}
 In this case, there are two edges (Figure \ref{fig:sample_edge_graph}): one from the condition to the true branch and one from the condition to the false branch. The basic blocks are the condition, the true branch and the false branch.
-\\This edges are used in the \textbf{coverage map}, that is a binary compiled with edge coverage information, where each edge is mapped to a bit in the coverage map.
+\\This edges are used in the \textbf{coverage map}, where each edge is mapped to a bit in the coverage map.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{Images/sample_edge_graph.png}
@@ -73,7 +73,7 @@ Stateful applications maintain state across multiple interactions or sessions. E
 
 
 \subsection{Key Techniques in Stateful Fuzzing}
-Stateful fuzzing involves several advanced techniques that distinguish it from traditional fuzzing approaches (TODO \cite{}):
+Stateful fuzzing involves several advanced techniques that distinguish it from traditional fuzzing approaches (\textit{The Art, Science, and Engineering of Fuzzing} \cite{theartoffuzzing}):
 
 \begin{itemize}
     \item \textbf{State Modeling}: The process of building a model representing an application state machine by reverse engineering source code, observing real interactions, or guide test case generation in conjunction with machine learning techniques.
@@ -88,7 +88,7 @@ Stateful fuzzing involves several advanced techniques that distinguish it from t
 \end{itemize}
 
 \subsection{Challenges in Stateful Fuzzing}
-Successfully performing testing is fraught with several challenges in stateful fuzzing (TODO \cite{}):
+Successfully performing testing is fraught with several challenges in stateful fuzzing (\textit{Is Stateful Fuzzing Really Challenging?} \cite{statefulfuzzingchallenges}):
 
 \begin{itemize} 
     \item \textbf{State Explosion}: As in real life, an application itself may have a number of possible states and with more states, a risk for exponential growth in process complexity increases. In this case, state abstraction, pruning, or prioritization counters the \textit{state explosion} in an essential way.
@@ -130,32 +130,27 @@ By default, Lighttpd is maintains transient states during the processing of requ
 The state model seems to be complex, but the state are effectively transitory.
 \\A sample flow of states in Lighttpd is as follows:
 \begin{itemize}
-    \item \textbf{CON\_STATE\_CONNECT}: The initial default state before a connection is established.
+    \item \textbf{1.CON\_STATE\_CONNECT}: The initial default state before a connection is established.
     
-    \item \textbf{CON\_STATE\_REQUEST\_START}: The state right after a connection is established and wait for request.
+    \item \textbf{2.CON\_STATE\_REQUEST\_START}: The state right after a connection is established and wait for request.
     
-    \item \textbf{CON\_STATE\_READ}: The state when the server is reading the request (here the server can be in a loop to read the request).
+    \item \textbf{3.CON\_STATE\_READ}: The state when the server is reading the request (here the server can be in a loop to read the request).
     
-    \item \textbf{CON\_STATE\_HANDLE\_REQUEST}: The state when the server is processing the request, if body length is null.
+    \item \textbf{4.CON\_STATE\_HANDLE\_REQUEST}: The state when the server is processing the request, if body length is null.
     
-    \item \textbf{CON\_STATE\_READ\_POST}: The state when the server is processing the request, if body length is more than 0.
+    \item \textbf{4.CON\_STATE\_READ\_POST}: The state when the server is processing the request, if body length is more than 0.
     
-    \item \textbf{CON\_STATE\_WRITE}: The state when the server is writing the response.
+    \item \textbf{5.CON\_STATE\_WRITE}: The state when the server is writing the response.
+    \item \textbf{6.CON\_STATE\_ERROR}: The state when an unhandled error occurs.
     
-    \item \textbf{CON\_STATE\_REQUEST\_END}: The state after the request has been fully received.
+    \item \textbf{7.CON\_STATE\_RESPONSE\_END}: The state after the request has been fully received.
     
-    \item \textbf{CON\_STATE\_CLOSE}: The state when the connection is closed.
+    \item \textbf{8.CON\_STATE\_CLOSE}: The state when the connection is closed.
 \end{itemize}
 In the \textit{CON\_STATE\_CONNECT} ther is no control of input, because it only changes when the connection is established.
 \\The only stationary state could be the \textit{CON\_STATE\_READ}, because it is a loop that reads the request (i.e. if the request is sent line by line, it will loop into it).
 \\The other states are transitory because, at the end, it will go back to \textit{CON\_STATE\_REQUEST\_START} or \textit{CON\_STATE\_CONNECT}.
 \\For this thesis, it has been chosen to model the state of the server based on the existence or non-existence of a resources (Figure \ref{fig:existent_nonexistent_resource_statemodel}). A resource can be a file, a directory, or any other entity that can be accessed via HTTP. By considering two types of requests—those that attempt to access an existing resource and those that attempt to access a non-existing resource—it can effectively explore different states of the server.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{Images/existent_nonexistent_resource.png}
-    \caption{State model of Lighttpd based on the existence of resources}
-    \label{fig:existent_nonexistent_resource_statemodel}
-\end{figure}
 
 \section{Fuzzers Overview: AFLNet, ChatAFL and Fallaway}
 
@@ -172,9 +167,9 @@ AFLNet \cite{AFLNet} is a stateful CGF tool. It integrates automated state model
 
 \subsection{ChatAFL}
 Traditional \textit{mutation-based protocol fuzzing} relies heavily on recorded message sequences to generate test cases, which can limit its effectiveness in thoroughly exploring the input and state space of complex network protocols. Existing approaches often require detailed, \textit{machine-readable} protocol specifications, which are labor-intensive to produce and maintain. Furthermore, these approaches may struggle with limited seed diversity and may reach a coverage plateau (no more progress in discovering code paths or states), where further exploration yields diminishing returns.
-\\To address these limitations, recent advancements have explored the potential of \textit{Large Language Models (LLMs)} to assist in the fuzzing process.
+\\To address these limitations, recent advancements have explored the potential of \textit{Large Language Models (LLMs)} \cite{minaee2024largelanguagemodelssurvey} to assist in the fuzzing process.
 \\LLMs are a class of neural network models that have demonstrated remarkable capabilities in natural language understanding and generation. They can be fine-tuned for specific tasks and have been successfully applied to a wide range of applications, including language translation, text generation and code completion.
-\\LLMs, such as \textbf{ChatGPT}, are pre-trained on extensive corpora, including publicly available protocol specifications and have demonstrated impressive capabilities in understanding and generating text. This presents an opportunity to leverage LLMs to improve fuzzing strategies by interpreting natural language descriptions of protocols and generating structured, diverse message sequences.
+\\LLMs are pre-trained on extensive corpora, including publicly available protocol specifications and have demonstrated impressive capabilities in understanding and generating text. This presents an opportunity to leverage LLMs to improve fuzzing strategies by interpreting natural language descriptions of protocols and generating structured, diverse message sequences.
 \\\textit{LLM-guided protocol fuzzing} uses the capabilities of LLMs to overcome the limitations of traditional mutation-based fuzzers. This method is implemented in ChatAFL \cite{chatafl} , a fuzzing tool built upon the AFLNet framework. ChatAFL incorporates LLMs to assist in three key areas:
 
 \begin{enumerate}

@@ -18,16 +18,36 @@ Nick Stephens, John Grosen, Christopher Salls, Andrew Dutcher, Ruoyu Wang,
 \newblock Driller: Augmenting fuzzing through selective symbolic execution.
 \newblock 2016.
 
-\bibitem{statefulfuzzing}
+\bibitem{statefulfuzzingchallenges}
+Cristian Daniele.
+\newblock Is stateful fuzzing really challenging?, 2024.
+
+\bibitem{fuzzingprogresschallenges}
+Zhenhua Yu, Zhengqi Liu, Xuya Cong, Xiaobo Li, and Li~Yin.
+\newblock Fuzzing: Progress, challenges, and perspectives.
+\newblock 2024.
+
+\bibitem{statefulfuzzingcristian}
 Cristian Daniele, Seyed Andarzian, and Erik Poll.
 \newblock Fuzzers for stateful systems: Survey and research directions.
 \newblock 2024.
+
+\bibitem{theartoffuzzing}
+Valentin~J.M. Manès, HyungSeok Han, Choongwoo Han, Sang~Kil Cha, Manuel Egele,
+  Edward~J. Schwartz, and Maverick Woo.
+\newblock The art, science, and engineering of fuzzing: A survey.
+\newblock 2021.
 
 \bibitem{AFLNet}
 Van{-}Thuan Pham, Marcel B{\"o}hme, and Abhik Roychoudhury.
 \newblock Aflnet: A greybox fuzzer for network protocols.
 \newblock In {\em Proceedings of the 13rd IEEE International Conference on
   Software Testing, Verification and Validation : Testing Tools Track}, 2020.
+
+\bibitem{minaee2024largelanguagemodelssurvey}
+Shervin Minaee, Tomas Mikolov, Narjes Nikzad, Meysam Chenaghlu, Richard Socher,
+  Xavier Amatriain, and Jianfeng Gao.
+\newblock Large language models: A survey, 2024.
 
 \bibitem{chatafl}
 Ruijie Meng, Martin Mirchev, Marcel B\"{o}hme, and Abhik Roychoudhury.

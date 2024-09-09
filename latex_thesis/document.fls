@@ -845,11 +845,6 @@ INPUT ./Images/lighttpd_original.png
 INPUT Images/lighttpd_original.png
 INPUT ./Images/lighttpd_original.png
 INPUT ./Images/lighttpd_original.png
-INPUT ./Images/existent_nonexistent_resource.png
-INPUT ./Images/existent_nonexistent_resource.png
-INPUT Images/existent_nonexistent_resource.png
-INPUT ./Images/existent_nonexistent_resource.png
-INPUT ./Images/existent_nonexistent_resource.png
 INPUT ./parts/chapter3.tex
 INPUT ./parts/chapter3.tex
 INPUT ./parts/chapter3.tex
@@ -918,13 +913,6 @@ INPUT ./document.bbl
 INPUT document.bbl
 INPUT ./document.bbl
 INPUT document.bbl
-INPUT ./parts/greetings.tex
-INPUT ./parts/greetings.tex
-INPUT ./parts/greetings.tex
-INPUT parts/greetings.tex
-INPUT ./parts/greetings.tex
-INPUT ./parts/greetings.tex
-INPUT parts/greetings.tex
 INPUT /usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-0.def
 INPUT /usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-0.def
 INPUT /usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-0.def

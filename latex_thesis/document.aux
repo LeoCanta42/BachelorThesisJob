@@ -23,11 +23,12 @@
 \citation{ossfuzz}
 \citation{sage}
 \citation{driller}
-\citation{statefulfuzzing}
+\citation{statefulfuzzingchallenges}
 \@writefile{toc}{\contentsline {chapter}{\numberline {1}Introduction}{4}{chapter.1}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\citation{statefulfuzzing}
+\citation{fuzzingprogresschallenges}
+\citation{statefulfuzzingcristian}
 \@writefile{toc}{\contentsline {chapter}{\numberline {2}Background}{6}{chapter.2}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
@@ -38,9 +39,11 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces Example of edge between basic blocks\relax }}{8}{figure.caption.3}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
 \newlabel{fig:sample_edge_graph}{{2.1}{8}{Example of edge between basic blocks\relax }{figure.caption.3}{}}
+\citation{theartoffuzzing}
 \@writefile{toc}{\contentsline {section}{\numberline {2.2}Stateful Fuzzing: Concepts and Challenges}{9}{section.2.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}Understanding Stateful Applications}{9}{subsection.2.2.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Key Techniques in Stateful Fuzzing}{9}{subsection.2.2.2}\protected@file@percent }
+\citation{statefulfuzzingchallenges}
 \@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces A simple state model illustrating state transitions in a stateful application\relax }}{10}{figure.caption.4}\protected@file@percent }
 \newlabel{fig:simplestatemodel}{{2.2}{10}{A simple state model illustrating state transitions in a stateful application\relax }{figure.caption.4}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2.3}Challenges in Stateful Fuzzing}{10}{subsection.2.2.3}\protected@file@percent }
@@ -50,40 +53,39 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces State model of Lighttpd\relax }}{13}{figure.caption.5}\protected@file@percent }
 \newlabel{fig:lighttpdstatemodel}{{2.3}{13}{State model of Lighttpd\relax }{figure.caption.5}{}}
 \citation{AFLNet}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.4}{\ignorespaces State model of Lighttpd based on the existence of resources\relax }}{15}{figure.caption.6}\protected@file@percent }
-\newlabel{fig:existent_nonexistent_resource_statemodel}{{2.4}{15}{State model of Lighttpd based on the existence of resources\relax }{figure.caption.6}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {2.4}Fuzzers Overview: AFLNet, ChatAFL and Fallaway}{15}{section.2.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.4.1}AFLNet}{15}{subsection.2.4.1}\protected@file@percent }
+\citation{minaee2024largelanguagemodelssurvey}
 \citation{chatafl}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.4.2}ChatAFL}{16}{subsection.2.4.2}\protected@file@percent }
 \citation{Fallaway}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.3}Fallaway}{18}{subsection.2.4.3}\protected@file@percent }
 \citation{libafl}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.3}Fallaway}{18}{subsection.2.4.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {chapter}{\numberline {3}Setup and fuzzing}{20}{chapter.3}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{toc}{\contentsline {section}{\numberline {3.1}Fallaway}{20}{section.3.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1.1}Lighttpd Code Modifications for Persistent Mode}{20}{subsection.3.1.1}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {3.1}{\ignorespaces Comparison of Original and Modified Code for `src/connections.c`\relax }}{21}{table.caption.7}\protected@file@percent }
-\newlabel{tab:connections_patch}{{3.1}{21}{Comparison of Original and Modified Code for `src/connections.c`\relax }{table.caption.7}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {3.2}{\ignorespaces Comparison of Original and Modified Code for `src/server.c`\relax }}{22}{table.caption.8}\protected@file@percent }
-\newlabel{tab:server_patch}{{3.2}{22}{Comparison of Original and Modified Code for `src/server.c`\relax }{table.caption.8}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.1}{\ignorespaces Comparison of Original and Modified Code for `src/connections.c`\relax }}{21}{table.caption.6}\protected@file@percent }
+\newlabel{tab:connections_patch}{{3.1}{21}{Comparison of Original and Modified Code for `src/connections.c`\relax }{table.caption.6}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.2}{\ignorespaces Comparison of Original and Modified Code for `src/server.c`\relax }}{22}{table.caption.7}\protected@file@percent }
+\newlabel{tab:server_patch}{{3.2}{22}{Comparison of Original and Modified Code for `src/server.c`\relax }{table.caption.7}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1.2}Mutator and Corpus}{22}{subsection.3.1.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Seed of existent resource request\relax }}{23}{figure.caption.9}\protected@file@percent }
-\newlabel{tab:existent_resource}{{3.1}{23}{Seed of existent resource request\relax }{figure.caption.9}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Seed of non-existent resource request\relax }}{23}{figure.caption.10}\protected@file@percent }
-\newlabel{tab:nonexistent_resource}{{3.2}{23}{Seed of non-existent resource request\relax }{figure.caption.10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Seed of existent resource request\relax }}{23}{figure.caption.8}\protected@file@percent }
+\newlabel{tab:existent_resource}{{3.1}{23}{Seed of existent resource request\relax }{figure.caption.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Seed of non-existent resource request\relax }}{23}{figure.caption.9}\protected@file@percent }
+\newlabel{tab:nonexistent_resource}{{3.2}{23}{Seed of non-existent resource request\relax }{figure.caption.9}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1.3}Setting Up the Fuzzing Environment}{23}{subsection.3.1.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1.4}Fuzzing Execution and Results}{25}{subsection.3.1.4}\protected@file@percent }
 \citation{profuzzbench}
 \@writefile{toc}{\contentsline {section}{\numberline {3.2}Comparison with AFLNet and ChatAFL}{26}{section.3.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Setting up the fuzzing environment}{26}{subsection.3.2.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}Mutator and Corpus Management}{27}{subsection.3.2.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces Seed used by AFLNet and ChatAFL\relax }}{27}{figure.caption.11}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces Seed used by AFLNet and ChatAFL\relax }}{28}{figure.caption.12}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces Seed used by AFLNet and ChatAFL\relax }}{28}{figure.caption.13}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces Dictionary used by AFLNet and ChatAFL\relax }}{28}{figure.caption.14}\protected@file@percent }
-\newlabel{fig:dictionary}{{3.6}{28}{Dictionary used by AFLNet and ChatAFL\relax }{figure.caption.14}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces Seed used by AFLNet and ChatAFL\relax }}{27}{figure.caption.10}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces Seed used by AFLNet and ChatAFL\relax }}{28}{figure.caption.11}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces Seed used by AFLNet and ChatAFL\relax }}{28}{figure.caption.12}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces Dictionary used by AFLNet and ChatAFL\relax }}{28}{figure.caption.13}\protected@file@percent }
+\newlabel{fig:dictionary}{{3.6}{28}{Dictionary used by AFLNet and ChatAFL\relax }{figure.caption.13}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2.3}Operational Differences: Code Handling and Analysis}{29}{subsection.3.2.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2.4}Fuzzing Execution and Results}{29}{subsection.3.2.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {chapter}{\numberline {4}Results}{31}{chapter.4}\protected@file@percent }
@@ -95,10 +97,10 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1.2}AFLNet}{32}{subsection.4.1.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1.3}ChatAFL}{33}{subsection.4.1.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {4.2}Coverage Analysis Over Time and Configurations}{33}{section.4.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Coverage of the three fuzzers in 24h\relax }}{34}{figure.caption.15}\protected@file@percent }
-\newlabel{fig:coverage_1day}{{4.1}{34}{Coverage of the three fuzzers in 24h\relax }{figure.caption.15}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces Coverage of the three fuzzers in 10 hours\relax }}{35}{figure.caption.16}\protected@file@percent }
-\newlabel{fig:coverage_10hours}{{4.2}{35}{Coverage of the three fuzzers in 10 hours\relax }{figure.caption.16}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Coverage of the three fuzzers in 24h\relax }}{34}{figure.caption.14}\protected@file@percent }
+\newlabel{fig:coverage_1day}{{4.1}{34}{Coverage of the three fuzzers in 24h\relax }{figure.caption.14}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces Coverage of the three fuzzers in 10 hours\relax }}{35}{figure.caption.15}\protected@file@percent }
+\newlabel{fig:coverage_10hours}{{4.2}{35}{Coverage of the three fuzzers in 10 hours\relax }{figure.caption.15}{}}
 \@writefile{toc}{\contentsline {chapter}{\numberline {5}Conclusion}{36}{chapter.5}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
@@ -114,14 +116,17 @@
 \bibcite{ossfuzz}{1}
 \bibcite{sage}{2}
 \bibcite{driller}{3}
-\bibcite{statefulfuzzing}{4}
-\bibcite{AFLNet}{5}
-\bibcite{chatafl}{6}
-\bibcite{Fallaway}{7}
-\bibcite{libafl}{8}
-\bibcite{profuzzbench}{9}
-\bibcite{icissp23}{10}
+\bibcite{statefulfuzzingchallenges}{4}
+\bibcite{fuzzingprogresschallenges}{5}
+\bibcite{statefulfuzzingcristian}{6}
+\bibcite{theartoffuzzing}{7}
+\bibcite{AFLNet}{8}
+\bibcite{minaee2024largelanguagemodelssurvey}{9}
+\bibcite{chatafl}{10}
 \@writefile{toc}{\contentsline {chapter}{References}{40}{section.6.2}\protected@file@percent }
-\bibcite{forkfuzz}{11}
-\@writefile{toc}{\contentsline {chapter}{Greetings}{42}{chapter*.18}\protected@file@percent }
-\gdef \@abspage@last{46}
+\bibcite{Fallaway}{11}
+\bibcite{libafl}{12}
+\bibcite{profuzzbench}{13}
+\bibcite{icissp23}{14}
+\bibcite{forkfuzz}{15}
+\gdef \@abspage@last{43}

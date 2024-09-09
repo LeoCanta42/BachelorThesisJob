@@ -38,4 +38,3 @@
 \contentsline {section}{\numberline {6.1}Fuzzing with Reinforcement Learning}{38}{section.6.1}%
 \contentsline {section}{\numberline {6.2}Fuzzing with multi-process SUTs}{39}{section.6.2}%
 \contentsline {chapter}{References}{40}{section.6.2}%
-\contentsline {chapter}{Greetings}{42}{chapter*.18}%

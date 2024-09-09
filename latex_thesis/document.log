@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.9.4)  9 SEP 2024 19:15
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.9.4)  9 SEP 2024 20:20
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -436,7 +436,7 @@ Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
 \c@lstlisting=\count310
  (./parts/front.tex
-<Images/university_logo.png, id=163, 106.3975pt x 112.42pt>
+<Images/university_logo.png, id=159, 106.3975pt x 112.42pt>
 File: Images/university_logo.png Graphic file (type png)
 <use Images/university_logo.png>
 Package pdftex.def Info: Images/university_logo.png  used on input line 3.
@@ -489,7 +489,7 @@ LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 33
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
-<Images/sample_edge_graph.png, id=258, 256.96pt x 240.9pt>
+<Images/sample_edge_graph.png, id=256, 256.96pt x 240.9pt>
 File: Images/sample_edge_graph.png Graphic file (type png)
 <use Images/sample_edge_graph.png>
 Package pdftex.def Info: Images/sample_edge_graph.png  used on input line 44.
@@ -505,31 +505,29 @@ Underfull \hbox (badness 1448) in paragraph at lines 58--61
  []
 
 [8 <./Images/sample_edge_graph.png>]
-<Images/simplestatemodel.png, id=281, 288.07625pt x 149.55875pt>
+<Images/simplestatemodel.png, id=279, 241.90375pt x 113.42375pt>
 File: Images/simplestatemodel.png Graphic file (type png)
 <use Images/simplestatemodel.png>
 Package pdftex.def Info: Images/simplestatemodel.png  used on input line 69.
-(pdftex.def)             Requested size: 195.0pt x 101.2399pt.
+(pdftex.def)             Requested size: 195.0pt x 91.43484pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [9] [10 <./Images/simplestatemodel.png>] [11]
-<Images/lighttpd_original.png, id=297, 1002.74625pt x 2713.13625pt>
+<Images/lighttpd_original.png, id=299, 1059.96pt x 2877.75125pt>
 File: Images/lighttpd_original.png Graphic file (type png)
 <use Images/lighttpd_original.png>
 Package pdftex.def Info: Images/lighttpd_original.png  used on input line 125.
-(pdftex.def)             Requested size: 234.00238pt x 633.11601pt.
+(pdftex.def)             Requested size: 234.00238pt x 635.30278pt.
  [12]
-Overfull \vbox (64.716pt too high) has occurred while \output is active []
+Overfull \vbox (66.90277pt too high) has occurred while \output is active []
 
  [13 <./Images/lighttpd_original.png>]
-<Images/existent_nonexistent_resource.png, id=309, 553.06625pt x 149.55875pt>
-File: Images/existent_nonexistent_resource.png Graphic file (type png)
-<use Images/existent_nonexistent_resource.png>
-Package pdftex.def Info: Images/existent_nonexistent_resource.png  used on input line 155.
-(pdftex.def)             Requested size: 312.00119pt x 84.37076pt.
- [14] [15 <./Images/existent_nonexistent_resource.png>] [16] [17] [18]) (./parts/chapter3.tex [19]
+
+LaTeX Warning: Reference `fig:existent_nonexistent_resource_statemodel' on page 14 undefined on input line 153.
+
+[14] [15] [16] [17] [18]) (./parts/chapter3.tex [19]
 Chapter 3.
 
 Underfull \hbox (badness 3229) in paragraph at lines 8--8
@@ -685,124 +683,30 @@ Underfull \hbox (badness 2197) in paragraph at lines 2--1
 Chapter 6.
 ) [38
 
-] [39] (./document.bbl [40
-
-]) (./parts/greetings.tex [41] (/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-0.def
+] [39] (./document.bbl (/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-0.def
 File: uni-0.def 2013/05/13 UCS: Unicode data U+0000..U+00FF
-))
-Underfull \hbox (badness 10000) in paragraph at lines 4--80
+) [40
 
- []
+]) [41] (./document.aux)
 
+LaTeX Warning: There were undefined references.
 
-Underfull \hbox (badness 10000) in paragraph at lines 4--80
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 4--80
-
- []
-
-
-Underfull \hbox (badness 1460) in paragraph at lines 4--80
-\OT1/cmr/m/n/12 Ringrazio mia madre, che nonos-tante qualche bat-tibecco, nonos-tante
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 4--80
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 4--80
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 4--80
-
- []
-
-
-Underfull \hbox (badness 1365) in paragraph at lines 4--80
-\OT1/cmr/m/n/12 Ringrazio mio cog-nato, nonch^^Se am-ico e fratello, per ogni avven-tura
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 4--80
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 4--80
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 4--80
-
- []
-
-
-Underfull \hbox (badness 1584) in paragraph at lines 4--80
-\OT1/cmr/m/n/12 In par-ti-co-lare ringrazio Emanuele Cata-nia, per la fratel-lanza che ci
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 4--80
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 4--80
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 4--80
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 4--80
-
- []
-
-
-Underfull \hbox (badness 1540) in paragraph at lines 4--80
-\OT1/cmr/m/n/12 Ringrazio il mio gruppo di col-leghi, Re-alU-nict-In-foNelChill, per aver
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 4--80
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 4--80
-
- []
-
-[42
-
-] [43] [44] (./document.aux)
 Package rerunfilecheck Info: File `document.out' has not changed.
-(rerunfilecheck)             Checksum: 31593F189D57F4D1DDB9C4486A156D31;7332.
+(rerunfilecheck)             Checksum: DD511FD875219DBB8B70B228EF7A3791;7241.
  ) 
 Here is how much of TeX's memory you used:
- 16972 strings out of 480247
- 268191 string characters out of 5896152
- 997891 words of memory out of 5000000
- 34289 multiletter control sequences out of 15000+600000
+ 16958 strings out of 480247
+ 267919 string characters out of 5896152
+ 997977 words of memory out of 5000000
+ 34280 multiletter control sequences out of 15000+600000
  479567 words of font info for 62 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  60i,13n,77p,811b,1860s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/leo/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcti1000.600pk> </home/leo/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk>{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc} </home/leo/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
-Output written on document.pdf (46 pages, 515672 bytes).
+Output written on document.pdf (43 pages, 517470 bytes).
 PDF statistics:
- 953 PDF objects out of 1000 (max. 8388607)
- 783 compressed objects within 8 object streams
- 349 named destinations out of 1000 (max. 500000)
- 356 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 940 PDF objects out of 1000 (max. 8388607)
+ 774 compressed objects within 8 object streams
+ 348 named destinations out of 1000 (max. 500000)
+ 343 words of extra memory for PDF output out of 10000 (max. 10000000)
 
