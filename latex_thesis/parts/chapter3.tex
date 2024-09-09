@@ -3,12 +3,12 @@
 \section{Fallaway}
 Fallaway distinguishes itself from other fuzzers like AFLNet or ChatAFL by using a \textbf{persistent mode}. This mode allows the fuzzer to maintain the server's state across multiple requests, which is especially useful in scenarios where the server does not reset its state between requests, such as when managing user sessions or maintaining authentication states in a web application.
 \\The persistent mode is implemented by modifying the Lighttpd server to maintain its state between requests. The server operates in a separate process and the fuzzer interacts with it via a socket. The fuzzer sends requests to the server and receives responses, using the results to guide the generation of subsequent requests. This process continues in a loop until the fuzzing session is complete.
-\\To enable this, we must modify the Lighttpd code to ensure that the server continuously receives, processes and responds to requests without shutting down. The changes are made to the function \texttt{server\_main\_loop} in the \texttt{src/server.c} file and to the connection handling functions in \texttt{src/connections.c} of the Lighttpd source code. The specific code changes are shown in the next section, providing a comparison between the original and modified code.
+\\To enable this, it is necessary to modify the Lighttpd code to ensure that the server continuously receives, processes and responds to requests without shutting down. The changes are made to the function \textit{server\_main\_loop} in the \textit{src/server.c} file and to the connection handling functions in \textit{src/connections.c} of the Lighttpd source code. The specific code changes are shown in the next section, providing a comparison between the original and modified code.
 
 \subsection{Lighttpd Code Modifications for Persistent Mode}
 
-Table \ref{tab:connections_patch} presents a comparison of the original and modified code for the \texttt{connections.c} file. The modifications to this file are crucial for maintaining an open connection state, ensuring that the fuzzer can interact continuously with the server. We also had to clean all buffers and old data for that connection.
-\\Table \ref{tab:server_patch} shows a comparison of the original and modified code for the \texttt{server.c} file. The changes made here are essential for enabling persistent server operation, allowing the fuzzer to manage and maintain server state across multiple requests, looping into the \_\_AFL\_LOOP.
+Table \ref{tab:connections_patch} presents a comparison of the original and modified code for the \textit{connections.c} file. The modifications to this file are crucial for maintaining an open connection state, ensuring that the fuzzer can interact continuously with the server. It is also important to clean all buffers and old data for that connection.
+\\Table \ref{tab:server_patch} shows a comparison of the original and modified code for the \textit{server.c} file. The changes made here are essential for enabling persistent server operation, allowing the fuzzer to manage and maintain server state across multiple requests, looping into the \textit{\_\_AFL\_LOOP}.
 
 \begin{table}[H]
 \centering
@@ -113,8 +113,8 @@ static void server_main_loop (server * const srv) {
 
 \subsection{Mutator and Corpus}
 
-Another crucial aspect of the fuzzing process involves the corpus and the mutator. In this experiment, we define the state of the server based on the existence \ref{tab:existent_resource} or non-existence \ref{tab:nonexistent_resource} of resources. Specifically, we consider two types of requests: one that attempts to access a resource that exists and another that attempts to access a resource that does not exist.
-\\\\The \textbf{corpus} consists of a set of initial test cases that represent these two scenarios. By including requests for both existing and non-existing resources, we ensure that the fuzzer can effectively explore different states of the server.
+Another crucial aspect of the fuzzing process involves the corpus and the mutator. In this experiment, it has been defined the state of the server based on the existence \ref{tab:existent_resource} or non-existence \ref{tab:nonexistent_resource} of resources. Specifically considering two types of requests: one that attempts to access a resource that exists and another that attempts to access a resource that does not exist.
+\\\\The \textbf{corpus} consists of a set of initial test cases that represent these two scenarios. By including requests for both existing and non-existing resources, it is ensured that the fuzzer can effectively explore different states of the server.
 \begin{figure}[H]
     \centering
     \begin{adjustbox}{valign=t}
@@ -149,11 +149,11 @@ Another crucial aspect of the fuzzing process involves the corpus and the mutato
     \label{tab:nonexistent_resource}
 \end{figure}
 \phantom{}\\
-The \textbf{mutator}, which is responsible for generating variations of the requests, is relatively straightforward. Its primary function is to modify the existing requests by appending a sequence of characters ('\textit{\textbackslash r\textbackslash n\textbackslash r\textbackslash n}') to the end of each request. This modification is essential as it guarantees that the requests are well-formed and adheres to the HTTP protocol standards. By ensuring the requests are properly formatted, we enable the server to parse and process them correctly, which is vital for accurate fuzz testing.
+The \textbf{mutator}, which is responsible for generating variations of the requests, is relatively straightforward. Its primary function is to modify the existing requests by appending a sequence of characters ('\textit{\textbackslash r\textbackslash n\textbackslash r\textbackslash n}') to the end of each request. This modification is essential as it guarantees that the requests are well-formed and adheres to the HTTP protocol standards. By ensuring the requests are properly formatted, it enables the server to parse and process them correctly, which is vital for accurate fuzz testing.
 
 \subsection{Setting Up the Fuzzing Environment}
 
-To run the fuzzer, we need to build a Docker container that includes all the necessary dependencies and the modified Lighttpd server. The Dockerfile below shows the steps to set up this environment.
+To run the fuzzer, it is important to build a Docker container that includes all the necessary dependencies and the modified Lighttpd server. The Dockerfile below shows the steps to set up this environment.
 
 \begin{lstlisting}
 FROM libaflstar 
@@ -224,11 +224,11 @@ Another important file to consider is the configuration file of the Lighttpd ser
     server.max-connections = 1000
 \end{lstlisting}
 \phantom{}\\
-This configuration file specifies the server's document root, bind address, port, and maximum number of workers and connections. By defining these parameters, we ensure that the server operates correctly and can handle the incoming requests from the fuzzer.
-\\In particular, we force to have just one worker to avoid problems with fuzzing, because Fallaway is not yet ready to work with multi-process SUT.
+This configuration file specifies the server's document root, bind address, port, and maximum number of workers and connections. By defining these parameters the server will operates correctly and can handle the incoming requests from the fuzzer.
+\\In particular, it is forced to have just one worker to avoid problems with fuzzing, because Fallaway is not yet ready to work with multi-process SUT.
 \subsection{Fuzzing Execution and Results}
 
-We ran the fuzzer for 24 hours, using the following script to execute it:
+To ran the fuzzer for 24 hours, use the following script:
 
 \begin{lstlisting}
 #!/bin/bash
@@ -237,17 +237,17 @@ loops="${2:-1000}"
 
 timeout 24h cargo run --release --bin libaflstar-http-$bin -- --in-dir /corpus --out-dir /output_lighttpd --target-port 8080 --loops $loops -t 300 /lighttpd/lighttpd -D -f /lighttpd.conf
 \end{lstlisting}
-In particular we have:
+In particular there are:
 \begin{itemize}
     \item \textbf{bin}: the state scheduler strategy.
-    \item \textbf{loops}: taken by the \_\_AFL\_LOOP, it is the number of iterations that the fuzzer will do.
+    \item \textbf{loops}: taken by the \textit{\_\_AFL\_LOOP}, it is the number of iterations that the fuzzer will do.
     \item \textbf{timeout 24h}: the fuzzer will run for 24 hours.
 \end{itemize}
 The results of the fuzzing process will be discussed in the chapter \ref{chap:Results}.
 
 \section{Comparison with AFLNet and ChatAFL}
 
-AFLNet and ChatAFL provide alternative approaches to fuzzing that share certain characteristics with Fallaway, but also have distinct differences in their setup, configuration, and operational strategies. In this section, we outline the setup for both AFLNet and ChatAFL, noting similarities with Fallaway, and highlight the unique features of each tool, including how they handle server responses and their internal mechanisms for optimizing fuzzing performance.
+AFLNet and ChatAFL provide alternative approaches to fuzzing that share certain characteristics with Fallaway, but also have distinct differences in their setup, configuration, and operational strategies. The purpose of this section is to outline the setup for both AFLNet and ChatAFL, noting similarities with Fallaway, and highlight the unique features of each tool, including how they handle server responses and their internal mechanisms for optimizing fuzzing performance.
 
 \subsection{Setting up the fuzzing environment}
 
@@ -262,7 +262,7 @@ Another important thing to consider is the configuration file of the Lighttpd se
     mimetype.assign = (".txt" => "text/plain", ".html" => "text/html" )
 \end{lstlisting}
 \phantom{}\\
-As we can see, in this case we don't have to force the number of workers to 1, because they don't have the same problem as Fallaway, due to their managment of the SUT, explained in the next section.
+As seen above, in this case there is no need to force the number of workers to 1, because they don't have the same problem as Fallaway, due to their managment of the SUT, explained in the next section.
 
 \subsection{Mutator and Corpus Management}
 
@@ -354,7 +354,7 @@ One of the main distinctions between Fallaway, AFLNet, and ChatAFL is their stra
 
 \subsection{Fuzzing Execution and Results}
 
-The real difference from Fallaway is in the execution script that we can see here:\\
+The real difference from Fallaway is in the execution script:\\
 \begin{lstlisting}
     #!/bin/bash
 
@@ -384,7 +384,7 @@ An example of execution line is like this:\\
 ./run.sh  <container_number> <fuzzed_time> <subjects> <fuzzers>
 \end{lstlisting}
 \phantom{}\\
-We can see that the script takes four arguments:\\
+The script takes four arguments:\\
 \begin{itemize}
     \item \textit{CONTAINER\_NUMBER}: the number of containers to use for the execution of the fuzzer.
     \item \textit{FUZZED\_TIME}: the time in minutes after which the execution of the fuzzer will be stopped.
@@ -392,7 +392,7 @@ We can see that the script takes four arguments:\\
     \item \textit{FUZZERS}: a list of fuzzers to use.
 \end{itemize}
 \phantom{}\\
-We ran the script with the following command (1440 is 24h in minutes):
+The script has been ran with the following command (1440 is 24h in minutes):
 \begin{lstlisting}
 ./run.sh 1 1440 lighttpd aflnet,chatafl
 \end{lstlisting}

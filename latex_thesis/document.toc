@@ -6,11 +6,11 @@
 \contentsline {subsection}{\numberline {2.1.2}Fuzzing Inputs Generation}{7}{subsection.2.1.2}%
 \contentsline {subsection}{\numberline {2.1.3}Coverage-Guided Fuzzing}{7}{subsection.2.1.3}%
 \contentsline {section}{\numberline {2.2}Stateful Fuzzing: Concepts and Challenges}{9}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Understanding Stateful Applications}{10}{subsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.2.2}Key Techniques in Stateful Fuzzing}{10}{subsection.2.2.2}%
-\contentsline {subsection}{\numberline {2.2.3}Challenges in Stateful Fuzzing}{11}{subsection.2.2.3}%
-\contentsline {section}{\numberline {2.3}Lighttpd: A Case Study for Stateful Fuzzing}{12}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Overview of Lighttpd Architecture}{12}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.2.1}Understanding Stateful Applications}{9}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Key Techniques in Stateful Fuzzing}{9}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Challenges in Stateful Fuzzing}{10}{subsection.2.2.3}%
+\contentsline {section}{\numberline {2.3}Lighttpd: A Case Study for Stateful Fuzzing}{11}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Overview of Lighttpd Architecture}{11}{subsection.2.3.1}%
 \contentsline {subsection}{\numberline {2.3.2}Relevance of Lighttpd for Fuzzing}{12}{subsection.2.3.2}%
 \contentsline {section}{\numberline {2.4}Fuzzers Overview: AFLNet, ChatAFL and Fallaway}{15}{section.2.4}%
 \contentsline {subsection}{\numberline {2.4.1}AFLNet}{15}{subsection.2.4.1}%
@@ -38,4 +38,4 @@
 \contentsline {section}{\numberline {6.1}Fuzzing with Reinforcement Learning}{38}{section.6.1}%
 \contentsline {section}{\numberline {6.2}Fuzzing with multi-process SUTs}{39}{section.6.2}%
 \contentsline {chapter}{References}{40}{section.6.2}%
-\contentsline {chapter}{Greetings}{41}{chapter*.18}%
+\contentsline {chapter}{Greetings}{42}{chapter*.18}%

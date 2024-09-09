@@ -1,4 +1,27 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
+
+\bibitem{ossfuzz}
+Zhen~Yu Ding and Claire Goues.
+\newblock An empirical study of oss-fuzz bugs.
+\newblock 2021.
+
+\bibitem{sage}
+P.~Godefroid, M.Y. Levin, and D.~Molnar.
+\newblock Sage: Whitebox fuzzing for security testing: Sage has had a
+  remarkable impact at microsoft.
+\newblock 2012.
+
+\bibitem{driller}
+Nick Stephens, John Grosen, Christopher Salls, Andrew Dutcher, Ruoyu Wang,
+  Jacopo Corbetta, Yan Shoshitaishvili, Christopher Kruegel, and Giovanni
+  Vigna.
+\newblock Driller: Augmenting fuzzing through selective symbolic execution.
+\newblock 2016.
+
+\bibitem{statefulfuzzing}
+Cristian Daniele, Seyed Andarzian, and Erik Poll.
+\newblock Fuzzers for stateful systems: Survey and research directions.
+\newblock 2024.
 
 \bibitem{AFLNet}
 Van{-}Thuan Pham, Marcel B{\"o}hme, and Abhik Roychoudhury.
@@ -17,6 +40,11 @@ Timme Bethe.
 \newblock Fallaway: High throughput stateful fuzzing by making afl*
   state-aware.
 \newblock 2024.
+
+\bibitem{libafl}
+Andrea Fioraldi, Dominik Maier, Dongjia Zhang, and Davide Balzarotti.
+\newblock Libafl: A framework to build modular and reusable fuzzers.
+\newblock 2022.
 
 \bibitem{profuzzbench}
 Roberto Natella and Van-Thuan Pham.
