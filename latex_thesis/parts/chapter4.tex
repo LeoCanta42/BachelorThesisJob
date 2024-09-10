@@ -97,12 +97,38 @@ As we already mentioned, Fallaway hasn't a linear growth in coverage, but it has
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{Images/coverage_over_time_lighttpd-10h.pdf}
-    \caption{Coverage of the three fuzzers in 10 hours}
+    \includegraphics[width=1\textwidth]{Images/coverage_over_time_lighttpd-1day-10l.pdf}
+    \caption{Coverage of the three fuzzers in 24h with Fallaway in a loop of 10}
+    \label{fig:coverage_10hours}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/coverage_over_time_lighttpd-1day-100l.pdf}
+    \caption{Coverage of the three fuzzers in 24h with Fallaway in a loop of 100}
+    \label{fig:coverage_10hours}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/coverage_over_time_lighttpd-1day-250l.pdf}
+    \caption{Coverage of the three fuzzers in 24h with Fallaway in a loop of 250}
+    \label{fig:coverage_10hours}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/coverage_over_time_lighttpd-1day-500l.pdf}
+    \caption{Coverage of the three fuzzers in 24h with Fallaway in a loop of 500}
+    \label{fig:coverage_10hours}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/coverage_over_time_lighttpd-1day-2000l.pdf}
+    \caption{Coverage of the three fuzzers in 24h with Fallaway in a loop of 2000}
     \label{fig:coverage_10hours}
 \end{figure}
 \phantom{}\\
-In this configuration, Fallaway has reached a complete\_coverage of 6\% (942/15168).
-\\This is 59 more edge cases than the previous configuration, which is a 6.7\% increase.
-\\This could be due to the fact that the fuzzer is running in a loop of 250, which allows it to run more test cases in a shorter amount of time.
+This could be due to the fact that the fuzzer is running in a loop of 250, which allows it to run more test cases in a shorter amount of time.
 \\This is not always a good thing, it depends on the SUT, corpus, configurations and more because in general: higher loop values can lead to more coverage, but also to more redundant test cases and to stuck on states that makes low progress; lower loop values can lead to less coverage, but also to less redundant test cases and to faster progress.
