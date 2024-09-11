@@ -14,45 +14,45 @@ Warning--empty journal in mutationgenerationbased
 Warning--empty booktitle in learningbasedfuzzing
 Warning--empty booktitle in learningbasedfuzzing2
 Warning--empty booktitle in libafl
-You've used 25 entries,
+You've used 27 entries,
             1791 wiz_defined-function locations,
-            535 strings with 6905 characters,
-and the built_in function-call counts, 3858 in all, are:
-= -- 248
-> -- 211
+            541 strings with 7115 characters,
+and the built_in function-call counts, 4058 in all, are:
+= -- 264
+> -- 213
 < -- 0
-+ -- 82
++ -- 84
 - -- 57
 * -- 144
-:= -- 586
-add.period$ -- 64
-call.type$ -- 25
-change.case$ -- 25
+:= -- 604
+add.period$ -- 68
+call.type$ -- 27
+change.case$ -- 27
 chr.to.int$ -- 0
-cite$ -- 34
-duplicate$ -- 202
-empty$ -- 495
+cite$ -- 36
+duplicate$ -- 212
+empty$ -- 531
 format.name$ -- 57
-if$ -- 893
+if$ -- 947
 int.to.chr$ -- 0
-int.to.str$ -- 25
+int.to.str$ -- 27
 missing$ -- 14
-newline$ -- 117
+newline$ -- 125
 num.names$ -- 18
-pop$ -- 165
+pop$ -- 177
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 101
+skip$ -- 113
 stack$ -- 0
 substring$ -- 0
-swap$ -- 26
+swap$ -- 28
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 9
 while$ -- 18
-width$ -- 27
-write$ -- 214
+width$ -- 29
+write$ -- 228
 (There were 10 warnings)

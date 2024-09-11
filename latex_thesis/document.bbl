@@ -111,6 +111,14 @@ Roberto Natella and Van-Thuan Pham.
 \newblock In {\em Proceedings of the 30th ACM SIGSOFT International Symposium
   on Software Testing and Analysis}, 2021.
 
+\bibitem{chataflgithub}
+{Chatafl GitHub Repository}.
+\newblock \url{https://github.com/ChatAFLndss/ChatAFL/tree/master}.
+
+\bibitem{chataflgithubprofuz}
+{Chatafl GitHub ProFuzzBench}.
+\newblock \url{https://github.com/ChatAFLndss/ChatAFL/tree/master/benchmark}.
+
 \bibitem{forkfuzz}
 Marcello Maugeri, Cristian Daniele, and Giampaolo Bella.
 \newblock Forkfuzz: Leveraging the fork-awareness in coverage-guided fuzzing.

@@ -177,8 +177,13 @@ The \textbf{mutator}, responsible for generating variations of the requests, is 
     \caption{Corpus folder structure}
 \end{figure}
 \phantom{}\\
-Summing up: \textit{existent\_resource} folder is a state, \textit{0\_put} is a prefix to reach that state and, in this case is the full request to reach it. The same for \textit{non\_existent\_resource} and \textit{0\_delete}. The \textit{metadata} files contains the number of outgoing edges from that state.
-\\Finally the other files rapresent the tokens that the mutator will use to generate new requests.
+Summing up: \textit{existent\_resource} folder is a state, \textit{0\_put} is a prefix to reach that state and, in this case is the full request to reach it. The same for \textit{non\_existent\_resource} and \textit{0\_delete}. The \textit{metadata} files contains the number of outgoing edges for that state. In this case, the number of outgoing edges is 2 for both states, because we can have:
+\begin{itemize}
+    \item \textit{existent\_resource} state: when sending the delete request, the server can return a 404 error, if the resource exists, or can return a 200 OK.
+    \item \textit{non\_existent\_resource} state: when sending the put request, the server can return a 404 error, if the resource does not exist, or can return a 200 OK.
+\end{itemize}
+\phantom{}\\
+Finally the other files rapresent the tokens that the mutator will use to generate new requests.
 
 \subsection{Setting Up the Fuzzing Environment}
 
@@ -415,7 +420,8 @@ The real difference from Fallaway is in the execution script:\\
     PFBENCH=$PFBENCH PATH=$PATH NUM_CONTAINERS=$NUM_CONTAINERS TIMEOUT=$TIMEOUT SKIPCOUNT=$SKIPCOUNT TEST_TIMEOUT=$TEST_TIMEOUT scripts/execution/profuzzbench_exec_all.sh ${TARGET_LIST} ${FUZZER_LIST}
 \end{lstlisting}
 \phantom{}\\
-An example of execution line is like this:\\
+This is the script defined by ChatAFL repository ~\cite{chataflgithub}, that internally uses ProFuzzBench's scripts to run the fuzzers ~\cite{chataflgithubprofuz}.
+\\An example of execution line is like this:\\
 \begin{lstlisting}
 ./run.sh  <container_number> <fuzzed_time> <subjects> <fuzzers>
 \end{lstlisting}
@@ -428,7 +434,7 @@ The script takes four arguments:\\
     \item \textit{FUZZERS}: a list of fuzzers to use.
 \end{itemize}
 \phantom{}\\
-The script to fuzz Lighttpd for 24h using both AFLNet and ChatAFL is:
+The command to fuzz Lighttpd for 24h using both AFLNet and ChatAFL is:
 \begin{lstlisting}
 ./run.sh 1 1440 lighttpd aflnet,chatafl
 \end{lstlisting}

@@ -877,8 +877,8 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1pcr.fd
 INPUT /usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1pcr.fd
 INPUT /usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1pcr.fd
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/courier/pcrr8c.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcbx1200.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/courier/pcrr8c.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcbx1200.tfm
 INPUT ./parts/chapter4.tex
 INPUT ./parts/chapter4.tex
 INPUT ./parts/chapter4.tex
