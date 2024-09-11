@@ -1,26 +1,27 @@
 \begin{thebibliography}{10}
 
-\bibitem{ossfuzz}
-Zhen~Yu Ding and Claire Goues.
-\newblock An empirical study of oss-fuzz bugs.
-\newblock 2021.
-
 \bibitem{sage}
 P.~Godefroid, M.Y. Levin, and D.~Molnar.
 \newblock Sage: Whitebox fuzzing for security testing: Sage has had a
   remarkable impact at microsoft.
 \newblock 2012.
 
-\bibitem{driller}
-Nick Stephens, John Grosen, Christopher Salls, Andrew Dutcher, Ruoyu Wang,
-  Jacopo Corbetta, Yan Shoshitaishvili, Christopher Kruegel, and Giovanni
-  Vigna.
-\newblock Driller: Augmenting fuzzing through selective symbolic execution.
-\newblock 2016.
+\bibitem{ossfuzz}
+Zhen~Yu Ding and Claire Goues.
+\newblock An empirical study of oss-fuzz bugs.
+\newblock 2021.
+
+\bibitem{afl}
+{American Fuzzy Lop (AFL) Website}.
+\newblock \url{https://lcamtuf.coredump.cx/afl/}.
 
 \bibitem{statefulfuzzingchallenges}
 Cristian Daniele.
 \newblock Is stateful fuzzing really challenging?, 2024.
+
+\bibitem{lighttpd}
+{Lighttpd GitHub Repository}.
+\newblock \url{https://github.com/lighttpd}.
 
 \bibitem{fuzzingprogresschallenges}
 Zhenhua Yu, Zhengqi Liu, Xuya Cong, Xiaobo Li, and Li~Yin.
@@ -32,17 +33,56 @@ Cristian Daniele, Seyed Andarzian, and Erik Poll.
 \newblock Fuzzers for stateful systems: Survey and research directions.
 \newblock 2024.
 
-\bibitem{theartoffuzzing}
-Valentin~J.M. Manès, HyungSeok Han, Choongwoo Han, Sang~Kil Cha, Manuel Egele,
-  Edward~J. Schwartz, and Maverick Woo.
-\newblock The art, science, and engineering of fuzzing: A survey.
+\bibitem{grammarfuzzingwhitebox}
+Patrice Godefroid, Adam Kiezun, and Michael Levin.
+\newblock Grammar-based whitebox fuzzing.
+\newblock 2008.
+
+\bibitem{mutationgenerationbased}
+Jun Li, Bodong Zhao, and Chao Zhang.
+\newblock Fuzzing: a survey.
+\newblock 2018.
+
+\bibitem{lightftp}
+{LightFTP GitHub Repository}.
+\newblock \url{https://github.com/hfiref0x/LightFTP}.
+
+\bibitem{learningbasedfuzzing}
+Bernhard Aichernig, Edi Muskardin, and Andrea Pferscher.
+\newblock Learning-based fuzzing of iot message brokers.
 \newblock 2021.
+
+\bibitem{learningbasedfuzzing2}
+Hao Cheng, Dongcheng Li, Man Zhao, Hui Li, and W.~Wong.
+\newblock A comprehensive review of learning-based fuzz testing techniques.
+\newblock 2024.
+
+\bibitem{tao2023gonet}
+Quanyu Tao.
+\newblock Gonet: Gradient oriented fuzzing for stateful network protocol, 2023.
+
+\bibitem{pathexplosion}
+{Path Explosion}.
+\newblock \url{https://en.wikipedia.org/wiki/Path_explosion}.
+
+\bibitem{lighttpdusage}
+{Lighttpd Website}.
+\newblock \url{https://www.lighttpd.net/2007/4/4/powered-by-lighttpd/}.
+
+\bibitem{lighttpdusage2}
+{Lighttpd Wikipedia Page}.
+\newblock \url{https://en.wikipedia.org/wiki/Lighttpd}.
 
 \bibitem{AFLNet}
 Van{-}Thuan Pham, Marcel B{\"o}hme, and Abhik Roychoudhury.
 \newblock Aflnet: A greybox fuzzer for network protocols.
 \newblock In {\em Proceedings of the 13rd IEEE International Conference on
   Software Testing, Verification and Validation : Testing Tools Track}, 2020.
+
+\bibitem{aflfuzzoneapproach}
+{AFL Approach}.
+\newblock
+  \url{https://afl-1.readthedocs.io/en/latest/motivation.html#the-afl-approach}.
 
 \bibitem{minaee2024largelanguagemodelssurvey}
 Shervin Minaee, Tomas Mikolov, Narjes Nikzad, Meysam Chenaghlu, Richard Socher,
@@ -58,8 +98,7 @@ Ruijie Meng, Martin Mirchev, Marcel B\"{o}hme, and Abhik Roychoudhury.
 \bibitem{Fallaway}
 Timme Bethe.
 \newblock Fallaway: High throughput stateful fuzzing by making afl*
-  state-aware.
-\newblock 2024.
+  state-aware, 2024.
 
 \bibitem{libafl}
 Andrea Fioraldi, Dominik Maier, Dongjia Zhang, and Davide Balzarotti.
@@ -72,17 +111,17 @@ Roberto Natella and Van-Thuan Pham.
 \newblock In {\em Proceedings of the 30th ACM SIGSOFT International Symposium
   on Software Testing and Analysis}, 2021.
 
-\bibitem{icissp23}
-Marcello Maugeri, Cristian Daniele, Giampaolo Bella, and Erik Poll.
-\newblock Evaluating the fork-awareness of coverage-guided fuzzers.
-\newblock In {\em Proceedings of the 9th International Conference on
-  Information Systems Security and Privacy - ICISSP}, 2023.
-
 \bibitem{forkfuzz}
 Marcello Maugeri, Cristian Daniele, and Giampaolo Bella.
 \newblock Forkfuzz: Leveraging the fork-awareness in coverage-guided fuzzing.
 \newblock In {\em Computer Security. ESORICS 2023 International Workshops:
   CPS4CIP, ADIoT, SecAssure, WASP, TAURIN, PriST-AI, and SECAI, The Hague, The
   Netherlands, September 25--29, 2023, Revised Selected Papers, Part II}, 2023.
+
+\bibitem{icissp23}
+Marcello Maugeri, Cristian Daniele, Giampaolo Bella, and Erik Poll.
+\newblock Evaluating the fork-awareness of coverage-guided fuzzers.
+\newblock In {\em Proceedings of the 9th International Conference on
+  Information Systems Security and Privacy - ICISSP}, 2023.
 
 \end{thebibliography}

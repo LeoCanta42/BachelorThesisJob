@@ -5,53 +5,54 @@ The style file: unsrt.bst
 Database file #1: bibliography.bib
 Warning--entry type for "statefulfuzzingchallenges" isn't style-file defined
 --line 56 of file bibliography.bib
-Warning--empty booktitle in ossfuzz
 Warning--empty journal in sage
-Warning--empty booktitle in driller
+Warning--empty booktitle in ossfuzz
 Warning--empty journal in fuzzingprogresschallenges
 Warning--empty journal in statefulfuzzingcristian
-Warning--empty journal in theartoffuzzing
-Warning--empty booktitle in Fallaway
+Warning--empty booktitle in grammarfuzzingwhitebox
+Warning--empty journal in mutationgenerationbased
+Warning--empty booktitle in learningbasedfuzzing
+Warning--empty booktitle in learningbasedfuzzing2
 Warning--empty booktitle in libafl
-You've used 15 entries,
+You've used 25 entries,
             1791 wiz_defined-function locations,
-            504 strings with 6228 characters,
-and the built_in function-call counts, 2811 in all, are:
-= -- 164
-> -- 202
+            535 strings with 6905 characters,
+and the built_in function-call counts, 3858 in all, are:
+= -- 248
+> -- 211
 < -- 0
-+ -- 73
-- -- 58
-* -- 145
-:= -- 478
-add.period$ -- 43
-call.type$ -- 15
-change.case$ -- 15
++ -- 82
+- -- 57
+* -- 144
+:= -- 586
+add.period$ -- 64
+call.type$ -- 25
+change.case$ -- 25
 chr.to.int$ -- 0
-cite$ -- 23
-duplicate$ -- 146
-empty$ -- 310
-format.name$ -- 58
-if$ -- 616
+cite$ -- 34
+duplicate$ -- 202
+empty$ -- 495
+format.name$ -- 57
+if$ -- 893
 int.to.chr$ -- 0
-int.to.str$ -- 15
-missing$ -- 13
-newline$ -- 76
-num.names$ -- 15
-pop$ -- 101
+int.to.str$ -- 25
+missing$ -- 14
+newline$ -- 117
+num.names$ -- 18
+pop$ -- 165
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 48
+skip$ -- 101
 stack$ -- 0
 substring$ -- 0
-swap$ -- 16
+swap$ -- 26
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 8
-while$ -- 15
-width$ -- 17
-write$ -- 140
-(There were 9 warnings)
+warning$ -- 9
+while$ -- 18
+width$ -- 27
+write$ -- 214
+(There were 10 warnings)
