@@ -179,8 +179,8 @@ The \textbf{mutator}, responsible for generating variations of the requests, is 
 \phantom{}\\
 Summing up: \textit{existent\_resource} folder is a state, \textit{0\_put} is a prefix to reach that state and, in this case is the full request to reach it. The same for \textit{non\_existent\_resource} and \textit{0\_delete}. The \textit{metadata} files contains the number of outgoing edges for that state. In this case, the number of outgoing edges is 2 for both states, because we can have:
 \begin{itemize}
-    \item \textit{existent\_resource} state: when sending the delete request, the server can return a 404 error, if the resource exists, or can return a 200 OK.
-    \item \textit{non\_existent\_resource} state: when sending the put request, the server can return a 404 error, if the resource does not exist, or can return a 200 OK.
+    \item \textit{existent\_resource} state: when sending the put request, the server can return a 404 error, if the resource exists, or can return a 200 OK.
+    \item \textit{non\_existent\_resource} state: when sending the delete request, the server can return a 404 error, if the resource does not exist, or can return a 200 OK.
 \end{itemize}
 \phantom{}\\
 Finally the other files rapresent the tokens that the mutator will use to generate new requests.

@@ -199,12 +199,12 @@ Overall, this LLM-guided approach, as demonstrated in ChatAFL, represents a nove
 \subsection{Fallaway}
 Fallaway ~\cite{Fallaway} is a stateful fuzzer designed to address several key challenges faced by traditional fuzzers when handling stateful SUTs. Unlike stateless fuzzers such as AFL, which send single test cases and expect the SUT to terminate, Fallaway manages multiple states by incorporating a \textit{dual-loop} structure: an outer loop that selects the SUT state and an inner loop that sends multiple test cases for the chosen state. This approach helps maintain deliberate focus on specific states, prevents interference between states and ensures that progress in one state does not hinder progress in another.
 \\To achieve these objectives, Fallaway decouples the concepts of state scheduling and test case scheduling.
-The fuzzer has a \textbf{queue}, that is a scheduling algorithm that selects the next state to use based on different strategies like:
+\\State scheduling is based on different strategies like:
 \begin{itemize}
     \item \textbf{Coverage-Yield (CY)} strategy, which uses a round-robin approach to select the next state.
     \item \textbf{Outgoing Edges (OE)} strategy, which selects states prioritizing the outgoing edges of the state model.
 \end{itemize} 
-Corpus and queue are often used interchangeably, but they are not really the same thing. \\We can look at the queue as a mapping of the corpus within a scheduling algorithm to choose the next input to mutate.
+Corpus and queue are often used interchangeably, but they are not really the same thing. \\We can look at the \textbf{queue} as a mapping of the corpus within a scheduling algorithm to choose the next input to mutate.
 \\About test case and coverage map, they can be state aware or not. Being state aware means that they are specific to a state, otherwise they are shared across all states.
 \\Fallaway uses two different strategies to manage the corpus:
 \begin{itemize}
