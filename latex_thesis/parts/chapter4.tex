@@ -145,7 +145,7 @@ In this case, the coefficient for AFLNet and ChatAFL is 0.67, indicating a good 
     \item \textit{Higher Execution Count}: Fallaway has a significantly higher number of total executions compared to AFLNet and ChatAFL, indicating its capability to generate and execute a large number of test cases. This increases the likelihood of discovering bugs or vulnerabilities through extensive input space exploration. An important distinction is that Fallaway treats each execution as a single input, whereas AFLNet and ChatAFL treat executions as full \textit{traces}—sequences of inputs, typically 5 or 6, sent before restarting the SUT's process. Therefore, the adjusted number of executions for a fair comparison with Fallaway is 1,258,656 for AFLNet and 1,447,452 for ChatAFL. Even with this adjustment, Fallaway still has a higher number of executions.
     \item \textit{Higher Code Coverage}: Achieves the highest code coverage among the three fuzzers (5.96\%), suggesting its strategy, even if may lacks of  sophistication in targeting specific code paths relies on brute force to uncover edge cases, is effective at exploring various parts of the code.
 \end{itemize}
-
+\phantom{}\\
 \textbf{Weaknesses:}
 \begin{itemize}
     \item \textit{Efficiency Concerns}: The large number of total executions (nearly 120 million in the best case) suggests that Fallaway may be less efficient, requiring more attempts to cover similar amounts of code compared to AFLNet and ChatAFL.
@@ -158,7 +158,7 @@ In this case, the coefficient for AFLNet and ChatAFL is 0.67, indicating a good 
 \begin{itemize}
     \item \textit{Efficient Execution}: With the lowest number of total executions (around 210,000), AFLNet is highly efficient in achieving its results. This suggests AFLNet is effective in targeting specific code parts with minimal test cases, leveraging coverage-guided strategies.
 \end{itemize}
-
+\phantom{}\\
 \textbf{Weaknesses:}
 \begin{itemize}
     \item \textit{Lower Code Coverage}: AFLNet achieves slightly lower coverage (5.47\%) compared to Fallaway and ChatAFL, indicating it might not explore as many diverse code paths outside of network protocol contexts.
@@ -170,7 +170,7 @@ In this case, the coefficient for AFLNet and ChatAFL is 0.67, indicating a good 
 \begin{itemize}
     \item \textit{Balanced Approach}: ChatAFL exhibits a balance between execution count and coverage. With a small number of executions (around 241,000) and a good code coverage (5.60\%), it balances efficiency and effectiveness.
 \end{itemize}
-
+\phantom{}\\
 \textbf{Weaknesses:}
 \begin{itemize}
     \item \textit{Potential Limitations in General Fuzzing Tasks}: While optimized for certain scenarios, its overall effectiveness may vary depending on the specific use case and target application. Even though it performs many more state changes \cite{chatafl}, it does not achieve a significant increase in coverage in this case study.
