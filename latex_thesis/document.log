@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.9.4)  12 SEP 2024 01:30
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.9.4)  12 SEP 2024 02:08
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -575,50 +575,55 @@ Chapter 4.
 <Images/coverage_over_time_lighttpd-1day-2000l.pdf, id=723, 867.24pt x 722.7pt>
 File: Images/coverage_over_time_lighttpd-1day-2000l.pdf Graphic file (type pdf)
 <use Images/coverage_over_time_lighttpd-1day-2000l.pdf>
-Package pdftex.def Info: Images/coverage_over_time_lighttpd-1day-2000l.pdf  used on input line 46.
+Package pdftex.def Info: Images/coverage_over_time_lighttpd-1day-2000l.pdf  used on input line 53.
 (pdftex.def)             Requested size: 390.0pt x 325.00247pt.
  [35]
 <Images/coverage_over_time_lighttpd-1day-1000l.pdf, id=729, 867.24pt x 722.7pt>
 File: Images/coverage_over_time_lighttpd-1day-1000l.pdf Graphic file (type pdf)
 <use Images/coverage_over_time_lighttpd-1day-1000l.pdf>
-Package pdftex.def Info: Images/coverage_over_time_lighttpd-1day-1000l.pdf  used on input line 53.
+Package pdftex.def Info: Images/coverage_over_time_lighttpd-1day-1000l.pdf  used on input line 60.
 (pdftex.def)             Requested size: 390.0pt x 325.00247pt.
  [36 <./Images/coverage_over_time_lighttpd-1day-2000l.pdf>]
 <Images/coverage_over_time_lighttpd-1day-500l.pdf, id=781, 867.24pt x 722.7pt>
 File: Images/coverage_over_time_lighttpd-1day-500l.pdf Graphic file (type pdf)
 <use Images/coverage_over_time_lighttpd-1day-500l.pdf>
-Package pdftex.def Info: Images/coverage_over_time_lighttpd-1day-500l.pdf  used on input line 60.
+Package pdftex.def Info: Images/coverage_over_time_lighttpd-1day-500l.pdf  used on input line 67.
 (pdftex.def)             Requested size: 390.0pt x 325.00247pt.
  [37 <./Images/coverage_over_time_lighttpd-1day-1000l.pdf>]
 <Images/coverage_over_time_lighttpd-1day-250l.pdf, id=835, 867.24pt x 722.7pt>
 File: Images/coverage_over_time_lighttpd-1day-250l.pdf Graphic file (type pdf)
 <use Images/coverage_over_time_lighttpd-1day-250l.pdf>
-Package pdftex.def Info: Images/coverage_over_time_lighttpd-1day-250l.pdf  used on input line 67.
+Package pdftex.def Info: Images/coverage_over_time_lighttpd-1day-250l.pdf  used on input line 74.
 (pdftex.def)             Requested size: 390.0pt x 325.00247pt.
  [38 <./Images/coverage_over_time_lighttpd-1day-500l.pdf>]
 <Images/coverage_over_time_lighttpd-1day-100l.pdf, id=888, 867.24pt x 722.7pt>
 File: Images/coverage_over_time_lighttpd-1day-100l.pdf Graphic file (type pdf)
 <use Images/coverage_over_time_lighttpd-1day-100l.pdf>
-Package pdftex.def Info: Images/coverage_over_time_lighttpd-1day-100l.pdf  used on input line 74.
+Package pdftex.def Info: Images/coverage_over_time_lighttpd-1day-100l.pdf  used on input line 81.
 (pdftex.def)             Requested size: 390.0pt x 325.00247pt.
  [39 <./Images/coverage_over_time_lighttpd-1day-250l.pdf>]
 <Images/coverage_over_time_lighttpd-1day-10l.pdf, id=940, 867.24pt x 722.7pt>
 File: Images/coverage_over_time_lighttpd-1day-10l.pdf Graphic file (type pdf)
 <use Images/coverage_over_time_lighttpd-1day-10l.pdf>
-Package pdftex.def Info: Images/coverage_over_time_lighttpd-1day-10l.pdf  used on input line 81.
+Package pdftex.def Info: Images/coverage_over_time_lighttpd-1day-10l.pdf  used on input line 88.
 (pdftex.def)             Requested size: 390.0pt x 325.00247pt.
  [40 <./Images/coverage_over_time_lighttpd-1day-100l.pdf>]
 <Images/coverage_over_time_lighttpd-1day-fallaways.pdf, id=993, 867.24pt x 867.24pt>
 File: Images/coverage_over_time_lighttpd-1day-fallaways.pdf Graphic file (type pdf)
 <use Images/coverage_over_time_lighttpd-1day-fallaways.pdf>
-Package pdftex.def Info: Images/coverage_over_time_lighttpd-1day-fallaways.pdf  used on input line 88.
+Package pdftex.def Info: Images/coverage_over_time_lighttpd-1day-fallaways.pdf  used on input line 95.
 (pdftex.def)             Requested size: 390.0pt x 390.00298pt.
  [41 <./Images/coverage_over_time_lighttpd-1day-10l.pdf>] [42 <./Images/coverage_over_time_lighttpd-1day-fallaways.pdf>] [43]
-Underfull \hbox (badness 1019) in paragraph at lines 125--126
+Underfull \hbox (badness 10000) in paragraph at lines 138--139
+
+ []
+
+[44]
+Underfull \hbox (badness 1019) in paragraph at lines 164--165
 []\OT1/cmr/m/it/12 Lower Code Cov-er-age\OT1/cmr/m/n/12 : AFLNet achieves slightly lower cov-er-age
  []
 
-) (./parts/conclusion.tex [44]
+) (./parts/conclusion.tex [45]
 Chapter 5.
 
 Underfull \hbox (badness 7907) in paragraph at lines 3--11
@@ -670,9 +675,9 @@ Underfull \hbox (badness 10000) in paragraph at lines 3--11
 
  []
 
-[45
+[46
 
-]) [46] (./document.bbl
+]) [47] (./document.bbl
 Underfull \hbox (badness 6204) in paragraph at lines 15--17
 []\OT1/cmr/m/n/12 American Fuzzy Lop (AFL) Web-site.  []$\OT1/pcr/m/n/12 https : / / lcamtuf .
  []
@@ -682,7 +687,7 @@ Underfull \hbox (badness 3989) in paragraph at lines 65--67
 []\OT1/cmr/m/n/12 Path Ex-plo-sion.  []$\OT1/pcr/m/n/12 https : / / en . wikipedia . org / wiki / Path _
  []
 
-[47
+[48
 
 ]
 Underfull \hbox (badness 2538) in paragraph at lines 69--71
@@ -699,23 +704,23 @@ Underfull \hbox (badness 10000) in paragraph at lines 119--121
 []\OT1/cmr/m/n/12 Chatafl GitHub Pro-FuzzBench.  []$\OT1/pcr/m/n/12 https : / / github . com /
  []
 
-[48]) [49] (./document.aux)
+[49]) [50] (./document.aux)
 Package rerunfilecheck Info: File `document.out' has not changed.
 (rerunfilecheck)             Checksum: FB0AA476CAC6B4D1A629B9734EF76D3C;6809.
  ) 
 Here is how much of TeX's memory you used:
- 16588 strings out of 480247
- 266054 string characters out of 5896152
- 999413 words of memory out of 5000000
- 33855 multiletter control sequences out of 15000+600000
+ 16591 strings out of 480247
+ 266102 string characters out of 5896152
+ 999500 words of memory out of 5000000
+ 33856 multiletter control sequences out of 15000+600000
  480423 words of font info for 65 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 60i,13n,77p,860b,1860s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,13n,77p,869b,1860s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/leo/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcbx1200.600pk> </home/leo/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcti1000.600pk> </home/leo/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk>{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc} </home/leo/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
-Output written on document.pdf (51 pages, 628417 bytes).
+Output written on document.pdf (52 pages, 631277 bytes).
 PDF statistics:
- 1311 PDF objects out of 1440 (max. 8388607)
- 943 compressed objects within 10 object streams
- 402 named destinations out of 1000 (max. 500000)
+ 1318 PDF objects out of 1440 (max. 8388607)
+ 949 compressed objects within 10 object streams
+ 404 named destinations out of 1000 (max. 500000)
  352 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -6,6 +6,13 @@ The Docker containers, running on an \textit{HP ProLiant DL380p Gen8} server wit
 \\In Table \ref{tab:fuzzer_comparison} we can see the comparison of the coverage and total executions for Fallaway, AFLNet, and ChatAFL. 
 \\Fallaway has been run with different loop configuration (this is explicited by the number after \textit{``Fallaway"} in the table). The strategy used is the \textit{mcsm-oe} (\textit{Multiple Corpus Single Map - Outgoing Edges}), because it has shown to be better than the other strategies \cite{Fallaway}.
 \\There are also other two columns, \textit{``$>$ AFLNet"} and \textit{``$>$ ChatAFL"}, that show the time in which the fuzzer overcame the coverage of that column's fuzzer.
+\\In bold we are highlighting:
+\begin{itemize}
+    \item The highest and lowest coverage.
+    \item The highest and lowest time to overcome AFLNet.
+    \item The highest and lowest time to overcome ChatAFL.
+    \item The highest and lowest number of total executions.
+\end{itemize}
 
 \section{Fuzzer Analysis}
 
@@ -16,21 +23,21 @@ The Docker containers, running on an \textit{HP ProLiant DL380p Gen8} server wit
     \hline
     \textbf{Fuzzer} & \textbf{Complete Coverage} & \textbf{$>$ AFLNet} & \textbf{$>$ ChatAFL} & \textbf{Total Executions *} \\
     \hline
-    Fallaway 2000 & \textbf{5.96\%} (905/15168) & 2h 56m 24s & 6h 25m 48s & 120,726,564 \\
+    Fallaway 2000 & \textbf{5.96\% (905/15168)} & 2h 56m 24s & \textbf{6h 25m 48s} & \textbf{120,726,564} \\
     \hline
     Fallaway 1000 & 5.82\% (883/15168) & 3h 22m 48s & 3h 35m 24s & 79,987,763 \\
     \hline
-    Fallaway 500 & 5.88\% (893/15168) & 0h 45m 23s & 1h 48m 0s & 81,231,325 \\
+    Fallaway 500 & 5.88\% (893/15168) & \textbf{0h 45m 23s} & \textbf{1h 48m 0s} & 81,231,325 \\
     \hline
     Fallaway 250 & 5.87\% (891/15168) & 0h 51m 16s & 2h 9m 0s & 96,929,952 \\
     \hline
     Fallaway 100 & 5.91\% (896/15168) & 4h 17m 24s & 4h 43m 48s & 59,916,978 \\
     \hline
-    Fallaway 10 & 4.89\% (741/15168) & Nan & Nan & 18,892,551 \\
+    Fallaway 10 & \textbf{4.89\% (741/15168)} & Nan & Nan & 18,892,551 \\
     \hline
-    AFLNet & 5.47\% (830/15168) & Nan & Nan & 209,776 \\
+    AFLNet & 5.47\% (830/15168) & Nan & Nan & \textbf{209,776} \\
     \hline
-    ChatAFL & 5.60\% (850/15168) & 9h 16m 48s & Nan & 241,242 \\
+    ChatAFL & 5.60\% (850/15168) & \textbf{9h 16m 48s} & Nan & 241,242 \\
     \hline
     \end{tabular}
     }
@@ -94,16 +101,48 @@ As shown in Figure \ref{fig:coverage_1day_2000l}, Fallaway with a loop count of 
 \\Although the loop counts differ, the coverage does not change significantly. This may be due to the implemented state model, which only considers two states: the existence or non-existence of a resource. As a result, even if the number of loops — and thus the number of possible test cases before changing states — varies, the coverage remains relatively stable. This limitation could be addressed by defining a more refined state model that includes additional states.
 \\Figure \ref{fig:coverage_1day_10l} shows the lowest coverage at 4.89\%. In this scenario, the low loop count suggests a minimal number of possible test cases before switching states, which reduces the likelihood of extensive exploration.
 \\In general, higher loop values can lead to greater coverage by exploring more states, but they may also cause deadlock states where progress is limited. Conversely, lower loop values can help overcome deadlock states more quickly, but they might not explore certain states in depth.
-\\Additionally, Fallaway does not exhibit linear growth in coverage; instead, it shows a more random behavior, even though its approach yields the best results observed. In contrast, AFLNet and ChatAFL demonstrate more linear growth in coverage, which indicates greater efficiency in code exploration. They start with higher initial coverage than Fallaway, suggesting they are better at targeting diverse code paths. % magari aggiungere coefficienti di pearson
-\\AFLNet achieves a coverage of 5.47\% with significantly fewer executions compared to the closest Fallaway's configuration (1000 loop, see Table \ref{tab:fuzzer_comparison}).
+\\Fallaway does not always exhibit linear growth in coverage; instead, it shows a more random behavior, even though its approach yields the best results observed. In contrast, AFLNet and ChatAFL demonstrate more linear growth in coverage, which indicates greater efficiency in code exploration. They start with higher initial coverage than Fallaway, suggesting they are better at targeting diverse code paths.
+\\The linearity is shown using the \textit{Pearson correlation coefficient} in Table \ref{tab:pearson_correlation}.
+Pearson correlation coefficient measures the strength and direction of a linear relationship between two variables (in this case, time and coverage). The closer the coefficient is to 1, the stronger the linear relationship is.
+In this case, the coefficient for AFLNet and ChatAFL is 0.67, indicating a good linear relationship between time and coverage.
+\\Fallaway's coefficient varies, depending on the loop count, with the highest value of 0.71 for 100 loops and the lowest value of 0.47 for 500 loops. This suggests that Fallaway with 100 loops has the most linear relationship between time and coverage, instead of the 500 loops configuration, which has the lowest linear relationship.
+\\Regarding coverage, AFLNet achieves a coverage of 5.47\% with significantly fewer executions compared to the closest coverage for Fallaway's configurations (1000 loop, see Table \ref{tab:fuzzer_comparison}).
 \\ChatAFL reaches 5.60\% coverage with a number of executions similar to AFLNet. As ChatAFL is based on AFLNet, it effectively surpasses the coverage plateau observed with AFLNet. In particular, as shown in Figure \ref{fig:coverage_1day_10l}, which minimizes the interference from Fallaway, ChatAFL surpasses AFLNet's coverage plateau most of the time. Additionally, within the 1-day timeframe, it exhibits a slight increase in coverage, indicating that it was able to exceed its own previous plateau.
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|}
+    \hline
+    \textbf{Fuzzer} & \textbf{Pearson Correlation Coefficient} \\
+    \hline
+    Fallaway 2000 & 0.67 \\
+    \hline
+    Fallaway 1000 & 0.64 \\
+    \hline
+    Fallaway 500 & 0.47 \\
+    \hline
+    Fallaway 250 & 0.53 \\
+    \hline
+    Fallaway 100 & 0.71 \\
+    \hline
+    Fallaway 10 & 0.54 \\
+    \hline
+    AFLNet & 0.67 \\
+    \hline
+    ChatAFL & 0.67 \\
+    \hline
+    \end{tabular}
+    \caption{Pearson Correlation Coefficient for the three fuzzers}
+    \label{tab:pearson_correlation}
+\end{table}
+
+\phantom{}\\
 
 \subsection{Fallaway}
 \label{sec:fallaway_analysis}
 
 \textbf{Strengths:}
 \begin{itemize}
-    \item \textit{Higher Execution Count}: Fallaway has a significantly higher number of total executions compared to AFLNet and ChatAFL, indicating its capability to generate and execute a large number of test cases. This increases the likelihood of discovering bugs or vulnerabilities through extensive input space exploration. An important distinction is that Fallaway treats each execution as a single input, whereas AFLNet and ChatAFL treat executions as full traces—sequences of inputs, typically 5 or 6, sent before restarting the SUT's process. Therefore, the adjusted number of executions for a fair comparison with Fallaway is 1,258,656 for AFLNet and 1,447,452 for ChatAFL. Even with this adjustment, Fallaway still has a higher number of executions.
+    \item \textit{Higher Execution Count}: Fallaway has a significantly higher number of total executions compared to AFLNet and ChatAFL, indicating its capability to generate and execute a large number of test cases. This increases the likelihood of discovering bugs or vulnerabilities through extensive input space exploration. An important distinction is that Fallaway treats each execution as a single input, whereas AFLNet and ChatAFL treat executions as full \textit{traces}—sequences of inputs, typically 5 or 6, sent before restarting the SUT's process. Therefore, the adjusted number of executions for a fair comparison with Fallaway is 1,258,656 for AFLNet and 1,447,452 for ChatAFL. Even with this adjustment, Fallaway still has a higher number of executions.
     \item \textit{Higher Code Coverage}: Achieves the highest code coverage among the three fuzzers (5.96\%), suggesting its strategy, even if may lacks of  sophistication in targeting specific code paths relies on brute force to uncover edge cases, is effective at exploring various parts of the code.
 \end{itemize}
 
@@ -134,5 +173,5 @@ As shown in Figure \ref{fig:coverage_1day_2000l}, Fallaway with a loop count of 
 
 \textbf{Weaknesses:}
 \begin{itemize}
-    \item \textit{Potential Limitations in General Fuzzing Tasks}: While optimized for certain scenarios, its overall effectiveness may vary depending on the specific use case and target application. Even though they perform many more state changes \cite{chatafl}, they do not achieve a significant increase in coverage in this case study.
+    \item \textit{Potential Limitations in General Fuzzing Tasks}: While optimized for certain scenarios, its overall effectiveness may vary depending on the specific use case and target application. Even though it performs many more state changes \cite{chatafl}, it does not achieve a significant increase in coverage in this case study.
 \end{itemize}
