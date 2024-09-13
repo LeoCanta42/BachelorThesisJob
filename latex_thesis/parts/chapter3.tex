@@ -112,79 +112,6 @@ static void server_main_loop (server * const srv) {
 \label{tab:server_patch}
 \end{table}
 
-\subsection{Mutator and Corpus}
-
-Another crucial aspect of the fuzzing process involves the corpus and the mutator. In this experiment, it has been defined the state of the server based on the existence \ref{tab:existent_resource} or non-existence \ref{tab:nonexistent_resource} of a resource. Specifically considering two types of requests: one that attempts to access a resource that exists and another that attempts to access a resource that does not exist.
-\\\\The \textbf{corpus} folder consists of: a set of folders, one for each state, each containing a set of files, the \textit{prefixes}, that are a sequence of messages to reach that state.
-\\In this case, the corpus is composed by two folders: one for the existent resource and one for the non-existent resource. Each folder contains a single file with a request to reach the state.
-Here we have two requests for the two states:
-\begin{figure}[H]
-    \centering
-    \begin{adjustbox}{valign=t}
-    \begin{lstlisting}
-    PUT /hello.txt HTTP/1.1
-    Host: 127.0.0.1:8080
-    Content-type: text/plain
-    Content-length: 13
-
-    Hello, World!
-
-    
-    \end{lstlisting}
-    \end{adjustbox}
-    \caption{Existent resource request}
-    \label{tab:existent_resource}
-\end{figure}
-    
-\begin{figure}[H]
-    \centering
-    \begin{adjustbox}{valign=t}
-    \begin{lstlisting}
-    DELETE /hello.txt HTTP/1.1
-    Host: 127.0.0.1:8080
-    User-Agent: curl/8.0.1
-    Accept: */*
-
-    
-    \end{lstlisting}
-    \end{adjustbox}
-    \caption{Non-existent resource request}
-    \label{tab:nonexistent_resource}
-\end{figure}
-\phantom{}\\
-The \textbf{mutator}, responsible for generating variations of the requests, is relatively straightforward. Its primary function is to modify the existing requests by appending the sequence of characters ``\textit{\textbackslash r\textbackslash n\textbackslash r\textbackslash n}" to the end of each request. This modification is essential as it ensures that the requests are well-formed and adhere to HTTP protocol standards.
-\\Before this, the mutator adds a set of tokens (taken from files in the corpus folder, but outside of the state folder) and places them in random positions within the request.
-\\By ensuring the requests are properly formatted, the mutator enables the server to parse and process them correctly, which is vital for accurate fuzz testing.
-\\An example of the corpus folder is as follows:
-\begin{figure}[H]
-    \centering
-    \begin{adjustbox}{valign=t}
-    \begin{lstlisting}
-    corpus
-    |-- existent_resource
-    |   |-- 0_put
-    |   |-- metadata
-    |-- non_existent_resource
-    |   |-- 0_delete
-    |   |-- metadata
-    |-- GET
-    |-- DELETE
-    |-- PUT
-    |-- OPTIONS
-    |-- POST
-    \end{lstlisting}
-    \end{adjustbox}
-    \caption{Corpus folder structure}
-\end{figure}
-\phantom{}\\
-Summing up: \textit{existent\_resource} folder is a state, \textit{0\_put} is a prefix to reach that state and, in this case is the full request to reach it. The same for \textit{non\_existent\_resource} and \textit{0\_delete}. The \textit{metadata} files contains the number of outgoing edges for that state. In this case, the number of outgoing edges is 2 for both states, because we can have:
-\begin{itemize}
-    \item \textit{existent\_resource} state: when sending the put request, the server can return a 404 error, if the resource exists, or can return a 200 OK.
-    \item \textit{non\_existent\_resource} state: when sending the delete request, the server can return a 404 error, if the resource does not exist, or can return a 200 OK.
-\end{itemize}
-\phantom{}\\
-Finally the other files rapresent the tokens that the mutator will use to generate new requests.
-
 \subsection{Setting Up the Fuzzing Environment}
 
 To run the fuzzer, it is important to build a Docker container that includes all the necessary dependencies and the modified Lighttpd server. The Dockerfile below is based on an image that already contains Fallaway and shows the steps to set up this environment.
@@ -264,7 +191,81 @@ Another important file to consider is the configuration file of the Lighttpd ser
 \phantom{}\\
 This configuration file specifies the server's document root, bind address, port, and maximum number of workers and connections. By defining these parameters the server will operates correctly and can handle the incoming requests from the fuzzer.
 \\In particular, it is forced to have just one worker to avoid problems with fuzzing, because Fallaway is not designed to work with multi-process SUT.
-\subsection{Fuzzing Execution and Results}
+
+\subsection{Mutator and Corpus}
+
+Another crucial aspect of the fuzzing process involves the corpus and the mutator. In this experiment, it has been defined the state of the server based on the existence \ref{tab:existent_resource} or non-existence \ref{tab:nonexistent_resource} of a resource. Specifically considering two types of requests: one that attempts to access a resource that exists and another that attempts to access a resource that does not exist.
+\\\\The \textbf{corpus} folder consists of: a set of folders, one for each state, each containing a set of files, the \textit{prefixes}, that are a sequence of messages to reach that state.
+\\In this case, the corpus is composed by two folders: one for the existent resource and one for the non-existent resource. Each folder contains a single file with a request to reach the state.
+Here we have two requests for the two states:
+\begin{figure}[H]
+    \centering
+    \begin{adjustbox}{valign=t}
+    \begin{lstlisting}
+    PUT /hello.txt HTTP/1.1
+    Host: 127.0.0.1:8080
+    Content-type: text/plain
+    Content-length: 13
+
+    Hello, World!
+
+    
+    \end{lstlisting}
+    \end{adjustbox}
+    \caption{Existent resource request}
+    \label{tab:existent_resource}
+\end{figure}
+    
+\begin{figure}[H]
+    \centering
+    \begin{adjustbox}{valign=t}
+    \begin{lstlisting}
+    DELETE /hello.txt HTTP/1.1
+    Host: 127.0.0.1:8080
+    User-Agent: curl/8.0.1
+    Accept: */*
+
+    
+    \end{lstlisting}
+    \end{adjustbox}
+    \caption{Non-existent resource request}
+    \label{tab:nonexistent_resource}
+\end{figure}
+\phantom{}\\
+The \textbf{mutator}, responsible for generating variations of the requests, is relatively straightforward. Its primary function is to modify the existing requests by appending the sequence of characters ``\textit{\textbackslash r\textbackslash n\textbackslash r\textbackslash n}" to the end of each request. This modification is essential as it ensures that the requests are well-formed and adhere to HTTP protocol standards.
+\\Before this, the mutator adds a set of tokens (taken from files in the corpus folder, but outside of the state folder) and places them in random positions within the request.
+\\By ensuring the requests are properly formatted, the mutator enables the server to parse and process them correctly, which is vital for accurate fuzz testing.
+\\An example of the corpus folder is as follows:
+\begin{figure}[H]
+    \centering
+    \begin{adjustbox}{valign=t}
+    \begin{lstlisting}
+    corpus
+    |-- existent_resource
+    |   |-- 0_put
+    |   |-- metadata
+    |-- non_existent_resource
+    |   |-- 0_delete
+    |   |-- metadata
+    |-- GET
+    |-- DELETE
+    |-- PUT
+    |-- OPTIONS
+    |-- POST
+    \end{lstlisting}
+    \end{adjustbox}
+    \caption{Corpus folder structure}
+\end{figure}
+\phantom{}\\
+Summing up: \textit{existent\_resource} folder is a state, \textit{0\_put} is a prefix to reach that state and, in this case is the full request to reach it. The same for \textit{non\_existent\_resource} and \textit{0\_delete}. The \textit{metadata} files contains the number of outgoing edges for that state. In this case, the number of outgoing edges is 2 for both states, because we can have:
+\begin{itemize}
+    \item \textit{existent\_resource} state: when sending the put request, the server can return a 404 error, if the resource exists, or can return a 200 OK.
+    \item \textit{non\_existent\_resource} state: when sending the delete request, the server can return a 404 error, if the resource does not exist, or can return a 200 OK.
+\end{itemize}
+\phantom{}\\
+Finally the other files rapresent the tokens that the mutator will use to generate new requests.
+
+\subsection{Fuzzing Execution}
 
 To run the fuzzer for 24 hours, it is necessary to run the following script:
 \begin{figure}[H]
@@ -296,7 +297,7 @@ The results of the fuzzing process will be discussed in the Chapter \ref{chap:Re
 
 \section{AFLNet and ChatAFL}
 
-\subsection{Setting up the fuzzing environment}
+\subsection{Setting Up the Fuzzing Environment}
 
 Both AFLNet and ChatAFL are built and configured using \textbf{ProFuzzBench} ~\cite{profuzzbench}, a benchmark suite specifically designed for evaluating network protocol fuzzers. ProFuzzBench provides a standardized environment and set of targets to ensure a fair comparison among different fuzzers.
 \\By using ProFuzzBench, AFLNet and ChatAFL benefit from a streamlined setup process that automates the installation of dependencies and configuration of the environment, thus reducing setup overhead. This setup also involves additional dependencies, such as specific Python packages, which are necessary for supporting ChatAFL's unique capabilities like leveraging language models internally.
@@ -313,7 +314,7 @@ Another important thing to consider is the configuration file of the Lighttpd se
     \label{fig:lighttpd_conf_aflnetchatafl}
 \end{figure}
 
-\subsection{Mutator and Corpus Management}
+\subsection{Mutator and Corpus}
 
 AFLNet and ChatAFL use a corpus of test cases to seed the fuzzing process. However, their approach to handling and mutating this corpus differs slightly:
 
@@ -392,7 +393,7 @@ AFLNet and ChatAFL also use a dictionary during fuzzing, shown in Figure \ref{fi
     \label{fig:dictionary}
 \end{figure}
 
-\subsection{Fuzzing Execution and Results}
+\subsection{Fuzzing Execution}
 
 \begin{figure}[H]
     \begin{lstlisting}

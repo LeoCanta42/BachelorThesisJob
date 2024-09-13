@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.9.4)  13 SEP 2024 17:06
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.9.4)  13 SEP 2024 17:11
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -529,34 +529,35 @@ File: omlcmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
 (Font)              Font shape `OML/cmm/m/it' tried instead on input line 26.
- [22]
-Underfull \hbox (badness 10000) in paragraph at lines 117--137
+ [22] [23] [24]
+Underfull \hbox (badness 10000) in paragraph at lines 175--190
 
  []
 
-[23]
+
+Underfull \hbox (badness 10000) in paragraph at lines 197--217
+
+ []
+
+[25]
 LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 155.
- [24] [25] [26]
-Underfull \hbox (badness 10000) in paragraph at lines 248--263
-
- []
-
-LaTeX Font Info:    Trying to load font information for TS1+pcr on input line 273.
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1pcr.fd
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 235.
+ [26]
+LaTeX Font Info:    Trying to load font information for TS1+pcr on input line 274.
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1pcr.fd
 File: ts1pcr.fd 2001/06/04 font definitions for TS1/pcr.
 ) [27]
-Underfull \hbox (badness 10000) in paragraph at lines 301--314
+Underfull \hbox (badness 10000) in paragraph at lines 302--315
 
  []
 
 [28] [29] [30] [31]
-Underfull \hbox (badness 10000) in paragraph at lines 425--428
+Underfull \hbox (badness 10000) in paragraph at lines 426--429
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 431--433
+Underfull \hbox (badness 10000) in paragraph at lines 432--434
 
  []
 
@@ -702,18 +703,18 @@ Underfull \hbox (badness 10000) in paragraph at lines 125--127
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `document.out' has not changed.
-(rerunfilecheck)             Checksum: 81B54EDFE375E6EC6739826F18FF4C28;6847.
+(rerunfilecheck)             Checksum: B862B304800E2D408FEAB455E431AC1A;6657.
  ) 
 Here is how much of TeX's memory you used:
  16609 strings out of 480247
- 266430 string characters out of 5896152
+ 266436 string characters out of 5896152
  998677 words of memory out of 5000000
  33863 multiletter control sequences out of 15000+600000
  480423 words of font info for 65 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  60i,13n,77p,869b,1860s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/leo/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcbx1200.600pk> </home/leo/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcti1000.600pk> </home/leo/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk>{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc} </home/leo/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
-Output written on document.pdf (53 pages, 632296 bytes).
+Output written on document.pdf (53 pages, 632144 bytes).
 PDF statistics:
  1346 PDF objects out of 1440 (max. 8388607)
  976 compressed objects within 10 object streams
