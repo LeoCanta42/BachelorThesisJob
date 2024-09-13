@@ -2,7 +2,7 @@
 \label{chap:Setup}
 
 \section{Fallaway}
-Fallaway distinguishes itself from other fuzzers like AFLNet or ChatAFL by using a \textbf{persistent mode}. This mode allows the fuzzer to maintain the server's state across multiple requests, which is especially useful in scenarios where the server does not reset its state between requests, such as when managing user sessions or maintaining authentication states in a web application.
+Fallaway use the \textbf{persistent mode}. This mode allows the fuzzer to maintain the server's state across multiple requests, which is especially useful in scenarios where the server does not reset its state between requests, such as when managing user sessions or maintaining authentication states in a web application.
 \\The persistent mode is implemented by modifying the Lighttpd server to maintain its state between requests. The server operates in a separate process and the fuzzer interacts with it via a socket. The fuzzer sends requests to the server and receives responses, using the results to guide the generation of subsequent requests. This process continues in a loop until the fuzzing session is complete.
 \\To enable this, it is necessary to modify the Lighttpd code to ensure that the server continuously receives, processes and responds to requests without shutting down. The changes are made to the function \textit{server\_main\_loop} in the \textit{src/server.c} file and to the connection handling functions in \textit{src/connections.c} of the Lighttpd source code. The specific code changes are shown in the next section, providing a comparison between the original and modified code.
 
@@ -248,6 +248,7 @@ WORKDIR /Fallaway
 \phantom{}\\
 The Docker container is configured with all the dependencies to run the fuzzer and build the modified Lighttpd server, providing a controlled environment to conduct the fuzzing experiment.
 Another important file to consider is the configuration file of the Lighttpd server, which is shown below.\\
+\begin{figure}[H]
 \begin{lstlisting}
     server.document-root = "/tmp"
     server.bind = "0.0.0.0"
@@ -257,19 +258,26 @@ Another important file to consider is the configuration file of the Lighttpd ser
     server.max-worker = 1 
     server.max-connections = 1000
 \end{lstlisting}
+\caption{Lighttpd configuration file}
+\label{fig:lighttpd_conf_fallaway}
+\end{figure}
 \phantom{}\\
 This configuration file specifies the server's document root, bind address, port, and maximum number of workers and connections. By defining these parameters the server will operates correctly and can handle the incoming requests from the fuzzer.
 \\In particular, it is forced to have just one worker to avoid problems with fuzzing, because Fallaway is not designed to work with multi-process SUT.
 \subsection{Fuzzing Execution and Results}
 
 To run the fuzzer for 24 hours, it is necessary to run the following script:
-\begin{lstlisting}
-#!/bin/bash
-bin="${1:-mcsm-cy}"
-loops="${2:-1000}"
+\begin{figure}[H]
+    \begin{lstlisting}
+    #!/bin/bash
+    bin="${1:-mcsm-cy}"
+    loops="${2:-1000}"
 
-timeout 24h cargo run --release --bin fallaway-http-$bin -- --in-dir /corpus --out-dir /output_lighttpd --target-port 8080 --loops $loops -t 300 /lighttpd/lighttpd -D -f /lighttpd.conf
-\end{lstlisting}
+    timeout 24h cargo run --release --bin fallaway-http-$bin -- --in-dir /corpus --out-dir /output_lighttpd --target-port 8080 --loops $loops -t 300 /lighttpd/lighttpd -D -f /lighttpd.conf
+    \end{lstlisting}
+    \caption{Execution script}
+    \label{fig:exec_script_fallaway}
+\end{figure}
 In particular there are:
 \begin{itemize}
     \item \textbf{timeout 24h}: a timeout of 24h for the next command.
@@ -286,28 +294,28 @@ In particular there are:
 \end{itemize}
 The results of the fuzzing process will be discussed in the Chapter \ref{chap:Results}.
 
-\section{Comparison with AFLNet and ChatAFL}
-
-AFLNet and ChatAFL provide alternative approaches to fuzzing that share certain characteristics with Fallaway, but also have distinct differences in their setup, configuration, and operational strategies. The purpose of this section is to outline the setup for both AFLNet and ChatAFL, noting similarities with Fallaway, and highlight the unique features of each tool, including how they handle server responses and their internal mechanisms for optimizing fuzzing performance.
+\section{AFLNet and ChatAFL}
 
 \subsection{Setting up the fuzzing environment}
 
-The setup process for AFLNet and ChatAFL is quite similar to that of Fallaway, given that all three fuzzers share a common Docker-based environment with the necessary dependencies. Both AFLNet and ChatAFL are built and configured using \textbf{ProFuzzBench} ~\cite{profuzzbench}, a benchmark suite specifically designed for evaluating network protocol fuzzers. ProFuzzBench provides a standardized environment and set of targets to ensure a fair comparison among different fuzzers.
+Both AFLNet and ChatAFL are built and configured using \textbf{ProFuzzBench} ~\cite{profuzzbench}, a benchmark suite specifically designed for evaluating network protocol fuzzers. ProFuzzBench provides a standardized environment and set of targets to ensure a fair comparison among different fuzzers.
 \\By using ProFuzzBench, AFLNet and ChatAFL benefit from a streamlined setup process that automates the installation of dependencies and configuration of the environment, thus reducing setup overhead. This setup also involves additional dependencies, such as specific Python packages, which are necessary for supporting ChatAFL's unique capabilities like leveraging language models internally.
 \\The Docker setup derived from ProFuzzBench provides the same base environment for both AFLNet and ChatAFL, ensuring compatibility and consistency across experiments. By using this common benchmark suite, researchers can directly compare results, further validating the effectiveness and performance differences between the fuzzers.
 Another important thing to consider is the configuration file of the Lighttpd server, which is shown below.\\
-\begin{lstlisting}
-    server.document-root = "/tmp"
-    server.bind = "127.0.0.1"
-    server.port = 8080
-    mimetype.assign = (".txt" => "text/plain", ".html" => "text/html" )
-\end{lstlisting}
-\phantom{}\\
-As seen above, in this case there is no need to force the number of workers to 1, because they do not have the same problem as Fallaway, due to their managment of the SUT, explained in the next section.
+\begin{figure}[H]
+    \begin{lstlisting}
+        server.document-root = "/tmp"
+        server.bind = "127.0.0.1"
+        server.port = 8080
+        mimetype.assign = (".txt" => "text/plain", ".html" => "text/html" )
+    \end{lstlisting}
+    \caption{Lighttpd configuration file}
+    \label{fig:lighttpd_conf_aflnetchatafl}
+\end{figure}
 
 \subsection{Mutator and Corpus Management}
 
-Similar to Fallaway, AFLNet and ChatAFL use a corpus of test cases to seed the fuzzing process. However, their approach to handling and mutating this corpus differs slightly:
+AFLNet and ChatAFL use a corpus of test cases to seed the fuzzing process. However, their approach to handling and mutating this corpus differs slightly:
 
 \begin{itemize}
     \item \textbf{AFLNet}: Focuses on network protocol fuzzing by analyzing and mutating protocol-specific fields in input messages. The corpus for AFLNet includes various protocol messages (e.g., HTTP requests) that are tailored to network targets. AFLNet leverages coverage feedback as well as response error codes from the server to refine its mutations and generate new test cases.
@@ -384,41 +392,36 @@ AFLNet and ChatAFL also use a dictionary during fuzzing, shown in Figure \ref{fi
     \label{fig:dictionary}
 \end{figure}
 
-\subsection{Operational Differences: Code Handling and Analysis}
-
-One of the main distinctions between Fallaway, AFLNet, and ChatAFL is their strategy for guiding the fuzzing process:
-
-\begin{itemize}
-    \item \textbf{AFLNet} and \textbf{ChatAFL}: Both tools incorporate error code analysis in their feedback loop. They monitor the response codes (such as HTTP 404, 500, etc.) returned by the server to understand which inputs trigger errors or unexpected states. This allows them to focus on generating inputs that might exploit these observed errors, thereby uncovering potential vulnerabilities.
-    \item \textbf{Fallaway}: In contrast, Fallaway exclusively relies on coverage metrics to guide the fuzzing process. It focuses on maximizing the code paths exercised by the generated inputs without directly considering the response codes from the server. This approach enables it to explore new paths more thoroughly, but may overlook specific error states that are of interest for security testing.
-\end{itemize}
-
 \subsection{Fuzzing Execution and Results}
 
-The real difference from Fallaway is in the execution script:\\
-\begin{lstlisting}
-    #!/bin/bash
+\begin{figure}[H]
+    \begin{lstlisting}
+        #!/bin/bash
 
-    PFBENCH="$PWD/benchmark"
-    cd $PFBENCH
+        PFBENCH="$PWD/benchmark"
+        cd $PFBENCH
 
-    PATH=$PATH:$PFBENCH/scripts/execution:$PFBENCH/scripts/analysis
-    NUM_CONTAINERS=$1
-    TIMEOUT=$(( ${2:-1440} * 60))
-    SKIPCOUNT="${SKIPCOUNT:-1}"
-    TEST_TIMEOUT="${TEST_TIMEOUT:-5000}"
+        PATH=$PATH:$PFBENCH/scripts/execution:$PFBENCH/scripts/analysis
+        NUM_CONTAINERS=$1
+        TIMEOUT=$(( ${2:-1440} * 60))
+        SKIPCOUNT="${SKIPCOUNT:-1}"
+        TEST_TIMEOUT="${TEST_TIMEOUT:-5000}"
 
-    export TARGET_LIST=$3
-    export FUZZER_LIST=$4
+        export TARGET_LIST=$3
+        export FUZZER_LIST=$4
 
-    if [[ "x$NUM_CONTAINERS" == "x" ]] || [[ "x$TIMEOUT" == "x" ]] || [[ "x$TARGET_LIST" == "x" ]] || [[ "x$FUZZER_LIST" == "x" ]]
-    then
-        echo "Usage: $0 NUM_CONTAINERS TIMEOUT TARGET FUZZER"
-        exit 1
-    fi
+        if [[ "x$NUM_CONTAINERS" == "x" ]] || [[ "x$TIMEOUT" == "x" ]] || [[ "x$TARGET_LIST" == "x" ]] || [[ "x$FUZZER_LIST" == "x" ]]
+        then
+            echo "Usage: $0 NUM_CONTAINERS TIMEOUT TARGET FUZZER"
+            exit 1
+        fi
 
-    PFBENCH=$PFBENCH PATH=$PATH NUM_CONTAINERS=$NUM_CONTAINERS TIMEOUT=$TIMEOUT SKIPCOUNT=$SKIPCOUNT TEST_TIMEOUT=$TEST_TIMEOUT scripts/execution/profuzzbench_exec_all.sh ${TARGET_LIST} ${FUZZER_LIST}
-\end{lstlisting}
+        PFBENCH=$PFBENCH PATH=$PATH NUM_CONTAINERS=$NUM_CONTAINERS TIMEOUT=$TIMEOUT SKIPCOUNT=$SKIPCOUNT TEST_TIMEOUT=$TEST_TIMEOUT scripts/execution/profuzzbench_exec_all.sh ${TARGET_LIST} ${FUZZER_LIST}
+    \end{lstlisting}
+    \caption{Execution script}
+    \label{fig:exec_script_aflnetchatafl}
+\end{figure}
+
 \phantom{}\\
 This is the script defined by ChatAFL repository ~\cite{chataflgithub}, that internally uses ProFuzzBench's scripts to run the fuzzers ~\cite{chataflgithubprofuz}.
 \\An example of execution line is like this:\\
@@ -439,3 +442,25 @@ The command to fuzz Lighttpd for 24h using both AFLNet and ChatAFL is:
 ./run.sh 1 1440 lighttpd aflnet,chatafl
 \end{lstlisting}
 Results from both AFLNet and ChatAFL will be discussed in detail in Chapter \ref{chap:Results}.
+
+\section{Comparisons}
+
+AFLNet and ChatAFL provide alternative approaches to fuzzing that share certain characteristics with Fallaway, but also have distinct differences in their setup, configuration, and operational strategies. The purpose of this section is to outline the similarities and unique features of the fuzzers, including how they handle server responses and their internal mechanisms for optimizing fuzzing performance.
+
+\subsection{Setup}
+The setup process for AFLNet and ChatAFL is quite similar to that of Fallaway, given that all three fuzzers share a common Docker-based environment with the necessary dependencies.
+\\However, AFLNet and ChatAFL are built on top of ProFuzzBench, which provides a standardized environment for network protocol fuzzing.
+
+\subsection{Operational Differences: Code Handling and Analysis}
+As seen in Figure \ref{fig:lighttpd_conf_fallaway} and Figure \ref{fig:lighttpd_conf_aflnetchatafl}, AFLNet and ChatAFL do not need to force the number of workers to 1, because they do not share the same problem as Fallaway, due to their managment of the SUT.
+\\In particular, below are some key differences in how AFLNet, ChatAFL, and Fallaway guide the fuzzing process:
+
+\begin{itemize}
+    \item \textbf{AFLNet} and \textbf{ChatAFL}: Both tools incorporate error code analysis in their feedback loop. They monitor the response codes (such as HTTP 404, 500, etc.) returned by the server to understand which inputs trigger errors or unexpected states. This allows them to focus on generating inputs that might exploit these observed errors, thereby uncovering potential vulnerabilities.
+    \item \textbf{Fallaway}: In contrast, Fallaway exclusively relies on coverage metrics to guide the fuzzing process. It focuses on maximizing the code paths exercised by the generated inputs without directly considering the response codes from the server. This approach enables it to explore new paths more thoroughly, but may overlook specific error states that are of interest for security testing.
+\end{itemize}
+Indeed, Fallaway distinguishes itself from other fuzzers like AFLNet or ChatAFL by using the \textit{persistent mode}.
+
+\subsection{Execution}
+Another difference is in the execution's scripts, shown in Figure \ref{fig:exec_script_fallaway} and Figure \ref{fig:exec_script_aflnetchatafl}.
+While Fallaway uses a custom script to run the fuzzer, AFLNet and ChatAFL rely on ProFuzzBench's execution scripts to manage the fuzzing process. This difference reflects the unique design and integration of each fuzzer within the ProFuzzBench framework.

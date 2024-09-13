@@ -1,5 +1,11 @@
 \begin{thebibliography}{10}
 
+\bibitem{vulndiscover}
+Lei Cui, Jiancong Cui, Zhiyu Hao, Lun Li, Zhenquan Ding, and Yongji Liu.
+\newblock An empirical study of vulnerability discovery methods over the past
+  ten years.
+\newblock 2022.
+
 \bibitem{sage}
 P.~Godefroid, M.Y. Levin, and D.~Molnar.
 \newblock Sage: Whitebox fuzzing for security testing: Sage has had a
@@ -43,10 +49,6 @@ Jun Li, Bodong Zhao, and Chao Zhang.
 \newblock Fuzzing: a survey.
 \newblock 2018.
 
-\bibitem{lightftp}
-{LightFTP GitHub Repository}.
-\newblock \url{https://github.com/hfiref0x/LightFTP}.
-
 \bibitem{learningbasedfuzzing}
 Bernhard Aichernig, Edi Muskardin, and Andrea Pferscher.
 \newblock Learning-based fuzzing of iot message brokers.
@@ -56,6 +58,10 @@ Bernhard Aichernig, Edi Muskardin, and Andrea Pferscher.
 Hao Cheng, Dongcheng Li, Man Zhao, Hui Li, and W.~Wong.
 \newblock A comprehensive review of learning-based fuzz testing techniques.
 \newblock 2024.
+
+\bibitem{lightftp}
+{LightFTP GitHub Repository}.
+\newblock \url{https://github.com/hfiref0x/LightFTP}.
 
 \bibitem{tao2023gonet}
 Quanyu Tao.

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.9.4)  12 SEP 2024 02:24
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.9.4)  13 SEP 2024 17:06
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -436,7 +436,7 @@ Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
 \c@lstlisting=\count310
  (./parts/front.tex
-<Images/university_logo.png, id=151, 106.3975pt x 112.42pt>
+<Images/university_logo.png, id=159, 106.3975pt x 112.42pt>
 File: Images/university_logo.png Graphic file (type png)
 <use Images/university_logo.png>
 Package pdftex.def Info: Images/university_logo.png  used on input line 3.
@@ -450,12 +450,7 @@ Package pdftex.def Info: Images/university_logo.png  used on input line 3.
 l.58 \newpage
               [1] (./parts/abstract.tex (/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-32.def
 File: uni-32.def 2013/05/13 UCS: Unicode data U+2000..U+20FF
-))
-Underfull \hbox (badness 1502) in paragraph at lines 5--63
-\OT1/cmr/m/n/12 This the-sis com-pare three state-ful fuzzers|\OT1/cmr/bx/n/12 Fallaway\OT1/cmr/m/n/12 , \OT1/cmr/bx/n/12 AFLNet \OT1/cmr/m/n/12 and
- []
-
-pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
+))pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.64 \tableofcontents
@@ -473,35 +468,38 @@ Chapter 1.
 
 ] [5]
 Chapter 2.
+
+LaTeX Warning: Reference `sec:coverageguidedfuzzing' on page 6 undefined on input line 17.
+
 [6
 
 ]
-LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 34.
+LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 23.
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
-<Images/sample_edge_graph.png, id=257, 256.96pt x 240.9pt>
+<Images/sample_edge_graph.png, id=266, 256.96pt x 240.9pt>
 File: Images/sample_edge_graph.png Graphic file (type png)
 <use Images/sample_edge_graph.png>
-Package pdftex.def Info: Images/sample_edge_graph.png  used on input line 45.
+Package pdftex.def Info: Images/sample_edge_graph.png  used on input line 34.
 (pdftex.def)             Requested size: 195.0pt x 182.81387pt.
- [7] [8 <./Images/sample_edge_graph.png>]
-<Images/simplestatemodel.png, id=281, 236.885pt x 113.42375pt>
+ [7 <./Images/sample_edge_graph.png>] [8]
+<Images/simplestatemodel.png, id=295, 236.885pt x 113.42375pt>
 File: Images/simplestatemodel.png Graphic file (type png)
 <use Images/simplestatemodel.png>
-Package pdftex.def Info: Images/simplestatemodel.png  used on input line 69.
+Package pdftex.def Info: Images/simplestatemodel.png  used on input line 78.
 (pdftex.def)             Requested size: 195.0pt x 93.3715pt.
- [9 <./Images/simplestatemodel.png>] [10]
-<Images/lighttpd_original.png, id=306, 1059.96pt x 2877.75125pt>
+ [9] [10 <./Images/simplestatemodel.png>]
+<Images/lighttpd_original.png, id=317, 1059.96pt x 2877.75125pt>
 File: Images/lighttpd_original.png Graphic file (type png)
 <use Images/lighttpd_original.png>
-Package pdftex.def Info: Images/lighttpd_original.png  used on input line 122.
+Package pdftex.def Info: Images/lighttpd_original.png  used on input line 118.
 (pdftex.def)             Requested size: 234.00238pt x 635.30278pt.
  [11] [12]
 Overfull \vbox (66.90277pt too high) has occurred while \output is active []
 
  [13 <./Images/lighttpd_original.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 152--152
+Underfull \hbox (badness 10000) in paragraph at lines 148--148
 |[]\OT1/cmr/bx/n/17.28 Benchmark Se-lec-tion: AFLNet,
  []
 
@@ -540,90 +538,85 @@ Underfull \hbox (badness 10000) in paragraph at lines 117--137
 LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 155.
  [24] [25] [26]
-Underfull \hbox (badness 10000) in paragraph at lines 248--251
+Underfull \hbox (badness 10000) in paragraph at lines 248--263
 
  []
 
-LaTeX Font Info:    Trying to load font information for TS1+pcr on input line 268.
+LaTeX Font Info:    Trying to load font information for TS1+pcr on input line 273.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1pcr.fd
 File: ts1pcr.fd 2001/06/04 font definitions for TS1/pcr.
 ) [27]
-Underfull \hbox (badness 10000) in paragraph at lines 295--299
+Underfull \hbox (badness 10000) in paragraph at lines 301--314
 
  []
 
-[28] [29] [30]
-Underfull \hbox (badness 10000) in paragraph at lines 398--399
-
- []
-
-[31]
-Underfull \hbox (badness 10000) in paragraph at lines 422--425
+[28] [29] [30] [31]
+Underfull \hbox (badness 10000) in paragraph at lines 425--428
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 428--430
+Underfull \hbox (badness 10000) in paragraph at lines 431--433
 
  []
 
-[32]) (./parts/chapter4.tex [33]
+[32] [33]) (./parts/chapter4.tex [34]
 Chapter 4.
-[34
+[35
 
 ]
-<Images/coverage_over_time_lighttpd-1day-2000l.pdf, id=723, 867.24pt x 722.7pt>
+<Images/coverage_over_time_lighttpd-1day-2000l.pdf, id=750, 867.24pt x 722.7pt>
 File: Images/coverage_over_time_lighttpd-1day-2000l.pdf Graphic file (type pdf)
 <use Images/coverage_over_time_lighttpd-1day-2000l.pdf>
 Package pdftex.def Info: Images/coverage_over_time_lighttpd-1day-2000l.pdf  used on input line 53.
 (pdftex.def)             Requested size: 390.0pt x 325.00247pt.
- [35]
-<Images/coverage_over_time_lighttpd-1day-1000l.pdf, id=729, 867.24pt x 722.7pt>
+ [36]
+<Images/coverage_over_time_lighttpd-1day-1000l.pdf, id=756, 867.24pt x 722.7pt>
 File: Images/coverage_over_time_lighttpd-1day-1000l.pdf Graphic file (type pdf)
 <use Images/coverage_over_time_lighttpd-1day-1000l.pdf>
 Package pdftex.def Info: Images/coverage_over_time_lighttpd-1day-1000l.pdf  used on input line 60.
 (pdftex.def)             Requested size: 390.0pt x 325.00247pt.
- [36 <./Images/coverage_over_time_lighttpd-1day-2000l.pdf>]
-<Images/coverage_over_time_lighttpd-1day-500l.pdf, id=781, 867.24pt x 722.7pt>
+ [37 <./Images/coverage_over_time_lighttpd-1day-2000l.pdf>]
+<Images/coverage_over_time_lighttpd-1day-500l.pdf, id=808, 867.24pt x 722.7pt>
 File: Images/coverage_over_time_lighttpd-1day-500l.pdf Graphic file (type pdf)
 <use Images/coverage_over_time_lighttpd-1day-500l.pdf>
 Package pdftex.def Info: Images/coverage_over_time_lighttpd-1day-500l.pdf  used on input line 67.
 (pdftex.def)             Requested size: 390.0pt x 325.00247pt.
- [37 <./Images/coverage_over_time_lighttpd-1day-1000l.pdf>]
-<Images/coverage_over_time_lighttpd-1day-250l.pdf, id=835, 867.24pt x 722.7pt>
+ [38 <./Images/coverage_over_time_lighttpd-1day-1000l.pdf>]
+<Images/coverage_over_time_lighttpd-1day-250l.pdf, id=861, 867.24pt x 722.7pt>
 File: Images/coverage_over_time_lighttpd-1day-250l.pdf Graphic file (type pdf)
 <use Images/coverage_over_time_lighttpd-1day-250l.pdf>
 Package pdftex.def Info: Images/coverage_over_time_lighttpd-1day-250l.pdf  used on input line 74.
 (pdftex.def)             Requested size: 390.0pt x 325.00247pt.
- [38 <./Images/coverage_over_time_lighttpd-1day-500l.pdf>]
-<Images/coverage_over_time_lighttpd-1day-100l.pdf, id=888, 867.24pt x 722.7pt>
+ [39 <./Images/coverage_over_time_lighttpd-1day-500l.pdf>]
+<Images/coverage_over_time_lighttpd-1day-100l.pdf, id=914, 867.24pt x 722.7pt>
 File: Images/coverage_over_time_lighttpd-1day-100l.pdf Graphic file (type pdf)
 <use Images/coverage_over_time_lighttpd-1day-100l.pdf>
 Package pdftex.def Info: Images/coverage_over_time_lighttpd-1day-100l.pdf  used on input line 81.
 (pdftex.def)             Requested size: 390.0pt x 325.00247pt.
- [39 <./Images/coverage_over_time_lighttpd-1day-250l.pdf>]
-<Images/coverage_over_time_lighttpd-1day-10l.pdf, id=940, 867.24pt x 722.7pt>
+ [40 <./Images/coverage_over_time_lighttpd-1day-250l.pdf>]
+<Images/coverage_over_time_lighttpd-1day-10l.pdf, id=966, 867.24pt x 722.7pt>
 File: Images/coverage_over_time_lighttpd-1day-10l.pdf Graphic file (type pdf)
 <use Images/coverage_over_time_lighttpd-1day-10l.pdf>
 Package pdftex.def Info: Images/coverage_over_time_lighttpd-1day-10l.pdf  used on input line 88.
 (pdftex.def)             Requested size: 390.0pt x 325.00247pt.
- [40 <./Images/coverage_over_time_lighttpd-1day-100l.pdf>]
-<Images/coverage_over_time_lighttpd-1day-fallaways.pdf, id=993, 867.24pt x 867.24pt>
+ [41 <./Images/coverage_over_time_lighttpd-1day-100l.pdf>]
+<Images/coverage_over_time_lighttpd-1day-fallaways.pdf, id=1020, 867.24pt x 867.24pt>
 File: Images/coverage_over_time_lighttpd-1day-fallaways.pdf Graphic file (type pdf)
 <use Images/coverage_over_time_lighttpd-1day-fallaways.pdf>
 Package pdftex.def Info: Images/coverage_over_time_lighttpd-1day-fallaways.pdf  used on input line 95.
 (pdftex.def)             Requested size: 390.0pt x 390.00298pt.
- [41 <./Images/coverage_over_time_lighttpd-1day-10l.pdf>] [42 <./Images/coverage_over_time_lighttpd-1day-fallaways.pdf>] [43]
+ [42 <./Images/coverage_over_time_lighttpd-1day-10l.pdf>] [43 <./Images/coverage_over_time_lighttpd-1day-fallaways.pdf>] [44]
 Underfull \hbox (badness 10000) in paragraph at lines 138--139
 
  []
 
-[44]
+[45]
 Underfull \hbox (badness 1019) in paragraph at lines 164--165
 []\OT1/cmr/m/it/12 Lower Code Cov-er-age\OT1/cmr/m/n/12 : AFLNet achieves slightly lower cov-er-age
  []
 
-) (./parts/conclusion.tex [45]
+) (./parts/conclusion.tex [46]
 Chapter 5.
 
 Underfull \hbox (badness 7907) in paragraph at lines 3--11
@@ -675,52 +668,55 @@ Underfull \hbox (badness 10000) in paragraph at lines 3--11
 
  []
 
-[46
+[47
 
-]) [47] (./document.bbl
-Underfull \hbox (badness 6204) in paragraph at lines 15--17
+]) [48] (./document.bbl
+Underfull \hbox (badness 6204) in paragraph at lines 21--23
 []\OT1/cmr/m/n/12 American Fuzzy Lop (AFL) Web-site.  []$\OT1/pcr/m/n/12 https : / / lcamtuf .
  []
 
+[49
 
-Underfull \hbox (badness 3989) in paragraph at lines 65--67
+]
+Underfull \hbox (badness 3989) in paragraph at lines 71--73
 []\OT1/cmr/m/n/12 Path Ex-plo-sion.  []$\OT1/pcr/m/n/12 https : / / en . wikipedia . org / wiki / Path _
  []
 
-[48
 
-]
-Underfull \hbox (badness 2538) in paragraph at lines 69--71
+Underfull \hbox (badness 2538) in paragraph at lines 75--77
 []\OT1/cmr/m/n/12 Lighttpd Web-site.  []$\OT1/pcr/m/n/12 https : / / www . lighttpd . net / 2007 / 4 / 4 /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 115--117
+Underfull \hbox (badness 10000) in paragraph at lines 121--123
 []\OT1/cmr/m/n/12 Chatafl GitHub Repos-i-tory.  []$\OT1/pcr/m/n/12 https : / / github . com /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 119--121
+Underfull \hbox (badness 10000) in paragraph at lines 125--127
 []\OT1/cmr/m/n/12 Chatafl GitHub Pro-FuzzBench.  []$\OT1/pcr/m/n/12 https : / / github . com /
  []
 
-[49]) [50] (./document.aux)
+[50]) [51] (./document.aux)
+
+LaTeX Warning: There were undefined references.
+
 Package rerunfilecheck Info: File `document.out' has not changed.
-(rerunfilecheck)             Checksum: FB0AA476CAC6B4D1A629B9734EF76D3C;6809.
+(rerunfilecheck)             Checksum: 81B54EDFE375E6EC6739826F18FF4C28;6847.
  ) 
 Here is how much of TeX's memory you used:
- 16591 strings out of 480247
- 266102 string characters out of 5896152
- 999500 words of memory out of 5000000
- 33856 multiletter control sequences out of 15000+600000
+ 16609 strings out of 480247
+ 266430 string characters out of 5896152
+ 998677 words of memory out of 5000000
+ 33863 multiletter control sequences out of 15000+600000
  480423 words of font info for 65 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  60i,13n,77p,869b,1860s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/leo/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcbx1200.600pk> </home/leo/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcti1000.600pk> </home/leo/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk>{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc} </home/leo/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
-Output written on document.pdf (52 pages, 631226 bytes).
+Output written on document.pdf (53 pages, 632296 bytes).
 PDF statistics:
- 1318 PDF objects out of 1440 (max. 8388607)
- 949 compressed objects within 10 object streams
- 404 named destinations out of 1000 (max. 500000)
- 352 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1346 PDF objects out of 1440 (max. 8388607)
+ 976 compressed objects within 10 object streams
+ 415 named destinations out of 1000 (max. 500000)
+ 368 words of extra memory for PDF output out of 10000 (max. 10000000)
 
