@@ -370,7 +370,7 @@ Here are some examples of the corpus used by AFLNet and ChatAFL:
     \caption{Seed used by AFLNet and ChatAFL}
 \end{figure}
 \phantom{}\\
-AFLNet and ChatAFL also use a dictionary during fuzzing, shown in Figure \ref{fig:dictionary}. This dictionary is used to generate meaningful and diverse input cases, ensuring that the fuzzer explores a wide range of scenarios and protocols. By leveraging such a dictionary, these tools enhance their ability to cover different code paths.
+AFLNet and ChatAFL also use a dictionary during fuzzing, shown in Figure \ref{fig:dictionary}. This dictionary is used to generate meaningful and diverse input cases, ensuring that the fuzzer explores a wide range of scenarios and protocols. By leveraging such a dictionary, these fuzzers enhance their ability to cover different code paths.
 \begin{figure}[H]
     \centering
     \begin{adjustbox}{valign=t}
@@ -444,24 +444,20 @@ The command to fuzz Lighttpd for 24h using both AFLNet and ChatAFL is:
 \end{lstlisting}
 Results from both AFLNet and ChatAFL will be discussed in detail in Chapter \ref{chap:Results}.
 
-\section{Comparisons}
+\section{Configuration Differences}
 
 AFLNet and ChatAFL provide alternative approaches to fuzzing that share certain characteristics with Fallaway, but also have distinct differences in their setup, configuration, and operational strategies. The purpose of this section is to outline the similarities and unique features of the fuzzers, including how they handle server responses and their internal mechanisms for optimizing fuzzing performance.
 
-\subsection{Setup}
+\subsection{Environment}
 The setup process for AFLNet and ChatAFL is quite similar to that of Fallaway, given that all three fuzzers share a common Docker-based environment with the necessary dependencies.
 \\However, AFLNet and ChatAFL are built on top of ProFuzzBench, which provides a standardized environment for network protocol fuzzing.
 
-\subsection{Operational Differences: Code Handling and Analysis}
+\subsection{Feedback Mechanism}
 As seen in Figure \ref{fig:lighttpd_conf_fallaway} and Figure \ref{fig:lighttpd_conf_aflnetchatafl}, AFLNet and ChatAFL do not need to force the number of workers to 1, because they do not share the same problem as Fallaway, due to their managment of the SUT.
 \\In particular, below are some key differences in how AFLNet, ChatAFL, and Fallaway guide the fuzzing process:
 
 \begin{itemize}
-    \item \textbf{AFLNet} and \textbf{ChatAFL}: Both tools incorporate error code analysis in their feedback loop. They monitor the response codes (such as HTTP 404, 500, etc.) returned by the server to understand which inputs trigger errors or unexpected states. This allows them to focus on generating inputs that might exploit these observed errors, thereby uncovering potential vulnerabilities.
+    \item \textbf{AFLNet} and \textbf{ChatAFL}: Both fuzzers incorporate error code analysis in their feedback loop. They monitor the response codes (such as HTTP 404, 500, etc.) returned by the server to understand which inputs trigger errors or unexpected states. This allows them to focus on generating inputs that might exploit these observed errors, thereby uncovering potential vulnerabilities.
     \item \textbf{Fallaway}: In contrast, Fallaway exclusively relies on coverage metrics to guide the fuzzing process. It focuses on maximizing the code paths exercised by the generated inputs without directly considering the response codes from the server. This approach enables it to explore new paths more thoroughly, but may overlook specific error states that are of interest for security testing.
 \end{itemize}
 Indeed, Fallaway distinguishes itself from other fuzzers like AFLNet or ChatAFL by using the \textit{persistent mode}.
-
-\subsection{Execution}
-Another difference is in the execution's scripts, shown in Figure \ref{fig:exec_script_fallaway} and Figure \ref{fig:exec_script_aflnetchatafl}.
-While Fallaway uses a custom script to run the fuzzer, AFLNet and ChatAFL rely on ProFuzzBench's execution scripts to manage the fuzzing process. This difference reflects the unique design and integration of each fuzzer within the ProFuzzBench framework.

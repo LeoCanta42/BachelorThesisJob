@@ -25,10 +25,9 @@
 \contentsline {subsection}{\numberline {3.2.1}Setting Up the Fuzzing Environment}{29}{subsection.3.2.1}%
 \contentsline {subsection}{\numberline {3.2.2}Mutator and Corpus}{29}{subsection.3.2.2}%
 \contentsline {subsection}{\numberline {3.2.3}Fuzzing Execution}{32}{subsection.3.2.3}%
-\contentsline {section}{\numberline {3.3}Comparisons}{33}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Setup}{33}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}Operational Differences: Code Handling and Analysis}{33}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}Execution}{34}{subsection.3.3.3}%
+\contentsline {section}{\numberline {3.3}Configuration Differences}{33}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Environment}{33}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Feedback Mechanism}{33}{subsection.3.3.2}%
 \contentsline {chapter}{\numberline {4}Results}{35}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Fuzzer Analysis}{36}{section.4.1}%
 \contentsline {section}{\numberline {4.2}Coverage Analysis Over Time and Configurations}{36}{section.4.2}%
