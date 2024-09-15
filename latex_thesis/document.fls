@@ -935,6 +935,17 @@ INPUT document.bbl
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/courier/pcrr7t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/courier/pcrr7t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/courier/pcrr8r.tfm
+INPUT ./parts/greetings.tex
+INPUT ./parts/greetings.tex
+INPUT ./parts/greetings.tex
+INPUT parts/greetings.tex
+INPUT ./parts/greetings.tex
+INPUT ./parts/greetings.tex
+INPUT parts/greetings.tex
+INPUT /usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-0.def
+INPUT /usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-0.def
+INPUT /usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-0.def
+INPUT /usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-0.def
 INPUT document.aux
 INPUT ./document.out
 INPUT ./document.out
