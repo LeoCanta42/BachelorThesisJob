@@ -1,14 +1,14 @@
 digraph g {
 
-	c0 [shape="circle" label="CON_STATE_CONNECT"];
-	c1 [shape="circle" label="CON_STATE_REQUEST_START"];
-	c2 [shape="circle" label="CON_STATE_READ"];	
-	c3 [shape="circle" label="CON_STATE_HANDLE_REQUEST"];
-	c4 [shape="circle" label="CON_STATE_READ_POST"];
-	c5 [shape="circle" label="CON_STATE_WRITE"];
-	c6 [shape="circle" label="CON_STATE_ERROR"];
-	c7 [shape="circle" label="CON_STATE_RESPONSE_END"];
-	c8 [shape="circle" label="CON_STATE_CLOSE"];
+	c0 [shape="circle" label="1.CON_STATE_CONNECT"];
+	c1 [shape="circle" label="2.CON_STATE_REQUEST_START"];
+	c2 [shape="circle" label="3.CON_STATE_READ"];	
+	c3 [shape="circle" label="4.CON_STATE_HANDLE_REQUEST"];
+	c4 [shape="circle" label="4.CON_STATE_READ_POST"];
+	c5 [shape="circle" label="5.CON_STATE_WRITE"];
+	c6 [shape="circle" label="6.CON_STATE_ERROR"];
+	c7 [shape="circle" label="7.CON_STATE_RESPONSE_END"];
+	c8 [shape="circle" label="8.CON_STATE_CLOSE"];
 
 
 	c0 -> c1
